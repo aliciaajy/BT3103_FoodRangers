@@ -175,6 +175,19 @@ export default {
           });
         });
     },
+    computed: {
+      dataUrl() {
+        return (
+          "data:image/jpeg;base64," +
+          btoa(
+            new Uint8Array(this.info.image).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ""
+            )
+          )
+        );
+      },
+    },
   },
   created() {
     this.fetchItems();
