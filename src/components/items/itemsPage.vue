@@ -121,6 +121,8 @@
 import moment from "moment";
 import db from "../../firebase.js";
 import addItem from "./addItem.vue";
+
+
 export default {
   data() {
     return {
@@ -174,19 +176,6 @@ export default {
             }
           });
         });
-    },
-    computed: {
-      dataUrl() {
-        return (
-          "data:image/jpeg;base64," +
-          btoa(
-            new Uint8Array(this.info.image).reduce(
-              (data, byte) => data + String.fromCharCode(byte),
-              ""
-            )
-          )
-        );
-      },
     },
   },
   created() {

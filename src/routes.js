@@ -15,7 +15,7 @@ export default [
     { path: '/signup', component: SignUp },
     { path: '/', component: Login },
     { path: '/forgot-password', component: ForgotPassword },
-    { path: '/home', component: Home },
+    { path: '/home', component: Home,meta: { requiresAuth: true }},
     { path: '/search', component: searchPage },
     { path: '/map', component: map },
     { path:'/mart', component: martPage},
