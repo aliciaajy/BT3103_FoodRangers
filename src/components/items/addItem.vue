@@ -9,8 +9,8 @@
           </button>
         </div>
         <div class="modal-body">
-          <form >
-            <label for="name"><b>Food Item: </b></label>
+          <form>
+            <label for="name"><b>Food Item*: </b></label>
             <input
               type="text"
               placeholder="Enter food"
@@ -30,13 +30,11 @@
             <br />
 
             <div v-if="img != null">
-              
               <img class="preview" height="200" width="200" :src="img" />
               <br />
             </div>
 
-
-            <label for="text"><b> Category: </b></label>
+            <label for="text"><b> Category*: </b></label>
 
             <select v-model="category">
               <option value="meat">Meat</option>
@@ -47,7 +45,7 @@
               <option value="fruit">Fruit</option>
             </select>
 
-            <label for="text"> <b>Item Details</b></label>
+            <label for="text"> <b>Item Details*:</b></label>
             <h1>
               Select <b>Opened / No Expiry Date</b> to get the estimated expiry
               date <br />Select <b>Unopened / Have Expiry Date</b> to key in
@@ -70,19 +68,24 @@
             </p>
 
             <label for="text"> <b>Amount saved ($):</b></label>
-            <input type="text" value="$" v-model="money" placeholder = "$" required/>
+            <input
+              type="text"
+              value="$"
+              v-model="money"
+              placeholder="$"
+              required
+            />
           </form>
         </div>
         <div class="modal-footer">
           <button
-            type="button"
+            type="submit"
             class="btn btn-default"
             data-dismiss="modal"
-           v-on:click="addItem"
+             v-on:click="addItem"
           >
             Add
           </button>
-
         </div>
       </div>
     </div>
@@ -92,13 +95,16 @@
 <script>
 import db from "../../firebase.js";
 import moment from "moment";
+import firebase from "firebase";
 
 export default {
   data() {
     return {
       dict: {},
       foodname: "",
+      imageData: null,
       img: null,
+      imgurl: "",
       category: "",
       state: "",
       expirydate: "",
@@ -113,16 +119,15 @@ export default {
       this.dict["category"] = this.category;
       this.dict["state"] = this.state;
       this.dict["expiry"] = moment(this.expirydate).format("DD-MM-YYYY");
-      this.dict["img"] = this.img;
+      this.dict["img"] = this.imgurl;
       this.dict["saved"] = this.money;
+      this.dict["keyin-date"] = moment().format("DD-MM-YYYY");
       db.collection("items")
         .add(this.dict)
         .then(() => {
           location.reload();
         });
       console.log(this.dict);
-
-      this.img = null;
     },
 
     getPredDate() {
@@ -135,7 +140,7 @@ export default {
             this.numDay = food[chosenCat];
           });
         });
-      // alert(this.numDay);
+   
 
       this.expirydate = moment().add(this.numDay, "days");
       return this.expirydate;
@@ -146,9 +151,37 @@ export default {
     },
 
     previewImage(e) {
-      const file = e.target.files[0];
+      this.uploadValue = 0;
+      this.imgurl = null;
+      var file = e.target.files[0];
+      this.imageData = e.target.files[0];
       this.img = URL.createObjectURL(file);
-    
+      this.onUpload();
+    },
+
+    onUpload() {
+      this.imgurl = null;
+      const storageRef = firebase
+        .storage()
+        .ref(`${this.imageData.name}`)
+        .put(this.imageData);
+      storageRef.on(
+        `state_changed`,
+        (snapshot) => {
+          this.uploadValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          this.uploadValue = 100;
+          storageRef.snapshot.ref.getDownloadURL().then((url) => {
+            this.imgurl = url;
+            console.log(this.imgurl);
+          });
+        }
+      );
     },
   },
 };
@@ -175,6 +208,4 @@ select {
   background: #f1f1f1;
   color: black;
 }
-
-
 </style>
