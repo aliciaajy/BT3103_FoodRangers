@@ -13,7 +13,7 @@
           {{value}}
         </li>
       </ul>
-      <martReviews id="reviews"> </martReviews>
+      <martReviews v-bind:id="this.id" class="reviewCSS"> </martReviews>
     </nav>
     <div id="content">
       <p id="rating">Green Rating: 
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style scoped>
-#reviews {
+.reviewCSS {
   margin-left: 40px;
   margin-right: 40px;
   border-top: 1px solid black;
@@ -106,7 +106,9 @@ p {
   font-weight: bold;
 }
 #types {
-  margin: 20px;
+  margin-left: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: left;
 }
 ul li:before {
