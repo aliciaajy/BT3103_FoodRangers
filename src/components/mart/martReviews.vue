@@ -1,7 +1,13 @@
 <template>
 <div>
     <br>
-    <p style="font-weight: bold"> Reviews </p>
+    <p style="font-weight: bold"> Reviews
+        <button
+        data-toggle="modal"
+        data-target="#myModal">
+        Add Review </button>
+        <addReview v-bind:id="this.id"> </addReview>
+    </p>
 
     <!--
     {{this.reviews}}
@@ -9,6 +15,7 @@
         {{m[0]}}
     </div>
     -->
+    
     <div>
     <ul>
         <li v-for="(key, value) in this.mart.reviews" :key="key">
@@ -23,9 +30,14 @@
 
 <script>
 import db from "../../firebase.js";
+import addReview from "./addReview.vue"
 
 export default {
     name: 'martReviews',
+
+    components: {
+        addReview
+    },
 
     data() {
         return {
@@ -54,6 +66,13 @@ export default {
 </script>
 
 <style scoped>
+button {
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: rgb(221, 252, 236);
+    float: right;
+}
+
 li {
     margin: 20px; 
 }

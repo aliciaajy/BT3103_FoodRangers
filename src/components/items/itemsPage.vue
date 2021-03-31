@@ -17,20 +17,23 @@
 
         <ul>
           <li v-for="item in this.items" :key="item.id">
+            <button
+              class="btn"
+              v-bind:id="item[0]"
+              v-on:click="deleteItem($event)"
+            >
+              Delete
+            </button>
             <div id="list-items">
               <img v-bind:src="item[1].img" id="itemImg" />
-              <button
-                class="btn"
-                v-bind:id="item[0]"
-                v-on:click="deleteItem($event)"
-              >
-                <i class="fa fa-trash fa-3x"></i>
-              </button>
+
               <div id="itemDetails">
                 <p>
                   <b>{{ item[1].name }} </b>
                 </p>
+                <p>Category: {{ item[1].category }}</p>
                 <p>State: {{ item[1].state }}</p>
+                <p>Amount Saved: ${{ item[1].saved }}</p>
                 <p>Expiry Date: {{ item[1].expiry }}</p>
 
                 <h3>
@@ -52,16 +55,18 @@
                 v-bind:id="item[0]"
                 v-on:click="deleteItem($event)"
               >
-                <i class="fa fa-trash fa-3x"></i>
+                Delete
               </button>
               <div id="list-expiring">
                 <img v-bind:src="item[1].img" id="itemImg" />
-                
+
                 <div id="itemDetails">
                   <p>
                     <b>{{ item[1].name }} </b>
                   </p>
+                  <p>Category: {{ item[1].category }}</p>
                   <p>State: {{ item[1].state }}</p>
+                  <p>Amount Saved: ${{ item[1].saved }}</p>
                   <p>Expiry Date: {{ item[1].expiry }}</p>
                   <h3>
                     <b>{{ item[1].numDaysLeft }}</b> more days
@@ -78,6 +83,13 @@
         <div class="vertical-align">
           <ul>
             <li v-for="item in this.expired" :key="item.id">
+              <button
+                class="btn"
+                v-bind:id="item[0]"
+                v-on:click="deleteItem($event)"
+              >
+                Delete
+              </button>
               <div id="list-expired">
                 <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -85,10 +97,12 @@
                   <p>
                     <b>{{ item[1].name }} </b>
                   </p>
+                  <p>Category: {{ item[1].category }}</p>
                   <p>State: {{ item[1].state }}</p>
+                  <p>Amount Saved: ${{ item[1].saved }}</p>
                   <p>Expiry Date: {{ item[1].expiry }}</p>
                   <h3>
-                    <b>{{ item[1].numDaysLeft }}</b> more days
+                    <b>Expired</b>
                   </h3>
                 </div>
               </div>
@@ -157,8 +171,6 @@ export default {
               // expired already
             } else if (days <= 5) {
               this.expiring.push([id, item_dict]);
-            } else {
-              this.items.push([id, item_dict]);
             }
           });
         });
@@ -176,8 +188,8 @@ export default {
   right: 100px;
   float: right;
   border: none;
-  color: black;
-  background-color: #ebf0eba9;
+  color: rgb(248, 10, 10);
+  background-color: #fcf7f7a9;
 }
 
 .btn:hover {
@@ -299,12 +311,12 @@ h3 {
   width: 45%;
   height: 200%;
   position: absolute;
-  display: flex;
   background: #2e976bcb;
   margin-top: 30px;
   margin-left: 60px;
   border-radius: 50px;
   transition: all 0.3s;
+  display: flex;
   align-items: center;
   /* justify-content: center; */
   flex-direction: column;
