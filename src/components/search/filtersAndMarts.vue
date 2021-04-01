@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="all">
       <div id="filters">
         <div id="search-div" class="searchLoc">
         <input id="search" class="form-control" type="text" v-model="searchQuery"
@@ -14,7 +14,7 @@
             <p>Distance away from you </p>
 
             <select v-model="distance" id="dropdown">
-
+              <option value="all">All </option>
               <option value="1">1 km</option>
               <option  value="5">5 km</option>
               <option  value="10">10 km</option>
@@ -246,7 +246,7 @@ export default {
     },
 
     location:function(res) {
-      if (this.distance === "0") {return res}
+      if (this.distance === "0" || this.distance === "all") {return res}
       //alert("location")
       //alert("curr location is: lat is " + this.center.lat + " and lng is " + this.center.lng)
       //alert(this.distance + " is v-model dist")
@@ -367,6 +367,8 @@ export default {
       padding-top: 70px;
 
   }
+
+
 
 
 </style>

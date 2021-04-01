@@ -80,7 +80,7 @@ export default {
 
     .searchLoc {
     height: 50px;
-    width: 400px;
+    width: 500px;
     background-color: #f1f1f1;
     left: 0px;
     padding-top: 50px;
@@ -186,6 +186,7 @@ export default {
 
 
     #result {
+      float:left;
       width: 1250px;
       margin: 0 auto;
       display: block;
@@ -208,6 +209,9 @@ export default {
     padding-left: 10px;
 
   }
+
+  #all {
+    width: 1250px;  }
 
 
   
