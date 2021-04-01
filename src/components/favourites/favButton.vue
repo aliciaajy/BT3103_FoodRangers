@@ -37,7 +37,7 @@
       deleteMart: function() {
         this.setToggle();
         let doc_id = this.mart[0];
-        alert("doc id is " + doc_id);
+        //alert("doc id is " + doc_id);
         db.collection('favMart').doc(doc_id).delete().then( () => {location.reload()});
       },
       

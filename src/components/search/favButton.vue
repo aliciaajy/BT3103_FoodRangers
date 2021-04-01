@@ -37,7 +37,7 @@
 
       },
         addMart: function() {
-          alert("mart is " + this.mart[1].name);
+          //alert("mart is " + this.mart[1].name);
           //let doc_id = this.mart[0];
 
           let added = this.mart;
@@ -45,7 +45,7 @@
 
             //var lst=[];
            // alert("mart id " + this.mart[0]);
-            alert("added")
+            //alert("added")
           db.collection('favMart').doc(added[0]).set(added[1]);
             //alert(this.itemsSelected + " saved to database");
             
@@ -69,7 +69,7 @@
         deleteMart: function() {
           let doc_id = this.mart[0];
           //alert("doc id is " + doc_id);
-          alert("deleted");
+          //alert("deleted");
           db.collection('favMart').doc(doc_id).delete();
         },
 
