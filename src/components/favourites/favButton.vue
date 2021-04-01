@@ -69,7 +69,7 @@
     }
   </script>
 
-<style>
+<style scoped>
   :focus {
   outline: #08f auto 2px;
 }
@@ -84,7 +84,7 @@ body.using-mouse :focus {
 
 }
 .heart {
-  width: 20px;
+  width: 35px;
   fill: gray;
   transition: fill 0.5s, transform 0.5s;
   pointer-events: none;
@@ -94,7 +94,7 @@ body.using-mouse :focus {
   background: transparent;
   border-radius: 50%;
   background-color: white;
-  padding: 10px 10px 8px 10px;
+  padding: 15px 15px 15px 15px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25), 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
   border: 0;
 }
@@ -110,71 +110,5 @@ body.using-mouse :focus {
 .heart-btn:active {
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
 }
-.heart-pop {
-  position: absolute;
-  width: 30%;
-  opacity: 0;
-  left: 0;
-  animation: pop 1s ease forwards reverse;
-}
-.heart-pop.one {
-  left: 1%;
-  transform: rotate(-10deg);
-  animation-delay: 0.45;
-}
-.heart-pop.two {
-  left: 15%;
-  transform: rotate(8deg);
-  animation-delay: 0.25s;
-}
-.heart-pop.three {
-  left: 30%;
-  transform: rotate(-5deg);
-  animation-delay: 0;
-}
-.heart-pop.four {
-  left: 50%;
-  transform: rotate(-8deg);
-  animation-delay: 0.3s;
-}
-.heart-pop.five {
-  left: 60%;
-  transform: rotate(-10deg);
-  animation-delay: 0.9s;
-}
-.heart-pop.six {
-  left: 70%;
-  transform: rotate(-8deg);
-  animation-delay: 0.2;
-}
-.heart-pop.seven {
-  left: 85%;
-  transform: rotate(6deg);
-  animation-delay: 0.35s;
-}
-.heart-pop.eight {
-  left: 90%;
-  transform: rotate(-4deg);
-  animation-delay: 0.5s;
-}
-.heart-pop.nine {
-  left: 95%;
-  transform: rotate(8deg);
-  animation-delay: 0.2s;
-}
-@keyframes pop {
-  0% {
-    left: calc(50% - 7px);
-    top: 10px;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    top: -20px;
-  }
-  100% {
-    opacity: 0;
-  }
-}
+
 </style>

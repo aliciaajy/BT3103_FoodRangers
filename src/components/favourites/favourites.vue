@@ -142,7 +142,8 @@ export default {
     }
 
     #likeButton {
-      padding: 50px;
+      padding-left: 50px;
+      padding-top: 70px;
 
     }
 

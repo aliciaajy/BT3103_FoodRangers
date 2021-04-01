@@ -64,7 +64,9 @@
                 </div>
                 <div id="starRatings">
                   <starRatings  v-bind:rating = "mart[1].ratings"></starRatings>
-                  <like id="likeButton" v-bind:mart="mart"></like>
+                </div>
+                <div id="likeButton">
+                  <like  v-bind:mart="mart"></like>
                 </div> 
               </div>
             </li>
@@ -356,6 +358,13 @@ export default {
 
   #loc-div {
     float: right;
+  }
+
+  #likeButton {
+
+      padding-left: 50px;
+      padding-top: 70px;
+
   }
 
 
