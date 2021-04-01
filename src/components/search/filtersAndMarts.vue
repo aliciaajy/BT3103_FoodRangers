@@ -65,6 +65,7 @@
                 <div id="starRatings">
                   <starRatings  v-bind:rating = "mart[1].ratings"></starRatings>
                 </div>
+
                 <div id="likeButton">
                   <like  v-bind:mart="mart"></like>
                 </div> 
