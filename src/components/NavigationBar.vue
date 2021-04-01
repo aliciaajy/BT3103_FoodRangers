@@ -8,13 +8,29 @@
       <a href="/map"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> Shops Near You</a>
       <a href="/search"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Search</a>
       <a href="/settings" class="right"><i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> Settings </a>
-      <a href="/login" class="right"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Sign Out </a>
+      <a href ='/' class="right" v-on:click="signOut"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Sign Out </a>
     </div>
   </div>
 </template>
 
 
 <script>
+import firebase from 'firebase'
+export default {
+ methods: {
+    signOut: function() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          alert("user sign out");
+          localStorage.clear();
+          localStorage.setItem("login", false);
+          location.reload();
+        });
+    },
+ }
+}
 
 </script>
 

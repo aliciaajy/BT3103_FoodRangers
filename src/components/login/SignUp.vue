@@ -1,42 +1,55 @@
 <template>
-  <div class= "body1"> 
+  <div class="body1">
     <img src="../../assets/earth.png" class="image1" />
     <div>
-    <form class="vertical-center inner-block" @submit.prevent = "register">
-      <h1><img src="../../assets/foodranger.png" class="image2" /></h1>
+      <form class="vertical-center inner-block" @submit.prevent="register">
+        <h1><img src="../../assets/foodranger.png" class="image2" /></h1>
 
-      <div class="form-group">
-        <label> Email Address: </label>
-        <input type="email" class="form-control form-control-lg" v-model= "email" />
-      </div>
+        <div class="form-group">
+          <label> Email Address: </label>
+          <input
+            type="email"
+            class="form-control form-control-lg"
+            v-model="email"
+          />
+        </div>
 
-      <div class="form-group">
-        <label> Password: </label>
-        <input type="password" class="form-control form-control-lg" v-model= "password" />
-      </div>
+        <div class="form-group">
+          <label> Password: </label>
+          <input
+            type="password"
+            class="form-control form-control-lg"
+            v-model="password"
+          />
+        </div>
 
-      <div class="form-group">
-        <label> Confirm Password: </label>
-        <input type="password" class="form-control form-control-lg" v-model= "confirm" />
-      </div>
+        <div class="form-group">
+          <label> Confirm Password: </label>
+          <input
+            type="password"
+            class="form-control form-control-lg"
+            v-model="confirm"
+          />
+        </div>
 
-      <button type="submit" class="btn btn-dark btn-lg btn-block">
-        Sign Up
-      </button>
+        <button type="submit" class="btn btn-dark btn-lg btn-block">
+          Sign Up
+        </button>
 
-      <p class="forgot-password text-right mt-2 mb-4">
-        Already registered?
-        <router-link to="/login">sign in</router-link>
-      </p>
-    </form>
+        <p class="forgot-password text-right mt-2 mb-4">
+          Already registered?
+          <router-link to="/">Sign in</router-link>
+        </p>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './login.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./login.css";
+import database from "../../firebase.js";
 
 export default {
   name: "Register",
@@ -55,13 +68,17 @@ export default {
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            alert("Successfully registered! Please login.");
+          .then((cred) => {
             this.$router.push("/login");
+            return database.collection("users").doc(cred.user.uid).set({
+              Email: cred.user.email,
+              userid: cred.user.uid,
+            });
           })
           .catch((error) => {
-            alert(error.message);
+            alert(error);
           });
+        this.$router.push("/login");
       }
     },
   },
@@ -83,7 +100,7 @@ export default {
 .image1 {
   width: 640px;
   height: 630px;
-  position:absolute;
+  position: absolute;
   left: 100px;
   display: inline-block;
   padding-top: 40px;
@@ -94,10 +111,4 @@ export default {
   height: 200px;
   position: flexi;
 }
-
-
-  
-
-
-  
 </style>

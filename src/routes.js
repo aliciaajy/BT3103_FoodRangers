@@ -12,10 +12,10 @@ import Settings from "./components/settings/Settings.vue"
 import fav from "./components/favourites/favourites.vue"
 
 export default [
-    { path: '/', component: SignUp },
-    { path: '/login', component: Login },
+    { path: '/signup', component: SignUp },
+    { path: '/', component: Login },
     { path: '/forgot-password', component: ForgotPassword },
-    { path: '/home', component: Home },
+    { path: '/home', component: Home,meta: { requiresAuth: true }},
     { path: '/search', component: searchPage },
     { path: '/map', component: map },
     { path:'/mart', component: martPage},

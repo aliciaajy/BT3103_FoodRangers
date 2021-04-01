@@ -28,7 +28,10 @@
       </button>
 
       <p class="forgot-password text-right mt-2 mb-4">
-        <router-link to="/forgot-password">Forgot password ?</router-link>
+       
+          Not registered?
+          <router-link to="/signup">Sign up</router-link> <br><br>
+            <router-link to="/forgot-password">Forgot password ?</router-link><br>
       </p>
 
       <div class="social-icons">
