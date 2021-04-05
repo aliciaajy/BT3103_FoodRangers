@@ -1,16 +1,79 @@
 <template>
   <div>
-    <div id="cat">
-      
+    <div>
+      <h2>Categories</h2>
+      <div id="cats" class="scrollmenu">
+        <button v-on:click="filterCat('All')">All</button>
+        <button v-on:click="filterCat('Housebrand')"><img src="https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1436334225/p4ucgwxnao0czp2ce1ap.png"><br>Housebrand</button>
+        <button v-on:click="filterCat('Snacks')"><img src="https://images-na.ssl-images-amazon.com/images/I/81FfpLMWNfL._SL1500_.jpg"><br>Snacks</button>
+        <button v-on:click="filterCat('Frozen')"><img src="https://www.tnp.sg/sites/default/files/styles/rl680/public/articles/2020/07/16/np20200716-nps-014-00.jpg?itok=SWmYphQe"><br>Frozen</button>
+        <button v-on:click="filterCat('Staples')"><img src="https://thumbs.dreamstime.com/b/carbohydrate-products-potato-15101117.jpg"><br>Staples</button>
+      </div>
     </div>
     <div id="products">
       <h2>Products</h2>
-      <ul id="listOfProducts">
+      <ul v-if = "this.selectedCat=='All'" class="listOfProducts" >
         <li v-for="item in this.items" :key="item.index">
           <img v-bind:src="item[1].img">
           <div id="info">
             <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
-            {{ item[1]["name"] }} <br>
+            <p>{{ item[1]["name"] }}</p><br>
+            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
+            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
+            <p v-show = "item[1].halal">Halal</p>
+            Expires: {{item[1]["expiryDate"]}} <br>
+            Qty left: {{item[1]["quantity"]}}
+          </div>
+        </li>
+      </ul>
+      <ul v-if = "this.selectedCat=='Housebrand'" class="listOfProducts" >
+        <li v-for="item in this.housebrand" :key="item.index">
+          <img v-bind:src="item[1].img">
+          <div id="info">
+            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
+            <p>{{ item[1]["name"] }}</p><br>
+            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
+            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
+            <p v-show = "item[1].halal">Halal</p>
+            Expires: {{item[1]["expiryDate"]}} <br>
+            Qty left: {{item[1]["quantity"]}}
+          </div>
+        </li>
+      </ul>
+      <ul v-if = "this.selectedCat=='Snacks'" class="listOfProducts" >
+        <li v-for="item in this.snacks" :key="item.index">
+          <img v-bind:src="item[1].img">
+          <div id="info">
+            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
+            <p>{{ item[1]["name"] }}</p><br>
+            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
+            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
+            <p v-show = "item[1].halal">Halal</p>
+            Expires: {{item[1]["expiryDate"]}} <br>
+            Qty left: {{item[1]["quantity"]}}
+          </div>
+        </li>
+      </ul>
+      <ul v-if = "this.selectedCat=='Frozen'" class="listOfProducts" >
+        <li v-for="item in this.frozen" :key="item.index">
+          <img v-bind:src="item[1].img">
+          <div id="info">
+            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
+            <p>{{ item[1]["name"] }}</p><br>
+            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
+            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
+            <p v-show = "item[1].halal">Halal</p>
+            Expires: {{item[1]["expiryDate"]}} <br>
+            Qty left: {{item[1]["quantity"]}}
+          </div>
+        </li>
+      </ul>
+      <ul v-if = "this.selectedCat=='Staples'" class="listOfProducts" >
+        <li v-for="item in this.staples" :key="item.index">
+          <img v-bind:src="item[1].img">
+          <div id="info">
+            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
+            <p>{{ item[1]["name"] }}</p><br>
             <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
             <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
             <p v-show = "item[1].halal">Halal</p>
@@ -28,7 +91,12 @@ import db from "../../firebase.js";
 export default {
   data() {
     return {
-      items: []
+      items: [],
+      housebrand: [],
+      snacks: [],
+      frozen: [],
+      staples: [],
+      selectedCat: "",
     }
   },
   methods: {
@@ -36,13 +104,28 @@ export default {
       db.collection('salesItems').get().then(snapshot => { 
         snapshot.docs.forEach(doc => { 
           this.items.push([doc.id, doc.data()]);
+          var values = Object.values(doc.data().category);
+          for (var cat of values) {
+            if (cat == "Housebrand") {
+              this.housebrand.push([doc.id, doc.data()]);
+            } else if (cat == "Snacks") {
+              this.snacks.push([doc.id, doc.data()]);
+            } else if (cat ==  "Frozen") {
+              this.frozen.push([doc.id, doc.data()]);
+            } else {
+              this.staples.push([doc.id, doc.data()])
+            }
+          }
         });
       });
-      console.log(this.items);
-    }
+    },
+    filterCat: function(cat) {
+      this.selectedCat=cat;
+      console.log(this.selectedCat);
+    },
   },
   created() {
-    this.fetchItems()
+    this.fetchItems();
   },
 };
 </script>
@@ -52,7 +135,7 @@ export default {
   width: 75%;
   float: right;
 }
-#listOfProducts {
+.listOfProducts {
   width: 100%;
   padding-left: 15px;
   box-sizing: border-box;
@@ -90,6 +173,29 @@ img {
   padding: 10px;
   padding-left: 45px;
   text-align: left;
+}
+button {
+  background-color: #ffff;
+  margin: 10px;
+  padding: 5px;
+  font-size: 12pt;
+  font-weight: bold;
+  width: 180px;
+}
+button img {
+  margin: 10px;
+}
+div.scrollmenu {
+  background-color: #ffff;
+  overflow: auto;
+  white-space: nowrap;
+}
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+#cats {
+  width: 75%;
+  float: right;
 }
 
 </style>
