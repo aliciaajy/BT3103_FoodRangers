@@ -11,11 +11,6 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faCoffee)
 import firebase from 'firebase'
-import VueApexCharts from 'vue-apexcharts'
-
-Vue.use(VueApexCharts)
-
-Vue.component('apexchart', VueApexCharts)
 
 Vue.use(VueGoogleMaps, {
   load: {
