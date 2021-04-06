@@ -47,6 +47,7 @@
 import db from "../../firebase.js";
 import starRatings from "../search/starRatings.vue";
 import like from "./favButton.vue";
+import firebase from "firebase";
 export default {
   components: {
     starRatings,
@@ -64,7 +65,7 @@ export default {
    methods: {
 
     fetchItems:function(){ 
-           db.collection('favMart').orderBy('name').get().then((querySnapShot)=>{
+           db.collection('favMart').where("userid","==",firebase.auth().currentUser.uid).orderBy('name').get().then((querySnapShot)=>{
                let mart={} 
                querySnapShot.forEach(doc=>{
                     mart=[doc.id,doc.data()]
