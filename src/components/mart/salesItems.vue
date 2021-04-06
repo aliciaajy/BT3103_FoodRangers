@@ -3,7 +3,7 @@
     <div>
       <h2>Categories</h2>
       <div id="cats" class="scrollmenu">
-        <button v-on:click="filterCat('All')">All</button>
+        <button id="all" v-on:click="filterCat('All')">All</button>
         <button v-on:click="filterCat('Housebrand')"><img src="https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1436334225/p4ucgwxnao0czp2ce1ap.png"><br>Housebrand</button>
         <button v-on:click="filterCat('Snacks')"><img src="https://images-na.ssl-images-amazon.com/images/I/81FfpLMWNfL._SL1500_.jpg"><br>Snacks</button>
         <button v-on:click="filterCat('Frozen')"><img src="https://www.tnp.sg/sites/default/files/styles/rl680/public/articles/2020/07/16/np20200716-nps-014-00.jpg?itok=SWmYphQe"><br>Frozen</button>
@@ -134,11 +134,17 @@ export default {
 #products {
   width: 75%;
   float: right;
+  margin-top: 50px;
 }
 .listOfProducts {
   width: 100%;
   padding-left: 15px;
   box-sizing: border-box;
+}
+#all {
+  width: 180px;
+  height: 50px;
+  border-radius: 10px;
 }
 ul {
   display: flex;
@@ -154,6 +160,7 @@ li {
   padding: 15px 20px;
   border: 1px solid #222;
   margin: 10px;
+  height: 430px;
 }
 h2 {
   float: left;
@@ -181,9 +188,7 @@ button {
   font-size: 12pt;
   font-weight: bold;
   width: 180px;
-}
-button img {
-  margin: 10px;
+  border-radius: 10px;
 }
 div.scrollmenu {
   background-color: #ffff;
