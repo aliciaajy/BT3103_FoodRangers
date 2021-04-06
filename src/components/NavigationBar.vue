@@ -23,10 +23,11 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          alert("user sign out");
+          alert("user successfully sign out");
           localStorage.clear();
           localStorage.setItem("login", false);
           location.reload();
+          this.$router.push("/");
         });
     },
  }

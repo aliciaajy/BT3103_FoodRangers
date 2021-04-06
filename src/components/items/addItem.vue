@@ -122,6 +122,7 @@ export default {
       this.dict["img"] = this.imgurl;
       this.dict["saved"] = this.money;
       this.dict["keyin-date"] = moment().format("DD-MM-YYYY");
+      this.dict['userid'] = firebase.auth().currentUser.uid
       db.collection("items")
         .add(this.dict)
         .then(() => {
