@@ -69,7 +69,7 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
           .then((cred) => {
-            this.$router.push("/login");
+            this.$router.push("/");
             return database.collection("users").doc(cred.user.uid).set({
               Email: cred.user.email,
               userid: cred.user.uid,

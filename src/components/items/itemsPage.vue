@@ -121,7 +121,7 @@
 import moment from "moment";
 import db from "../../firebase.js";
 import addItem from "./addItem.vue";
-
+import firebase from "firebase"
 
 export default {
   data() {
@@ -145,7 +145,9 @@ export default {
         });
     },
     fetchItems: function () {
+      
       db.collection("items")
+        .where("userid","==",firebase.auth().currentUser.uid)
         .get()
         .then((querySnapShot) => {
           // let item = {};
@@ -154,11 +156,6 @@ export default {
             var tdydate = moment();
             var days = edate.diff(tdydate, "days");
 
-            // if (edate.isAfter(tdydate)) {
-            //   days = edate.diff(tdydate, "days");
-            // } else if (tdydate.isSameOrAfter(edate)) {
-            //   days = tdydate.diff(edate, "days");
-            // }
             let id = doc.id;
             let item_dict = doc.data();
             item_dict["numDaysLeft"] = days;

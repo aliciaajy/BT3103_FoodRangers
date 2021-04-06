@@ -11,18 +11,20 @@ import Dashboard from "./components/dashboard/Dashboard.vue"
 import Settings from "./components/settings/Settings.vue"
 import fav from "./components/favourites/favourites.vue"
 
+
+
 export default [
     { path: '/signup', component: SignUp },
     { path: '/', component: Login },
     { path: '/forgot-password', component: ForgotPassword },
-    { path: '/home', component: Home,meta: { requiresAuth: true }},
-    { path: '/search', component: searchPage },
-    { path: '/map', component: map },
-    { path:'/mart', component: martPage},
-    { path: '/items', component: itemsPage},
-    { path: '/addItems', component:addItems},
-    { path: '/dashboard', component: Dashboard},
-    {path: '/settings', component: Settings},
-    { path:'/mart/:id', component: martPage, props: true},
-    {path: '/favourites', component: fav}
+    { path: '/home', component: Home, meta: { requiresAuth: true } },
+    { path: '/search', component: searchPage, meta: { requiresAuth: true } },
+    { path: '/map', component: map, meta: { requiresAuth: true } },
+    { path: '/mart', component: martPage },
+    { path: '/items', component: itemsPage, meta: { requiresAuth: true } },
+    { path: '/addItems', component: addItems },
+    { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } },
+    { path: '/settings', component: Settings, meta: { requiresAuth: true } },
+    { path: '/mart/:id', component: martPage, props: true },
+    { path: '/favourites', component: fav, meta: { requiresAuth: true } }
 ]

@@ -70,6 +70,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          localStorage.setItem("login", true);
           alert("Successfully logged in");
           this.$router.push("/home");
         })
