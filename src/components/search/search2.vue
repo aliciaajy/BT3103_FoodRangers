@@ -101,44 +101,72 @@ export default {
 
   methods: {
 
+    //change to lowercase except first letter
+    formatString: function(str) {
+      return str.replace(/(\B)[^ ]*/g, match => (match.toLowerCase()))
+      .replace(/^[^ ]/g, match => (match.toUpperCase()));
+    },
+
+
     addAPI: function() {
       alert("addAPI")
-      axios.get(`https://data.gov.sg/api/action/datastore_search?resource_id=df586152-d00f-4b15-b667-9e268f1b60df`)
+      axios.get(`https://data.gov.sg/api/action/datastore_search?resource_id=3561a136-4ee4-4029-a5cd-ddf591cce643`)
         .then(response => {
-          alert(response.data.help)
-          alert(response.data.result)
+          //alert(response.data.help)
+          //alert(response.data.result)
           let result = {}
           result = response.data.result;
           result.records.forEach(martData => { 
 
-                alert("doc is " + martData["premise_address"]);
-                let mart = {};
-
-                let address = {};
-                address = martData["premise_address"];
-
-                mart.push( {
-                  key: "address",
-                  value: address});
+                //alert("doc is " + martData["premise_address"]);
 
 
-                db.collection('apiMart').doc(martData["license_numbers"]).set(address);
+                let address = "";
+                if (martData["block_house_num"] != "na") {
+                  address += martData["block_house_num"];
+                }
+
+                if (martData["street_name"] != "na") {
+                  address += " " + martData["street_name"];
+                }
+
+
+                if (martData["building_name"] != "na") {
+                  address += " " + martData["building_name"];
+                }
+
+                address = this.formatString(address);
+                
+
+                let postal = {};
+                postal = martData["postal_code"]
+
+                let name = {};
+                name = martData["licensee_name"] + " - " + martData["street_name"]
+                name = this.formatString(name);
+
+
+
+
+
+                
+
+                var id = {};
+                id = martData["licence_num"];
+                //alert(id);
+
+
+
+                db.collection('apiMart').doc(id).set({
+                  name: name,
+                  address: address,
+                  postal: postal});
 
 
             })
 
         })
 
-    },
-
-    fetchItems2:function(){ 
-           db.collection('favMart').orderBy('name').get().then((querySnapShot)=>{
-               let mart={} 
-               querySnapShot.forEach(doc=>{
-                    mart=[doc.id,doc.data()]
-                    this.marts.push(mart)
-                }) 
-            }) 
     },
 
     fetchItems:function(){ 
