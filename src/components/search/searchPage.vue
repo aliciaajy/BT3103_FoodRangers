@@ -26,7 +26,8 @@
 <script>
 
 //import db from "../../firebase.js";
-import filters from "./filtersAndMarts.vue";
+//import filters from "./filtersAndMarts.vue";
+import filters from "./search2.vue";
 //import starRatings from "./starRatings.vue";
 
 export default {
