@@ -13,6 +13,7 @@
 
 <script>
   import db from "../../firebase.js";
+  import firebase from "firebase";
   export default {
     data() {
       return {
@@ -47,6 +48,9 @@
            // alert("mart id " + this.mart[0]);
             //alert("added")
           db.collection('favMart').doc(added[0]).set(added[1]);
+          db.collection('favMart').doc(added[0]).update({
+            userid: firebase.auth().currentUser.uid
+          });
             //alert(this.itemsSelected + " saved to database");
             
             /*for (let i = 0; i < this.marts.length; i++) {

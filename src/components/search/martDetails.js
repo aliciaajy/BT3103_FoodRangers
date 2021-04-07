@@ -1,5 +1,5 @@
 import db from "../../firebase.js";
-import axios from 'axios';
+//import axios from 'axios';
 
 export default {
   methods: {
@@ -10,105 +10,65 @@ export default {
     },
 
 
-    addAPI: function() {
-      alert("addAPI")
-      axios.get("https://data.gov.sg/api/action/datastore_search?resource_id=3561a136-4ee4-4029-a5cd-ddf591cce643")
-        .then(response => {
-          //alert(response.data.help)
-          //alert(response.data.result)
-          let result = {}
-          result = response.data.result;
-          result.records.forEach(martData => { 
+    uniqueMarts: function() {
+      let licenceArr = [];
 
-                //alert("doc is " + martData["premise_address"]);
+      db.collection("apiMart").get().then((querySnapShot)=>{
+        querySnapShot.forEach(doc=>{
+          let data = {};
 
+          let licence = "";
+          data = doc.data();
+          //alert("data is " + data);
+          //id = doc.id;
 
-                let address = "";
-                if (martData["block_house_num"] != "na") {
-                  address += martData["block_house_num"];
-                }
+          licence = data.licence;
 
-                if (martData["street_name"] != "na") {
-                  address += " " + martData["street_name"];
-                }
+          if (!licenceArr.includes(licence)) {
+            licenceArr.push(licence);
 
-
-                if (martData["building_name"] != "na") {
-                  address += " " + martData["building_name"];
-                }
-
-                address = this.formatString(address);
-                
-
-                let postal = {};
-                postal = martData["postal_code"]
-
-                let name = {};
-                name = martData["licensee_name"] + " - " + martData["street_name"]
-                name = this.formatString(name);
-
-
-                var id = {};
-                id = martData["licence_num"];
-                //alert(id);
-
-                let pos = {lang: "0", long: "0"};
-
-                let licensee_name = {};
-                licensee_name = martData["licensee_name"]
-                licensee_name = this.formatString(licensee_name);
-
-                db.collection('apiMart').doc(id).set({
-                  name: name,
-                  address: address,
-                  postal: postal,
-                  position: pos,
-                  licence: licensee_name
-                  });
-
-                this.findPos(id, postal);
-
-
+            db.collection("martDetails").doc(licence).set({
+              type: {}
             })
 
-        })
+            this.typeMarts(licence);
+          }
+        }) 
+
+      })
+      //alert("licence are " + licenceArr);
+      return licenceArr;
 
     },
+    //specify type of marts for the big supermarkets, eg. bring your own bag
+    //sheng siong, ntuc, cold storage
+    typeMarts: function(licence) {
+      let type1 = "Bring Your Own Bag";
+      let type2 = "Discount - Food Expiring Soon";
+      let type3 = "Discount - Ugly Produce";
 
-    findPos: function(id, postal) {
-      //alert("findpos");
-      let query = {};
-
-      query = "https://developers.onemap.sg/commonapi/search?searchVal=" + postal 
-      + "&returnGeom=Y&getAddrDetails=Y"
+      let lowerLicence = licence.toLowerCase();
+      if (lowerLicence.includes("ntuc")) {
+        db.collection("martDetails").doc(licence).update({
+        type: [type1, type2, type3]
+      })
+      } else if (lowerLicence.includes("sheng siong")) {
+        db.collection("martDetails").doc(licence).update({
+        type: [type1, type2]
+      })
+      } else if (lowerLicence.includes("cold storage")) {
+        db.collection("martDetails").doc(licence).update({
+        type: [type1]
+      })
+      }
       
-      //alert("query is " + query);
+      
+    }
 
-      axios.get(query)
-        .then(response => {
-          let res = {};
-          res = response.data.results[0];
-          //alert("response lat: " + res["LATITUDE"]);
-          let pos = {};
-
-          
-          pos["lang"] = parseFloat(res["LATITUDE"]);
-          pos["long"] = parseFloat(res["LONGITUDE"]);
-          //posRes.push(pos);
-          //alert("pos in loop is " + pos["lang"]);
-          db.collection('apiMart').doc(id).update({
-            "position": pos
-          })
-
-
-          //pos = {lang: res["LATITUDE"], long: res["LONGITUDE"]}
-        })
-        //alert("pos is " + pos["lang"]);
-      },
       //methods end here
 	},
 
-  created() {
-    this.addAPI();
+  beforeMount() {
+    this.uniqueMarts();
   }
 }
