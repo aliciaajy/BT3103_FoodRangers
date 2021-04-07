@@ -20,9 +20,6 @@ export default {
           result = response.data.result;
           result.records.forEach(martData => { 
 
-                let postal = {};
-                postal = martData["postal_code"]
-
                 //alert("doc is " + martData["premise_address"]);
 
 
@@ -35,33 +32,16 @@ export default {
                   address += " " + martData["street_name"];
                 }
 
-                if (martData["level_num"] != "na" || martData["unit_num"] != "0") {
-                  var level = "";
-                  if (martData["level_num"].length == 1) {
-                    level += "0"
-                  }
 
-                  level += martData["level_num"]
-
-                  var unit = "";
-
-                  if (martData["unit_num"].length == 1) {
-                    unit += "0"
-                  }
-
-                  unit += martData["unit_num"]
-                  
-                    address += ", #" + level + "-" + unit;
-                }
                 if (martData["building_name"] != "na") {
                   address += " " + martData["building_name"];
                 }
 
-                address += ", Singapore " + postal;
-
                 address = this.formatString(address);
                 
 
+                let postal = {};
+                postal = martData["postal_code"]
 
                 let name = {};
                 name = martData["licensee_name"] + " - " + martData["street_name"]
