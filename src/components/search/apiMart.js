@@ -83,7 +83,8 @@ export default {
                   address: address,
                   postal: postal,
                   position: pos,
-                  licence: licensee_name
+                  licence: licensee_name,
+                  reviews: {}
                   });
 
                 this.findPos(id, postal);

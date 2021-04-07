@@ -1,6 +1,7 @@
 <template>
   <div id="all">
     <api></api>
+    <martDetails></martDetails>
       <div id="filters">
         <div id="search-div" class="searchLoc">
         <input id="search" class="form-control" type="text" v-model="searchQuery"
@@ -84,6 +85,7 @@ import db from "../../firebase.js";
 import starRatings from "./starRatings.vue";
 import like from "./favButton.vue";
 import api from "./apiMart.js";
+import martDetails from "./martDetails.js";
 //import axios from 'axios';
 export default {
   data() {
@@ -104,7 +106,7 @@ export default {
   methods: {
 
     fetchItems:function(){ 
-           db.collection('marts').orderBy('name').get().then((querySnapShot)=>{
+           db.collection('apiMart').orderBy('name').get().then((querySnapShot)=>{
                let mart={} 
                querySnapShot.forEach(doc=>{
                     mart=[doc.id,doc.data()]
@@ -307,7 +309,7 @@ export default {
         res = this.marts;
       }
       res = this.search();
-      res = this.compareRatings(res);
+      //res = this.compareRatings(res);
       res = this.type(res);
       res = this.location(res);
 
@@ -339,7 +341,8 @@ export default {
   components: {
     starRatings,
     like,
-    api
+    api,
+    martDetails
   }
 
 };

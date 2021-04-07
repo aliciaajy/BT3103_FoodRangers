@@ -26,9 +26,7 @@
                   
                     <h4>{{ mart[1].address }}</h4>
                   </div>
-                  <div id="starRatings">
-                    <starRatings  v-bind:rating = "mart[1].ratings"></starRatings>
-                  </div>
+
                   <div id="likeButton">
                     <like v-bind:mart="mart"></like>
                   </div> 
@@ -45,12 +43,12 @@
 
 <script>
 import db from "../../firebase.js";
-import starRatings from "../search/starRatings.vue";
+//import starRatings from "../search/starRatings.vue";
 import like from "./favButton.vue";
 import firebase from "firebase";
 export default {
   components: {
-    starRatings,
+   // starRatings,
     like
 
   },
@@ -65,10 +63,15 @@ export default {
    methods: {
 
     fetchItems:function(){ 
-           db.collection('favMart').where("userid","==",firebase.auth().currentUser.uid).orderBy('name').get().then((querySnapShot)=>{
+      alert("fetch");
+      alert("id - " + firebase.auth().currentUser.uid)
+           db.collection('favMart').where("userid","==",firebase.auth().currentUser.uid).get().then((querySnapShot)=>{
+            alert("working")
                let mart={} 
                querySnapShot.forEach(doc=>{
                     mart=[doc.id,doc.data()]
+
+                    alert("mart is " + JSON.stringify(doc.data()))
                     this.marts.push(mart)
                 }) 
             }) 
