@@ -110,7 +110,7 @@ export default {
 
     addAPI: function() {
       alert("addAPI")
-      axios.get(`https://data.gov.sg/api/action/datastore_search?resource_id=3561a136-4ee4-4029-a5cd-ddf591cce643`)
+      axios.get("https://data.gov.sg/api/action/datastore_search?resource_id=3561a136-4ee4-4029-a5cd-ddf591cce643")
         .then(response => {
           //alert(response.data.help)
           //alert(response.data.result)
@@ -166,6 +166,14 @@ export default {
             })
 
         })
+
+    },
+
+    findPos: function(postal) {
+      let query = {};
+      query = "https://developers.onemap.sg/commonapi/search?searchVal=" + postal 
+      + "&returnGeom=Y&getAddrDetails=Y"
+      return query;
 
     },
 
