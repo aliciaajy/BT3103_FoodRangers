@@ -42,14 +42,23 @@
           //let doc_id = this.mart[0];
 
           let added = this.mart;
+          let id = firebase.auth().currentUser.uid;
+          let data = added[1];
+          let users = data.userid;
+          alert("users is " + users);
 
 
+          if (!users.includes(id)) {
+            users.push(id);
+          }
+          
+          //alert("users after is " + users);
             //var lst=[];
            // alert("mart id " + this.mart[0]);
             //alert("added")
           db.collection('favMart').doc(added[0]).set(added[1]);
           db.collection('favMart').doc(added[0]).update({
-            userid: firebase.auth().currentUser.uid
+            userid: users
           });
             //alert(this.itemsSelected + " saved to database");
             
