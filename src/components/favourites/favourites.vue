@@ -63,15 +63,15 @@ export default {
    methods: {
 
     fetchItems:function(){ 
-      alert("fetch");
-      alert("id - " + firebase.auth().currentUser.uid)
+      //alert("fetch");
+      //alert("id - " + firebase.auth().currentUser.uid)
            db.collection('favMart').where("userid","array-contains",firebase.auth().currentUser.uid).get().then((querySnapShot)=>{
-            alert("working")
+            //alert("working")
                let mart={} 
                querySnapShot.forEach(doc=>{
                     mart=[doc.id,doc.data()]
 
-                    alert("mart is " + JSON.stringify(doc.data()))
+                    //alert("mart is " + JSON.stringify(doc.data()))
                     this.marts.push(mart)
                 }) 
             }) 

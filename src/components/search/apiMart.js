@@ -11,7 +11,7 @@ export default {
 
 
     addAPI: function() {
-      alert("addAPI")
+      //alert("addAPI")
       axios.get("https://data.gov.sg/api/action/datastore_search?resource_id=3561a136-4ee4-4029-a5cd-ddf591cce643")
         .then(response => {
           //alert(response.data.help)
@@ -114,8 +114,8 @@ export default {
           let pos = {};
 
           
-          pos["lang"] = parseFloat(res["LATITUDE"]);
-          pos["long"] = parseFloat(res["LONGITUDE"]);
+          pos["lat"] = parseFloat(res["LATITUDE"]);
+          pos["lng"] = parseFloat(res["LONGITUDE"]);
           //posRes.push(pos);
           //alert("pos in loop is " + pos["lang"]);
           db.collection('apiMart').doc(id).update({
