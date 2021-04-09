@@ -6,6 +6,7 @@
       :options="chartOptions"
       :series="series"
     ></apexcharts>
+ 
   </div>
 </template>
 
@@ -69,8 +70,8 @@ export default {
       };
     },
 
-    async fetchEventData() {
-      await database
+   fetchEventData() {
+       database
         .collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .where("category", "==", "dairy")
@@ -80,7 +81,7 @@ export default {
           console.log("Event data" + this.eventdata);
         });
 
-      await database
+       database
         .collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .where("category", "==", "fish")
@@ -89,7 +90,7 @@ export default {
           this.eventdata.push(querySnapshot.size);
           console.log("Event data" + this.eventdata);
         });
-      await database
+       database
         .collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .where("category", "==", "fruit")
@@ -99,7 +100,7 @@ export default {
           console.log("Event data" + this.eventdata);
         });
 
-      await database
+       database
         .collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .where("category", "==", "meat")
@@ -108,7 +109,7 @@ export default {
           this.eventdata.push(querySnapshot.size);
           console.log("Event data" + this.eventdata);
         });
-      await database
+       database
         .collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .where("category", "==", "poultry")
@@ -117,7 +118,7 @@ export default {
           this.eventdata.push(querySnapshot.size);
           console.log("Event data" + this.eventdata);
         });
-      await database
+       database
         .collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .where("category", "==", "vegetable")
