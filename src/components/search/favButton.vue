@@ -127,7 +127,7 @@
 
   </script>
 
-<style>
+<style scoped>
 
   :focus {
   outline: #08f auto 2px;
