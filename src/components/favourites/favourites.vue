@@ -65,7 +65,8 @@ export default {
     fetchItems:function(){ 
       //alert("fetch");
       //alert("id - " + firebase.auth().currentUser.uid)
-           db.collection('favMart').where("userid","array-contains",firebase.auth().currentUser.uid).get().then((querySnapShot)=>{
+           db.collection('favMart').where("userid","array-contains",firebase.auth().currentUser.uid).
+           get().then((querySnapShot)=>{
             //alert("working")
                let mart={} 
                querySnapShot.forEach(doc=>{

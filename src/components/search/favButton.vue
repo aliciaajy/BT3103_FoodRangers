@@ -44,6 +44,7 @@
           let added = this.mart;
           let id = firebase.auth().currentUser.uid;
           let data = added[1];
+          alert(added[1].name);
           let users = data.userid;
           alert("users is " + users);
 
@@ -81,8 +82,8 @@
 
         deleteMart: function() {
           let doc_id = this.mart[0];
-          //alert("doc id is " + doc_id);
-          //alert("deleted");
+          alert("doc id is " + doc_id);
+          alert("deleted");
           db.collection('favMart').doc(doc_id).delete();
         },
 
@@ -107,6 +108,7 @@
               //if the doc exists = mart was previously favourited
               //set liketoggle to true
               this.setToggle();
+              //alert("after adding to fav is " + this.likeToggle)
             }
           }))
         }

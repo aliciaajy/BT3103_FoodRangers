@@ -34,6 +34,7 @@ export default {
                 if (martData["street_name"] != "na") {
                   address += " " + martData["street_name"];
                 }
+                address = this.formatString(address);
 
                 if (martData["level_num"] != "na" || martData["unit_num"] != "0") {
                   var level = "";
@@ -54,12 +55,12 @@ export default {
                     address += ", #" + level + "-" + unit;
                 }
                 if (martData["building_name"] != "na") {
-                  address += " " + martData["building_name"];
+                  address += this.formatString(" " + martData["building_name"]);
                 }
 
                 address += ", Singapore " + postal;
 
-                address = this.formatString(address);
+                //address = this.formatString(address);
                 
 
 
