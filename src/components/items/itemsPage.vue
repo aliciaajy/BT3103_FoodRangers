@@ -1,7 +1,7 @@
 <template>
   <div>
     <Bar></Bar>
-    <br>
+    <br><br>
     <p class="title"> 🍎 Personal Items 🍎 </p>
     <div class="vertical-align">
       <div class="items scroll">
@@ -182,6 +182,12 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 32.5px;
+  font: Helvetica;
+  padding-top: 10px;
+}
+
 .btn {
   border-radius: 30px;
   right: 100px;
@@ -229,14 +235,14 @@ h3 {
   font-size: 23px;
   color: crimson;
   text-align: right;
-  font-family: Arial, Helvetica, sans-serif;
+  font: Helvetica;
 }
 
 .title {
   font: Helvetica;
   text-align: center;
   padding-left: 50px;
-  font-size: 40px;
+  font-size: 35px;
 }
 
 #itemImg {
@@ -311,8 +317,8 @@ h3 {
 }
 
 .items {
-  width: 850px;
-  height: 1600px;
+  width: 42.5%;
+  height: 1570px;
   position: absolute;
   background: #2e976bcb;
   margin-top: 30px;
@@ -325,12 +331,12 @@ h3 {
   flex-direction: column;
 }
 .expiring-soon {
-  width: 850px;
+  width: 42.5%;
   height: 750px;
   position: absolute;
   background: #f3ae53ab;
   margin-top: 30px;
-  left: 970px;
+  left: 52.5%;
   border-radius: 50px;
   transition: all 0.3s;
   display: flex;
@@ -339,14 +345,14 @@ h3 {
   flex-direction: column;
 }
 .expired {
-  width: 850px;
+  width: 42.5%;
   height: 750px;
   position: absolute;
   background: #972e2eab;
   border-radius: 50px;
   transition: all 0.3s;
   margin-top: 850px;
-  left: 970px;
+  left: 52.5%;
   display: flex;
   align-items: center;
   /* justify-content: center; */
