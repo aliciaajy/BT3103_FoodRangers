@@ -87,11 +87,13 @@ export default {
                   licence: licensee_name,
                   reviews: {},
                   userid: [],
-                  type: []
+                  type: [],
+                  image: "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg",
                   });
 
                 this.findPos(id, postal);
                 this.typeMarts(id, licensee_name);
+                this.imageMarts(id, licensee_name);
 
 
             })
@@ -155,12 +157,35 @@ export default {
             type: [""]
         })
       }
+    },
+
+    imageMarts: function(id, license) {
+      //let noImg = "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg";
+      let ntucImg = "https://www.moneydigest.sg/wp-content/uploads/2017/10/fairprice-2.png";
+      let shengImg = "https://insideretail.asia/wp-content/uploads/2020/09/Sheng-Siong-supermarket.jpg";
+      let coldImg = "https://leisurepark.com.sg/wp-content/uploads/2017/09/Cold-Storage-gallery.jpg"
+
+      let lowerLicense = license.toLowerCase();
+      if (lowerLicense.includes("ntuc")) {
+        db.collection("apiMart").doc(id).update({
+        image: ntucImg
+      })
+      } else if (lowerLicense.includes("sheng siong")) {
+        db.collection("apiMart").doc(id).update({
+        image: shengImg
+      })
+      } else if (lowerLicense.includes("cold storage")) {
+        db.collection("apiMart").doc(id).update({
+        image: coldImg
+      })
+      } 
+
     }
       
       //methods end here
 	},
 
-  created() {
+  beforeCreate() {
     this.addAPI();
   }
 }
