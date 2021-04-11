@@ -58,6 +58,11 @@ export default {
   float: left;
 }
 
+i {
+  font-size: 25px;
+  padding: 3px;
+}
+
 /* .topnav img {
   float: left;
   left: 10px;
