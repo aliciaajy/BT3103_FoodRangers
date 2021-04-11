@@ -191,10 +191,6 @@ export default {
       if (this.selectedType === "0") {return res}
 
       res.forEach((mart) => {
-
-        let licence = mart[1].licence;
-
-        db.collection("martDetails").doc(licence).get()
         //alert(mart.name + " in type");
         mart[1].type.forEach((typeCate) =>  {
             let lower = typeCate.toLowerCase();
@@ -317,7 +313,7 @@ export default {
       }
       res = this.search();
       //res = this.compareRatings(res);
-      //res = this.type(res);
+      res = this.type(res);
       res = this.location(res);
 
       return res;
