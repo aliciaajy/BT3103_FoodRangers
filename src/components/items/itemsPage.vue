@@ -1,7 +1,7 @@
 <template>
   <div>
     <Bar></Bar>
-    <br><br>
+    <br>
     <p class="title"> 🍎 Personal Items 🍎 </p>
     <div class="vertical-align">
       <div class="items scroll">
