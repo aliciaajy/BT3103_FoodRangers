@@ -12,7 +12,7 @@
 
       </div>
 
-      <filters></filters>
+      <filters id="filters"></filters>
 
 
       
@@ -40,7 +40,8 @@ export default {
 </script>
 
 <style>
-   ul {
+
+  ul {
     list-style-type: none;
     margin: 0; 
     padding: 0;

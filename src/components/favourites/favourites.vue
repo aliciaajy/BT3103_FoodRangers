@@ -132,7 +132,10 @@ export default {
     }
 
   #result {
-    margin: 0 auto; display: block;
+    margin: 0 auto;
+    padding-left:3%;
+    padding-right:3px;
+    display: block;
   }
 
     #numOfSearches {
