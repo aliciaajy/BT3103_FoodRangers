@@ -379,4 +379,9 @@ export default {
 
   }
 
+  #filters {
+    padding-left:3%;
+    padding-right:3%;
+  }
+
 </style>
