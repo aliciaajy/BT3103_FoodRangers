@@ -77,7 +77,7 @@ export default {
       var reviews = {}
       reviews[this.reviewerName] = this.review;
 
-      db.collection("marts").doc(this.id)
+      db.collection("apiMart").doc(this.id)
         .set({reviews}, {merge: true})
         .then(() => {
           location.reload();
