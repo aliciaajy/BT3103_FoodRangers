@@ -35,14 +35,14 @@
         }
       },
       deleteMart: function() {
+        alert("before delte " + this.likeToggle);
         this.setToggle();
         let doc_id = this.mart[0];
         //alert("doc id is " + doc_id);
         db.collection('favMart').doc(doc_id).delete().then( () => {location.reload()});
       },
       
-      likeDisplay: function() {
-      }
+
       //methods end here
       },
       components: {
@@ -81,7 +81,7 @@ body.using-mouse :focus {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25), 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
   border: 0;
 }
-.heart-btn.liked .heart:active {
+.heart-btn.liked .heart {
   fill: #ee3529;
 }
 .heart-btn.liked .heart-icon {
