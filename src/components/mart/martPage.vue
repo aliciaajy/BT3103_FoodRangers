@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     fetchItems: function() {
-      db.collection('marts').doc(this.id).get().then(snapshot => { 
+      db.collection('apiMart').doc(this.id).get().then(snapshot => { 
         this.mart = snapshot.data();
       });
     },

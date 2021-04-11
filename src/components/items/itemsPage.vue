@@ -1,8 +1,8 @@
 <template>
   <div>
     <Bar></Bar>
-
-    <p class="title">Personal Items</p>
+    <br>
+    <p class="title"> 🍎 Personal Items 🍎 </p>
     <div class="vertical-align">
       <div class="items scroll">
         <h1>All Items</h1>
@@ -182,6 +182,12 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 32.5px;
+  font: Helvetica;
+  padding-top: 10px;
+}
+
 .btn {
   border-radius: 30px;
   right: 100px;
@@ -208,6 +214,7 @@ ul {
   flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
+  position: sticky;
 }
 
 li {
@@ -228,14 +235,14 @@ h3 {
   font-size: 23px;
   color: crimson;
   text-align: right;
-  font-family: Arial, Helvetica, sans-serif;
+  font: Helvetica;
 }
 
 .title {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  text-align: left;
+  font: Helvetica;
+  text-align: center;
   padding-left: 50px;
-  font-size: 40px;
+  font-size: 35px;
 }
 
 #itemImg {
@@ -260,21 +267,23 @@ h3 {
 #list-items {
   background: rgba(180, 212, 180, 0.911);
   border-radius: 50px;
-  display: flex;
+  display: block;
   width: auto;
   height: auto;
   border: 1.8px solid rgb(3, 3, 3);
   overflow: hidden;
+  position: sticky;
 }
 
 #list-expiring {
   background: rgba(250, 236, 173, 0.911);
   border-radius: 50px;
-  display: flex;
+  display: block;
   width: auto;
   height: auto;
   border: 1.8px solid rgb(3, 3, 3);
   overflow: hidden;
+  position: sticky;
 }
 
 #list-expired {
@@ -285,6 +294,7 @@ h3 {
   height: auto;
   border: 1.8px solid rgb(3, 3, 3);
   overflow: hidden;
+  position: sticky;
 }
 
 .button {
@@ -307,8 +317,8 @@ h3 {
 }
 
 .items {
-  width: 45%;
-  height: 200%;
+  width: 42.5%;
+  height: 1570px;
   position: absolute;
   background: #2e976bcb;
   margin-top: 30px;
@@ -321,29 +331,28 @@ h3 {
   flex-direction: column;
 }
 .expiring-soon {
-  width: 45%;
-  height: 67%;
+  width: 42.5%;
+  height: 750px;
   position: absolute;
   background: #f3ae53ab;
   margin-top: 30px;
-  right: 50px;
+  left: 52.5%;
   border-radius: 50px;
   transition: all 0.3s;
   display: flex;
   align-items: center;
   /* justify-content: center; */
   flex-direction: column;
-  position: absolute;
 }
 .expired {
-  width: 45%;
-  height: 130%;
+  width: 42.5%;
+  height: 750px;
   position: absolute;
   background: #972e2eab;
-  right: 50px;
   border-radius: 50px;
   transition: all 0.3s;
-  margin-top: 500px;
+  margin-top: 850px;
+  left: 52.5%;
   display: flex;
   align-items: center;
   /* justify-content: center; */

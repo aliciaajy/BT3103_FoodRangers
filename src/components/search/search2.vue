@@ -359,7 +359,6 @@ export default {
     font-size: 25px;
 
   }
-
   
   #ratings {
     float: right;
