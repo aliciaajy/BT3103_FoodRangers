@@ -185,7 +185,7 @@ export default {
       //methods end here
 	},
 
-  created() {
+  beforeCreate() {
     this.addAPI();
   }
 }
