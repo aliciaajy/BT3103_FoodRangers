@@ -31,7 +31,7 @@ export default {
               type: {}
             })
 
-            this.typeMarts(licence);
+            this.typeLicence(licence);
           }
         }) 
 
@@ -42,7 +42,7 @@ export default {
     },
     //specify type of marts for the big supermarkets, eg. bring your own bag
     //sheng siong, ntuc, cold storage
-    typeMarts: function(licence) {
+    typeLicence: function(licence) {
       let type1 = "Bring Your Own Bag";
       let type2 = "Discount - Food Expiring Soon";
       let type3 = "Discount - Ugly Produce";
@@ -63,12 +63,33 @@ export default {
       }
       
       
-    }
+    },
+
+    typeMarts: function() {
+      db.collection("martDetails").get().then((querySnapShot)=>{
+        querySnapShot.forEach(doc=>{
+          let data = {};
+
+          //let licence = "";
+          data = doc.data();
+          let id = doc.id;
+
+          db.collection("apiMart").doc(id).update({
+            type: data.type,
+          })
+
+        })
+      });
+    },
 
       //methods end here
 	},
 
   beforeMount() {
     this.uniqueMarts();
+  },
+
+  created() {
+    this.typeMarts();
   }
 }

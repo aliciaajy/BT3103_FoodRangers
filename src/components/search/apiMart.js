@@ -85,7 +85,8 @@ export default {
                   position: pos,
                   licence: licensee_name,
                   reviews: {},
-                  userid: []
+                  userid: [],
+                  type: []
                   });
 
                 this.findPos(id, postal);
