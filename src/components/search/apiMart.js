@@ -90,6 +90,7 @@ export default {
                   });
 
                 this.findPos(id, postal);
+                this.typeMarts(id, licensee_name);
 
 
             })
@@ -127,7 +128,34 @@ export default {
           //pos = {lang: res["LATITUDE"], long: res["LONGITUDE"]}
         })
         //alert("pos is " + pos["lang"]);
-      },
+    },
+
+    typeMarts: function(id, license) {
+
+      let type1 = "Bring Your Own Bag";
+      let type2 = "Discount - Food Expiring Soon";
+      let type3 = "Discount - Ugly Produce";
+
+      let lowerLicense = license.toLowerCase();
+      if (lowerLicense.includes("ntuc")) {
+        db.collection("apiMart").doc(id).update({
+        type: [type1, type2, type3]
+      })
+      } else if (lowerLicense.includes("sheng siong")) {
+        db.collection("apiMart").doc(id).update({
+        type: [type1, type2]
+      })
+      } else if (lowerLicense.includes("cold storage")) {
+        db.collection("apiMart").doc(id).update({
+        type: [type1]
+      })
+      } else {
+        db.collection("apiMart").doc(id).update({
+            type: [""]
+        })
+      }
+    }
+      
       //methods end here
 	},
 
