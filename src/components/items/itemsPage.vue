@@ -90,6 +90,7 @@
               >
                 Delete
               </button>
+              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
               <div id="list-expired">
                 <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -144,6 +145,29 @@ export default {
           location.reload();
         });
     },
+
+    createConsume: function() {
+      let userId = firebase.auth().currentUser.uid
+      db.collection("consumeItems").doc(userId).set({
+        consumed: [],
+        notConsumed: []
+      });
+
+      alert("these items are " + this.items);
+
+      db.collection("consumeItems").doc(userId).update({
+        notConsumed: this.items
+      });
+
+
+
+    },
+
+    consumeItem: function() {
+      //deleteItem(event);
+      //userId = firebase.auth().currentUser.uid
+      //db.collection("consumeItems").doc(userId).
+    },
     fetchItems: function () {
       db.collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
@@ -157,16 +181,13 @@ export default {
             let id = doc.id;
             let item_dict = doc.data();
 
-            //alert("items' img are " + item_dict.img);
-
             if (item_dict.img == "") {
               alert("items' img are " + item_dict.img);
-              //alert("id is " + id);
 
               db.collection("items").doc(id).update({
                 img:"https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png"
               })
-              //item_dict.img = "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg"
+
             }
             item_dict["numDaysLeft"] = days;
             //if it does not expire within 3 days, consider it not expiring soon
@@ -187,7 +208,12 @@ export default {
   },
   created() {
     this.fetchItems();
+    //this.createConsume();
   },
+
+  beforeMount() {
+    this.createConsume();
+  }
 };
 </script>
 
