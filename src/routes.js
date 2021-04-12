@@ -8,10 +8,8 @@ import martPage from './components/mart/martPage.vue'
 import itemsPage from "./components/items/itemsPage.vue"
 import addItems from "./components/items/addItem.vue"
 import Dashboard from "./components/dashboard/Dashboard.vue"
-import Settings from "./components/settings/settingsMenu.vue"
 import fav from "./components/favourites/favourites.vue"
-import userProfile from "./components/settings/userProfile.vue"
-
+import Settings from "./components/settings/Settings.vue"
 
 
 export default [
@@ -28,5 +26,5 @@ export default [
     { path: '/settings', component: Settings, meta: { requiresAuth: true } },
     { path: '/mart/:id', component: martPage, props: true },
     { path: '/favourites', component: fav, meta: { requiresAuth: true } },
-    { path: '/settings/profile', component: userProfile}
+
 ]

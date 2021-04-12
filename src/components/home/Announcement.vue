@@ -4,15 +4,13 @@
       <div>
         <ul>
           <li v-for="item in this.expiring" :key="item.id">
-         
-              <div id="itemDetails">
-                <p>
-                  <i class="fa fa-map-exclamation fa-2x" aria-hidden="true"></i>
-                  <b>{{ item[1].name }}</b> is expiring in
-                  <b> {{ item[1].numDaysLeft }} </b> days
-                </p>
-              </div>
-          
+            <div id="itemDetails">
+              <p>
+                <i class="fa fa-map-exclamation fa-2x" aria-hidden="true"></i>
+                <b>{{ item[1].name }}</b> is expiring in
+                <b> {{ item[1].numDaysLeft }} </b> days
+              </p>
+            </div>
           </li>
         </ul>
       </div>
@@ -84,7 +82,6 @@ li {
   margin: 10px;
 }
 
-
 #annword {
   float: right;
   width: 35%;
@@ -98,8 +95,6 @@ li {
   background: rgb(151, 206, 228);
   border: 1.8px solid rgb(3, 3, 3);
 }
-
-
 
 .scroll {
   margin: 4px, 4px;
