@@ -121,7 +121,7 @@ export default {
     font-size: 30px;
     font-weight: bold;
     color: #2c3e50;
-    font-family: Avenir;
+    font-family: Helvetica;
     font-style: bold;
 
     }
