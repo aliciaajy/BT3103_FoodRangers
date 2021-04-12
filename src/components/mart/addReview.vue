@@ -48,6 +48,7 @@
                     <br>
 
                     <button
+                    class="formButton"
                     type="submit"
                     :disabled="!isFormValid"
                     data-dismiss="modal"
@@ -115,5 +116,19 @@ input, textarea {
   border: none;
   background: #f1f1f1;
   color: black;
+}
+
+.formButton {
+  padding: 10px 20px;
+  background-color: lightblue;
+  border-radius: 10px;
+  height: 40px;
+  padding: 3px;
+}
+
+button:disabled {
+  background-color: lightgrey;
+  color: white;
+  cursor: not-allowed;
 }
 </style>
