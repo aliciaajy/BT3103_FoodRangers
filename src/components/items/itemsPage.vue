@@ -164,7 +164,7 @@ export default {
               //alert("id is " + id);
 
               db.collection("items").doc(id).update({
-                img:"https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg"
+                img:"https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png"
               })
               //item_dict.img = "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg"
             }
