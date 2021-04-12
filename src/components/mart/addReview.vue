@@ -12,44 +12,56 @@
             </div>
 
             <div class="modal-body">
-                <form>
-                    <label for="name" required> <b> Displayed Name: </b> </label>
+                <form novalidate @submit.prevent="addReview">
+                  <div> 
+                    <label for="name"> <b> Displayed Name: </b> </label>
                     <br>
                         <input
                         type="text"
                         placeholder="Enter Name"
-                        name="name"
                         v-model="reviewerName"
-                        required>
+                        class="form-control"
+                        required="true">
+                        <br>
+                        <span v-if="!reviewerName.length > 0"> Please key in your name.
+                        </span>
                     <br>
                     <br>
+                  </div>
 
+                  <div>
                     <label for="review"><b> Review: </b></label>
                     <br>
                         <textarea
                         type="text"
                         placeholder="Enter Review"
                         name="review"
-                        required
-                        v-model="review"/>
+                        class = "form-control"
+                        v-model="review"
+                        required="true"/>
+                        <br>
+                        <span v-if="!review.length > 0"> Please key in your review.
+                        </span>
                     <br>
-                </form>
+                  </div>
 
+                    <br>
+
+                    <button
+                    class="formButton"
+                    type="submit"
+                    :disabled="!isFormValid"
+                    data-dismiss="modal"
+                    @click="addReview"
+                    >
+                    Submit Review
+                    </button>
+              </form>
             </div>
-
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-default"
-            data-dismiss="modal"
-            @click="addReview"
-          >
-            Submit Review
-          </button>
+          
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -70,10 +82,17 @@ export default {
             type: String
         }
     },
+  
+  computed: {
+    isFormValid() {
+      return this.reviewerName && this.review
+    }
+  },
 
 
   methods: {
     addReview: function(){
+      if (!this.isFormValid) return;
       var reviews = {}
       reviews[this.reviewerName] = this.review;
 
@@ -97,5 +116,19 @@ input, textarea {
   border: none;
   background: #f1f1f1;
   color: black;
+}
+
+.formButton {
+  padding: 10px 20px;
+  background-color: lightblue;
+  border-radius: 10px;
+  height: 40px;
+  padding: 3px;
+}
+
+button:disabled {
+  background-color: lightgrey;
+  color: white;
+  cursor: not-allowed;
 }
 </style>
