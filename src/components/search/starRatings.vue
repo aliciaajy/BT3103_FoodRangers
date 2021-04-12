@@ -9,7 +9,15 @@
       inactive-color="#ffffff"
       id="ratingsStar"
     ></starRating>
-    <h1 id="starRatingsVue">Ratings: {{ rating }}</h1>
+    
+    <div v-if="rating > 0"> 
+      <h1 id="starRatingsVue"> Ratings: {{ rating }} </h1>
+    </div>
+
+    <div v-else>
+      <h1 id="starRatingsVue">Ratings: N.A </h1>
+    </div>
+    
   </div>
 </template>
 

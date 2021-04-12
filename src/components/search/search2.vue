@@ -65,7 +65,7 @@
                   <h4>{{ mart[1].address }}</h4>
                 </div>
                 <div id="starRatings">
-                  <starRatings  v-bind:rating = "mart[1].ratings"></starRatings>
+                  <starRatings v-bind:rating = "mart[1].ratings"></starRatings>
                 </div>
 
                 <div id="likeButton">
@@ -312,7 +312,7 @@ export default {
         res = this.marts;
       }
       res = this.search();
-      //res = this.compareRatings(res);
+      res = this.compareRatings(res);
       res = this.type(res);
       res = this.location(res);
 
