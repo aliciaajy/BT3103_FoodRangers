@@ -1,8 +1,8 @@
 <template>
   <div>
     <Bar></Bar>
-    <br>
-    <p class="title"> 🍎 Personal Items 🍎 </p>
+    <br />
+    <p class="title">🍎 Personal Items 🍎</p>
     <div class="vertical-align">
       <div class="items scroll">
         <h1>All Items</h1>
@@ -121,7 +121,7 @@
 import moment from "moment";
 import db from "../../firebase.js";
 import addItem from "./addItem.vue";
-import firebase from "firebase"
+import firebase from "firebase";
 
 export default {
   data() {
@@ -145,9 +145,8 @@ export default {
         });
     },
     fetchItems: function () {
-      
       db.collection("items")
-        .where("userid","==",firebase.auth().currentUser.uid)
+        .where("userid", "==", firebase.auth().currentUser.uid)
         .get()
         .then((querySnapShot) => {
           // let item = {};

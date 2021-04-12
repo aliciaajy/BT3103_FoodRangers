@@ -2,21 +2,22 @@
   <div>
     <Bar></Bar>
     <nav>
-      <img v-bind:src="this.mart.image">
+      <img v-bind:src="this.mart.image" />
       <div class="mart">
-        <p>{{this.mart.name}} </p>
-        {{this.mart.address}} <br>
+        <p>{{ this.mart.name }}</p>
+        {{ this.mart.address }} <br />
       </div>
       <ul id="types">
         <p>Green Initiatives:</p>
-        <li v-for = "(value, key) in this.mart.type" :key="key">
-          {{value}}
+        <li v-for="(value, key) in this.mart.type" :key="key">
+          {{ value }}
         </li>
       </ul>
       <martReviews v-bind:id="this.id" class="reviewCSS"> </martReviews>
     </nav>
     <div id="content">
-      <p id="rating">Green Rating: 
+      <p id="rating">
+        Green Rating:
         <span v-text="this.mart.ratings"></span>
         <starRating
           :rating="this.mart.ratings"
@@ -37,29 +38,32 @@
 import db from "../../firebase.js";
 import salesItems from "./salesItems";
 import StarRating from "vue-star-rating";
-import martReviews from './martReviews.vue'
+import martReviews from "./martReviews.vue";
 
 export default {
   data() {
     return {
       mart: [],
-    }
+    };
   },
   props: {
     id: {
       type: String,
-    }
+    },
   },
   components: {
     salesItems: salesItems,
     StarRating,
-    martReviews
+    martReviews,
   },
   methods: {
-    fetchItems: function() {
-      db.collection('apiMart').doc(this.id).get().then(snapshot => { 
-        this.mart = snapshot.data();
-      });
+    fetchItems: function () {
+      db.collection("apiMart")
+        .doc(this.id)
+        .get()
+        .then((snapshot) => {
+          this.mart = snapshot.data();
+        });
     },
   },
   created() {
@@ -83,6 +87,7 @@ nav {
   height: 100vh;
   padding: 10px;
 }
+
 img {
   width: 270px;
   border-radius: 20px;
@@ -94,7 +99,7 @@ img {
   text-align: left;
 }
 .mart:after {
-  content:"";
+  content: "";
   display: inline-block;
   height: 0.5em;
   vertical-align: bottom;
@@ -112,7 +117,7 @@ p {
   text-align: left;
 }
 ul li:before {
- content: '✓'; 
+  content: "✓";
 }
 li {
   margin-left: 20px;
@@ -129,7 +134,5 @@ span {
 }
 #ratingsStar {
   display: inline-block;
-  
 }
-
 </style>
