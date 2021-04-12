@@ -159,7 +159,7 @@ export default {
             let id = doc.id;
             let item_dict = doc.data();
 
-            this.itemsImg(id);
+  
             item_dict["numDaysLeft"] = days;
             //if it does not expire within 3 days, consider it not expiring soon
             if (days > 5) {
@@ -177,12 +177,6 @@ export default {
         });
     },
 
-    itemsImg: function(id) {
-      let noImg = "https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png";
-      db.collection("items").doc(id).update({
-        "img": noImg
-      });
-    }
   },
   created() {
     this.fetchItems();
