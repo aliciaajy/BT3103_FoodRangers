@@ -24,7 +24,7 @@
             >
               Delete
             </button>
-            <div id="list-items">
+            <div id="list-items" class="container">
               <img v-bind:src="item[1].img" id="itemImg" />
 
               <div id="itemDetails">
@@ -122,6 +122,7 @@ import moment from "moment";
 import db from "../../firebase.js";
 import addItem from "./addItem.vue";
 import firebase from "firebase";
+
 export default {
   data() {
     return {
@@ -248,12 +249,11 @@ h3 {
   font-size: 35px;
 }
 #itemImg {
-  width: auto;
+  width: 46%;
   max-width: 200px;
-  height: auto;
+  height:auto;
   max-height: 200px;
   left: 20px;
-  float: left;
   border-width: 1px;
   overflow: hidden;
 }
@@ -262,12 +262,16 @@ h3 {
   text-align: center;
   padding: 25px;
   color: #192027;
-  float: right;
+  display:inline-block;
+  width: 46%;
+    @media (max-width: 620px) {
+      width: 100%;
+    }
 }
 #list-items {
   background: rgba(180, 212, 180, 0.911);
   border-radius: 50px;
-  display: block;
+  display: flex;
   width: auto;
   height: auto;
   border: 1.8px solid rgb(3, 3, 3);
@@ -277,7 +281,7 @@ h3 {
 #list-expiring {
   background: rgba(250, 236, 173, 0.911);
   border-radius: 50px;
-  display: block;
+  display: flex;
   width: auto;
   height: auto;
   border: 1.8px solid rgb(3, 3, 3);
@@ -360,4 +364,5 @@ vertical-align {
   justify-content: center;
   flex-direction: row;
 }
+
 </style>
