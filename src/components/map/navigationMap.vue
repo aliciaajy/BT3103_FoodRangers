@@ -82,7 +82,7 @@ export default {
     },
 
     fetchItems: function() { 
-           db.collection('marts').get().then((querySnapShot)=>{
+           db.collection('apiMart').get().then((querySnapShot)=>{
                let mart = {} 
                querySnapShot.forEach(doc=>{
                     mart=[doc.id,doc.data()];
@@ -92,7 +92,7 @@ export default {
     },
 
     getMarkers: function() {
-        db.collection('marts').get().then((querySnapShot)=>{
+        db.collection('apiMart').get().then((querySnapShot)=>{
             let marker = {}
             querySnapShot.forEach(doc=>{
                 let entry = doc.data();
