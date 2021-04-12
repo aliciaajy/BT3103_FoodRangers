@@ -1,8 +1,8 @@
 <template>
   <div>
     <Bar></Bar>
-    <br>
-    <p class="title"> 🍎 Personal Items 🍎 </p>
+    <br />
+    <p class="title">🍎 Personal Items 🍎</p>
     <div class="vertical-align">
       <div class="items scroll">
         <h1>All Items</h1>
@@ -121,8 +121,7 @@
 import moment from "moment";
 import db from "../../firebase.js";
 import addItem from "./addItem.vue";
-import firebase from "firebase"
-
+import firebase from "firebase";
 export default {
   data() {
     return {
@@ -145,9 +144,8 @@ export default {
         });
     },
     fetchItems: function () {
-      
       db.collection("items")
-        .where("userid","==",firebase.auth().currentUser.uid)
+        .where("userid", "==", firebase.auth().currentUser.uid)
         .get()
         .then((querySnapShot) => {
           // let item = {};
@@ -155,11 +153,8 @@ export default {
             var edate = moment(doc.data().expiry, "DD-MM-YYYY");
             var tdydate = moment();
             var days = edate.diff(tdydate, "days");
-
             let id = doc.id;
             let item_dict = doc.data();
-
-  
             item_dict["numDaysLeft"] = days;
             //if it does not expire within 3 days, consider it not expiring soon
             if (days > 5) {
@@ -176,7 +171,6 @@ export default {
           });
         });
     },
-
   },
   created() {
     this.fetchItems();
@@ -190,7 +184,6 @@ h1 {
   font: Helvetica;
   padding-top: 10px;
 }
-
 .btn {
   border-radius: 30px;
   right: 100px;
@@ -199,7 +192,6 @@ h1 {
   color: rgb(248, 10, 10);
   background-color: #fcf7f7a9;
 }
-
 .btn:hover {
   background-color: rgb(90, 83, 83);
 }
@@ -219,7 +211,6 @@ ul {
   padding: 0;
   position: sticky;
 }
-
 li {
   flex-grow: 1;
   flex-basis: 300px;
@@ -227,27 +218,23 @@ li {
   padding: 10px;
   margin: 10px;
 }
-
 p {
   font-size: 20px;
   text-decoration: black;
   text-align: left;
 }
-
 h3 {
   font-size: 23px;
   color: crimson;
   text-align: right;
   font: Helvetica;
 }
-
 .title {
   font: Helvetica;
   text-align: center;
   padding-left: 50px;
   font-size: 35px;
 }
-
 #itemImg {
   width: auto;
   max-width: 200px;
@@ -258,7 +245,6 @@ h3 {
   border-width: 1px;
   overflow: hidden;
 }
-
 #itemDetails {
   align-items: center;
   text-align: center;
@@ -266,7 +252,6 @@ h3 {
   color: #192027;
   float: right;
 }
-
 #list-items {
   background: rgba(180, 212, 180, 0.911);
   border-radius: 50px;
@@ -277,7 +262,6 @@ h3 {
   overflow: hidden;
   position: sticky;
 }
-
 #list-expiring {
   background: rgba(250, 236, 173, 0.911);
   border-radius: 50px;
@@ -288,7 +272,6 @@ h3 {
   overflow: hidden;
   position: sticky;
 }
-
 #list-expired {
   background: rgba(236, 184, 184, 0.911);
   border-radius: 50px;
@@ -299,7 +282,6 @@ h3 {
   overflow: hidden;
   position: sticky;
 }
-
 .button {
   position: absolute;
   top: 10px;
@@ -318,7 +300,6 @@ h3 {
   background-color: #ebf0eba9;
   transform: translateX(2px);
 }
-
 .items {
   width: 42.5%;
   height: 1570px;
@@ -368,8 +349,3 @@ vertical-align {
   flex-direction: row;
 }
 </style>
-
-
-
-
-
