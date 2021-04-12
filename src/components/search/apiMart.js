@@ -11,7 +11,7 @@ export default {
 
 
     addAPI: function() {
-      //alert("addAPI")
+      alert("addAPI")
       axios.get("https://data.gov.sg/api/action/datastore_search?resource_id=3561a136-4ee4-4029-a5cd-ddf591cce643")
         .then(response => {
           //alert(response.data.help)
@@ -79,6 +79,8 @@ export default {
                 licensee_name = martData["licensee_name"]
                 licensee_name = this.formatString(licensee_name);
 
+                let ratings = "NA";
+
                 db.collection('apiMart').doc(id).set({
                   name: name,
                   address: address,
@@ -89,17 +91,19 @@ export default {
                   userid: [],
                   type: [],
                   image: "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg",
-                  //ratings: 0
+                  ratings: ratings,
                   });
 
-                db.collection('apiMart').doc(id).set({
-                    rating: 0,
-                });
+               /* db.collection('apiMart').doc(id).set({
+                  "ratings": "0"
+                })*/
+
 
                 this.findPos(id, postal);
                 this.typeMarts(id, licensee_name);
                 this.imageMarts(id, licensee_name);
-                //this.ratingMarts(id, licensee_name);
+
+                this.ratingMarts(id, licensee_name);
 
 
             })
@@ -189,9 +193,10 @@ export default {
     },
 
     ratingMarts: function(id, license) {
-      let ntucRat = 4.1;
-      let shengRat = 3.5;
-      let coldRat = 3.8;
+      //alert("ratings")
+      let ntucRat = "4.1";
+      let shengRat = "3.5";
+      let coldRat = "3.8";
 
       let lowerLicense = license.toLowerCase();
       if (lowerLicense.includes("ntuc")) {
@@ -207,6 +212,10 @@ export default {
         ratings: coldRat
       })
       } 
+    },
+
+    martDetails: function() {
+
     }
       
       //methods end here
@@ -214,5 +223,10 @@ export default {
 
   beforeCreate() {
     this.addAPI();
+  },
+
+  created() {
+    //this.addAPI();
+
   }
 }
