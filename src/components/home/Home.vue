@@ -19,7 +19,7 @@
 
 <script>
 
-import Annoucement from './Annoucement.vue';
+import Annoucement from './Announcement.vue';
 import Notes from './Notes.vue';
 
 export default {
