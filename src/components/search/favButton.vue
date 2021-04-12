@@ -46,7 +46,7 @@
           let data = added[1];
           alert(added[1].name);
           let users = data.userid;
-          alert("users is " + users);
+          //alert("users is " + users);
 
 
           if (!users.includes(id)) {
@@ -82,8 +82,8 @@
 
         deleteMart: function() {
           let doc_id = this.mart[0];
-          alert("doc id is " + doc_id);
-          alert("deleted");
+          //alert("doc id is " + doc_id);
+          //alert("deleted");
           db.collection('favMart').doc(doc_id).delete();
         },
 

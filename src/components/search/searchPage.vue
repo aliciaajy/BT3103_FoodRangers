@@ -102,7 +102,7 @@ export default {
 
     #martImg {
        width: 288px;
-       height: 200px;
+       height: 220px;
 
 
        max-width: 80%;

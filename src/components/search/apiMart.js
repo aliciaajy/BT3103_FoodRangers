@@ -79,7 +79,7 @@ export default {
                 licensee_name = martData["licensee_name"]
                 licensee_name = this.formatString(licensee_name);
 
-                let ratings = "NA";
+                let ratings = 0;
 
                 db.collection('apiMart').doc(id).set({
                   name: name,
@@ -97,12 +97,9 @@ export default {
                /* db.collection('apiMart').doc(id).set({
                   "ratings": "0"
                 })*/
-
-
                 this.findPos(id, postal);
                 this.typeMarts(id, licensee_name);
                 this.imageMarts(id, licensee_name);
-
                 this.ratingMarts(id, licensee_name);
 
 
@@ -194,9 +191,9 @@ export default {
 
     ratingMarts: function(id, license) {
       //alert("ratings")
-      let ntucRat = "4.1";
-      let shengRat = "3.5";
-      let coldRat = "3.8";
+      let ntucRat = 4.1;
+      let shengRat = 3.5;
+      let coldRat = 3.8;
 
       let lowerLicense = license.toLowerCase();
       if (lowerLicense.includes("ntuc")) {
@@ -214,9 +211,6 @@ export default {
       } 
     },
 
-    martDetails: function() {
-
-    }
       
       //methods end here
 	},
