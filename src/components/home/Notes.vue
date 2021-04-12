@@ -4,200 +4,145 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <!-- <div>
-              <h4 >Reminders</h4>
-              <h3>Total tasks: {{ notes.length }}</h3>
-              <div class="form">
-                <div class="form-group">
-                  <label>Note Title</label>
-                  <input
-                    class="form-control"
-                    type="text"
-                    v-model="note.title"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label>Note Text</label>
-                  <textarea
-                    rows="3"
-                    class="form-control"
-                    v-model="note.text"
-                    required
-                  ></textarea>
-                </div>
-                <button class="btn btn-primary" @click="addNote">
-                  Save Note
-                </button>
-                <div
-                  class="alert alert-danger text-center"
-                  role="alert"
-                  v-bind:class="{ active: isActive }"
-                >
-                  All fields are Required
-                </div>
-              </div> -->
+            <ul>
               <div class="row">
-                <div class="col-sm-6 note" v-for="(note, index) in notes" :key=index> 
+                <li class="col-sm-6 note" v-for="note in this.reminders" :key="note.id"> 
                   <div class="card">
-                    <button class="close" @click="removeNote(index)">
+                    <button class="close"
+                    v-bind:id="note[0]"
+                    @click="removeNote($event)">
                       &times;
                     </button>
                     <div class="card-block">
-                      <h4 class="card-title">{{ note.title }}</h4>
+                      <h4 class="card-title">{{ note[1].title }}</h4>
                       <h6 class="card-subtitle mb-2 text-muted">
-                        {{ note.date }}
+                        {{ note[1].date }}
                       </h6>
-                      <p class="card-text">{{ note.text }}</p>
+                      <p class="card-text">{{ note[1].text }}</p>
                     </div>
-                  </div>
+                    </div>
+                    </li>
+                    </div>
+                  </ul>
                 </div>
               </div>
-                          <div>
-              <h4 >Reminders</h4>
-              <h3>Total tasks: {{ notes.length }}</h3>
+            
+              
+              <div>
+              <h4 > Add a Reminder</h4>
+              <h3>Total reminders: {{ this.reminders.length }}</h3>
               <div class="form">
                 <div class="form-group">
-                  <label>Note Title</label>
+                  <label>Title</label>
                   <input
                     class="form-control"
                     type="text"
-                    v-model="note.title"
+                    name="title"
+                    v-model="title"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label>Note Text</label>
+                  <label>Reminder</label>
                   <textarea
                     rows="3"
                     class="form-control"
-                    v-model="note.text"
+                    v-model="text"
                     required
                   ></textarea>
                 </div>
-                <button class="btn btn-primary" @click="addNote">
-                  Save Note
+                <button class="btn btn-primary" @click="addNote" :disabled="!isFormValid">
+                  Save Reminder
                 </button>
-                <div
-                  class="alert alert-danger text-center"
-                  role="alert"
-                  v-bind:class="{ active: isActive }"
-                >
-                  All fields are Required
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
-// import { methods } from 'underscore';
+import db from "../../firebase.js";
+import firebase from "firebase";
+
 export default {
   data() {
     return {
-    isActive: false,
-    title: "Notepad",
-    subtitle: "Using Vue JS",
-    note: {
-      title: "",
-      text: "",
-    },
-    notes: [
-      {
-        title: "Example Note",
-        text: "Here is a nice little example note :)",
-        date: new Date(Date.now()).toLocaleString(),
-      },
-      {
-        title: "Another Note",
-        text: "Time for another, this makes 2 of us!",
-        date: new Date(Date.now()).toLocaleString(),
-      },
-    ],
+    title: "",
+    text: "",
+    notes: {},
+    reminders: [],
     }
   },
-  methods: {
-    addNote() {
-      let { text, title } = this.note;
 
-      if (this.note.text.length > 1 && this.note.title.length > 1) {
-        this.notes.push({
-          text,
-          title,
-          date: new Date(Date.now()).toLocaleString(),
+  computed: {
+    isFormValid() {
+      return this.title && this.text; 
+    }
+  },
+
+  methods: {
+    fetchItems: function () {
+      db.collection("userNotes")
+        .where("userid", "==", firebase.auth().currentUser.uid)
+        .get()
+        .then((querySnapShot) => {
+          querySnapShot.forEach((doc) => {
+            let id = doc.id;
+            let notes_dict = doc.data();
+            this.reminders.push([id, notes_dict]);
         });
-        this.isActive = false;
-        this.note.text = "";
-        this.note.title = "";
-      } else {
-        this.isActive = true;
+        });
+    },
+     
+    addNote() {
+      if (this.text.length > 1 && this.title.length > 1) {
+        this.notes["title"] = this.title;
+        this.notes["text"] = this.text;
+        this.notes["date"] = new Date(Date.now()).toLocaleString();
+        this.notes["userid"] = firebase.auth().currentUser.uid;
+        db.collection("userNotes")
+          .add(this.notes)
+          .then(() => {
+            location.reload();
+          });
       }
     },
-    removeNote(index) {
-      this.notes.splice(index, 1);
+    
+    removeNote(event) {
+      let doc_id = event.target.getAttribute("id");
+      db.collection("userNotes")
+        .doc(doc_id)
+        .delete()
+        .then(() => {
+          location.reload();
+      });
     },
-
-    //     fetchItems: function () {
-    //   db.collection("userNotes")
-    //     .where("userid", "==", firebase.auth().currentUser.uid)
-    //     .get()
-    //     .then((querySnapShot) => {
-    //       // let item = {};
-    //       querySnapShot.forEach((doc) => {
-    //         let id = doc.id;
-    //         let item_dict = doc.data();
-    //         this.notes.push([id, item_dict]);
-    //       });
-    //     });
-    // },
-
-    // addNote() {
-    //   if (this.note.text.length > 1 && this.note.title.length > 1) {
-    //     this.dict["title"] = this.title;
-    //     this.dict["text"] = this.text;
-    //     this.dict["date"] = new Date(Date.now()).toLocaleString();
-    //     this.dict["userid"] = firebase.auth().currentUser.uid;
-    //     db.collection("userNotes")
-    //       .add(this.dict)
-    //       .then(() => {
-    //         location.reload();
-    //       });
-    //     this.isActive = false;
-    //   } else {
-    //     this.isActive = true;
-    //   }
-    // },
-    // removeNote(event) {
-    //   let doc_id = event.target.getAttribute("id");
-    //   db.collection("userNotes")
-    //     .doc(doc_id)
-    //     .delete()
-    //     .then(() => {
-    //       location.reload();
-    //     });
-    // },
   },
+
+  
+  
   created() {
     this.fetchItems();
   },
-  
+
 };
 </script>
+
 <style scoped>
 .remind {
   float: left
 }
 #notes {
   float:left;
+  width:800px;
+  padding:20px;
+
 }
 body {
   font-size: 14px;
   min-width: 300px;
-  font-family: "Ubuntu", sans-serif;
+  font: helvetica;
   background: #f3f3f3;
   margin: 0;
   -webkit-user-select: none;
@@ -205,9 +150,9 @@ body {
   padding: 70px 30px 0px 30px;
   font-weight: 100;
 }
-.card {
+.card { 
   margin: 20px 0;
-  background: #ffffff;
+  background:#f5e8b1;
   border: 10px;
   padding: 20px;
 }
@@ -256,4 +201,4 @@ p.card-text {
   max-width: 600px;
   margin: 0px auto;
 }
-</style>
+</style> 

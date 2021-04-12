@@ -3,18 +3,15 @@
     <Bar></Bar>
     
     <h1>
-      
       Welcome Back,
       <small class="text-muted">Name</small>
-      <h2 id ="annword">  Annoucement </h2>
+      <h2 id ="annword">  Announcement </h2>
     </h1>
     <Notes></Notes>
-    <Annoucement></Annoucement>
+    <Annoucement id="announcements"></Annoucement>
   </div>
 
 </template>
-
-
 
 
 <script>
@@ -34,7 +31,13 @@ export default {
 <style scoped>
 h1 {
   text-align:left;
+  padding: 20px;
 }
+
+#announcements {
+  padding: 20px;
+}
+
 h3 {
   right: 20px;
 }
