@@ -89,11 +89,17 @@ export default {
                   userid: [],
                   type: [],
                   image: "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg",
+                  //ratings: 0
                   });
+
+                db.collection('apiMart').doc(id).set({
+                    rating: 0,
+                });
 
                 this.findPos(id, postal);
                 this.typeMarts(id, licensee_name);
                 this.imageMarts(id, licensee_name);
+                //this.ratingMarts(id, licensee_name);
 
 
             })
@@ -180,6 +186,27 @@ export default {
       })
       } 
 
+    },
+
+    ratingMarts: function(id, license) {
+      let ntucRat = 4.1;
+      let shengRat = 3.5;
+      let coldRat = 3.8;
+
+      let lowerLicense = license.toLowerCase();
+      if (lowerLicense.includes("ntuc")) {
+        db.collection("apiMart").doc(id).update({
+        ratings: ntucRat
+      })
+      } else if (lowerLicense.includes("sheng siong")) {
+        db.collection("apiMart").doc(id).update({
+        ratings: shengRat
+      })
+      } else if (lowerLicense.includes("cold storage")) {
+        db.collection("apiMart").doc(id).update({
+        ratings: coldRat
+      })
+      } 
     }
       
       //methods end here
