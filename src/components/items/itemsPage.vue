@@ -155,6 +155,18 @@ export default {
             var days = edate.diff(tdydate, "days");
             let id = doc.id;
             let item_dict = doc.data();
+
+            //alert("items' img are " + item_dict.img);
+
+            if (item_dict.img == "") {
+              alert("items' img are " + item_dict.img);
+              //alert("id is " + id);
+
+              db.collection("items").doc(id).update({
+                img:"https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg"
+              })
+              //item_dict.img = "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg"
+            }
             item_dict["numDaysLeft"] = days;
             //if it does not expire within 3 days, consider it not expiring soon
             if (days > 5) {
