@@ -9,21 +9,17 @@
           </button>
         </div>
         <div class="modal-body">
-          <form novalidate @submit.prevent="addItem">
-            
-            <div>
+          <form>
             <label for="name"><b>Food Item*: </b></label>
             <input
               type="text"
               placeholder="Enter food"
               name="food"
               v-model="foodname"
-              required="true"
+              required
             />
             <br />
-            </div>
 
-            <div>
             <input
               @click="click1"
               type="file"
@@ -37,9 +33,7 @@
               <img class="preview" height="200" width="200" :src="img" />
               <br />
             </div>
-            </div>
 
-            <div>
             <label for="text"><b> Category*: </b></label>
 
             <select v-model="category">
@@ -50,16 +44,14 @@
               <option value="vegetable">Vegetable</option>
               <option value="fruit">Fruit</option>
             </select>
-            </div>
 
-            <div>
             <label for="text"> <b>Item Details*:</b></label>
             <h1>
               Select <b>Opened / No Expiry Date</b> to get the estimated expiry
               date <br />Select <b>Unopened / Have Expiry Date</b> to key in
               your expiry date!
             </h1>
-            <select v-model="state" required="true">
+            <select v-model="state" required>
               <option value="Opened">Opened / No Expiry Date</option>
               <option value="Unopened">Unopened / Have Expiry Date</option>
             </select>
@@ -71,35 +63,30 @@
               </label>
             </p>
             <p v-if="state == 'Unopened'">
-              <label><b>Expiry Date*: </b></label>
-              <input type="date" v-model="expirydate" required="true" />
+              <label><b>Expiry Date: </b></label>
+              <input type="date" v-model="expirydate" required />
             </p>
-            </div>
 
-            <div>
-            <label for="text"> <b>Amount saved ($)*:</b></label>
+            <label for="text"> <b>Amount saved ($):</b></label>
             <input
               type="text"
               value="$"
               v-model="money"
               placeholder="$"
+              required
             />
-            </div>
-
-          <div>
+          </form>
+        </div>
+        <div class="modal-footer">
           <button
-            class="formButton"
-            :disabled="!isFormValid"
             type="submit"
+            class="btn btn-default"
             data-dismiss="modal"
              v-on:click="addItem"
           >
             Add
           </button>
-          </div>
-          </form>
         </div>
-        
       </div>
     </div>
   </div>
@@ -109,7 +96,6 @@
 import db from "../../firebase.js";
 import moment from "moment";
 import firebase from "firebase";
-
 export default {
   data() {
     return {
@@ -125,16 +111,8 @@ export default {
       numDay: 0,
     };
   },
-
-  computed: {
-    isFormValid() {
-      return this.foodname && this.category && this.state && this.expirydate && this.money;
-    }
-  },
-
   methods: {
     addItem() {
-      if (!this.isFormValid) return;
       this.dict["name"] = this.foodname;
       this.dict["category"] = this.category;
       this.dict["state"] = this.state;
@@ -150,7 +128,6 @@ export default {
         });
       console.log(this.dict);
     },
-
     getPredDate() {
       var chosenCat = this.category;
       db.collection("perishable")
@@ -162,15 +139,12 @@ export default {
           });
         });
    
-
       this.expirydate = moment().add(this.numDay, "days");
       return this.expirydate;
     },
-
     click1() {
       this.$refs.input1.click();
     },
-
     previewImage(e) {
       this.uploadValue = 0;
       this.imgurl = null;
@@ -179,7 +153,6 @@ export default {
       this.img = URL.createObjectURL(file);
       this.onUpload();
     },
-
     onUpload() {
       this.imgurl = null;
       const storageRef = firebase
@@ -218,7 +191,6 @@ label {
   flex-flow: row wrap;
   align-items: left;
 }
-
 input,
 select {
   width: 100%;
@@ -228,19 +200,5 @@ select {
   border: none;
   background: #f1f1f1;
   color: black;
-}
-
-.formButton {
-  padding: 10px 20px;
-  background-color: lightblue;
-  border-radius: 10px;
-  height: 40px;
-  padding: 3px;
-}
-
-button:disabled {
-  background-color: lightgrey;
-  color: white;
-  cursor: not-allowed;
 }
 </style>
