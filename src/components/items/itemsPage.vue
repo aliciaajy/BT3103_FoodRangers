@@ -24,6 +24,7 @@
             >
               Delete
             </button>
+            <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
             <div id="list-items" class="container">
               <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -57,6 +58,7 @@
               >
                 Delete
               </button>
+              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
               <div id="list-expiring">
                 <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -131,6 +133,7 @@ export default {
       items: [],
       expiring: [],
       expired: [],
+      all: []
     };
   },
   components: {
@@ -147,25 +150,31 @@ export default {
         });
     },
 
-    /*createConsume: function() {
-      let userId = firebase.auth().currentUser.uid
+    consumeItem: function(event) {
+
+      let doc_id = event.target.getAttribute("id");
+      //alert("id consumed is " + doc_id);
+      let userId = firebase.auth().currentUser.uid;
+      var actualMonth = "";
+
+      //alert("all items first " + this.all[0]) 
+      this.all.forEach((item) => {
+        let id = item[0];
+        let data = item[1];
+        if (id == doc_id) {
+          //alert("found");
+          actualMonth = data["keyedInMonth"];
+
+        }
+      })
       db.collection("consumeItems").doc(userId).set({
-        consumed: [],
-        notConsumed: []
-      });
+            [actualMonth]: {unConsumed: firebase.firestore.FieldValue.arrayRemove(doc_id)}
+            }, {merge: true});
+      db.collection("consumeItems").doc(userId).set({
+              [actualMonth]: {consumed: firebase.firestore.FieldValue.arrayUnion(doc_id)}
+            }, {merge: true})
 
-      //alert("these items are " + this.items);
-
-
-
-
-
-    },*/
-
-    consumeItem: function() {
       //deleteItem(event);
-      //userId = firebase.auth().currentUser.uid
-      //db.collection("consumeItems").doc(userId).
     },
     fetchItems: function () {
       alert("fetchItems")
@@ -205,18 +214,18 @@ export default {
             var date = doc.data()["keyin-date"];
             var month = moment(date, 'DD-MM-YY').month();
             let userId = firebase.auth().currentUser.uid
-            alert("id is " + id+ "month is " + month);
+            //alert("id is " + id+ "month is " + month);
 
             let actualMonth = "" + (month + 1);
-            alert("actual month i s" + actualMonth) 
+            item_dict["keyedInMonth"] = actualMonth;
+            //alert("keyed in month is " + item_dict["keyedInMonth"])
+            this.all.push([id, item_dict]);
+            //alert("actual month i s" + actualMonth) 
             //let field = "" + actualMonth + " - notConsumed"
-            
 
-            //all items not consumed yet
-            //db.collection("consumeItems").child(userId).child(actualMonth).update({
-              //unconsumed: firebase.firestore.FieldValue.arrayUnion(id)
-            //});
-
+            db.collection("consumeItems").doc(userId).set({
+              [actualMonth]: {unConsumed: firebase.firestore.FieldValue.arrayUnion(id)}
+            }, {merge: true})
 
           });
         });
