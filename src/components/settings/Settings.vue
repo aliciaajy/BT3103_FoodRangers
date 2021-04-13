@@ -4,7 +4,7 @@
     <div id="left">
       <div id="information">
         <div style="float: left">
-          <h1>About Me</h1>
+          <h1><br><br>About Me</h1>
           <br />
           <p>Name: {{ info.name }}</p>
           <br />
@@ -31,25 +31,7 @@
           <h2 style="margin-left: -130px">{{ info.name }}</h2>
         </div>
 
-        <table>
-          <tr>
-            <th width="300px">Favourite Marts</th>
-            <th width="130px">Event Type</th>
-            <th width="80px">Status</th>
-          </tr>
-          <tr v-bind:key="e" v-for="e in my_events">
-            <td width="300px">{{ e.title }}</td>
-            <td width="130px">{{ e.type }}</td>
-            <td width="80px" v-if="e.status">Ongoing</td>
-            <td width="80px" v-else>Ended</td>
-            <button v-on:click="redirectEvent(e.id, e.type)">
-              Go to event
-            </button>
-            <button v-on:click="archiveEvent(e.id, e.status)">
-              Archieve Event
-            </button>
-          </tr>
-        </table>
+  
       </div>
     </div>
   </div>

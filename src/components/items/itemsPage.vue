@@ -295,6 +295,8 @@ h3 {
   left: 20px;
   border-width: 1px;
   overflow: hidden;
+  margin-top:20px;
+  margin-left: 20px;
 }
 #itemDetails {
   align-items: center;
