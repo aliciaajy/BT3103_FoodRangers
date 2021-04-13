@@ -21,9 +21,9 @@ export default {
             ]
         },
         options: {
-            legend: { display: false },
+            legend: { display: true },
             title: {
-              display: true,
+              display: false,
               text: 'Predicted world population (millions) in 2050'
             },
             responsive: true,
