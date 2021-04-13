@@ -24,6 +24,7 @@
             >
               Delete
             </button>
+            <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
             <div id="list-items" class="container">
               <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -57,6 +58,7 @@
               >
                 Delete
               </button>
+              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
               <div id="list-expiring">
                 <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -90,6 +92,7 @@
               >
                 Delete
               </button>
+              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
               <div id="list-expired">
                 <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -123,12 +126,14 @@ import db from "../../firebase.js";
 import addItem from "./addItem.vue";
 import firebase from "firebase";
 
+
 export default {
   data() {
     return {
       items: [],
       expiring: [],
       expired: [],
+      all: []
     };
   },
   components: {
@@ -144,7 +149,35 @@ export default {
           location.reload();
         });
     },
+
+    consumeItem: function(event) {
+
+      let doc_id = event.target.getAttribute("id");
+      //alert("id consumed is " + doc_id);
+      let userId = firebase.auth().currentUser.uid;
+      var actualMonth = "";
+
+      //alert("all items first " + this.all[0]) 
+      this.all.forEach((item) => {
+        let id = item[0];
+        let data = item[1];
+        if (id == doc_id) {
+          //alert("found");
+          actualMonth = data["keyedInMonth"];
+
+        }
+      })
+      db.collection("consumeItems").doc(userId).set({
+            [actualMonth]: {unConsumed: firebase.firestore.FieldValue.arrayRemove(doc_id)}
+            }, {merge: true});
+      db.collection("consumeItems").doc(userId).set({
+              [actualMonth]: {consumed: firebase.firestore.FieldValue.arrayUnion(doc_id)}
+            }, {merge: true})
+
+      //deleteItem(event);
+    },
     fetchItems: function () {
+      alert("fetchItems")
       db.collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .get()
@@ -157,16 +190,13 @@ export default {
             let id = doc.id;
             let item_dict = doc.data();
 
-            //alert("items' img are " + item_dict.img);
-
             if (item_dict.img == "") {
-              alert("items' img are " + item_dict.img);
-              //alert("id is " + id);
+              //alert("items' img are " + item_dict.img);
 
               db.collection("items").doc(id).update({
                 img:"https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png"
               })
-              //item_dict.img = "https://icon-library.com/images/no-photo-available-icon/no-photo-available-icon-4.jpg"
+
             }
             item_dict["numDaysLeft"] = days;
             //if it does not expire within 3 days, consider it not expiring soon
@@ -181,13 +211,31 @@ export default {
             } else if (days <= 5) {
               this.expiring.push([id, item_dict]);
             }
+            var date = doc.data()["keyin-date"];
+            var month = moment(date, 'DD-MM-YY').month();
+            let userId = firebase.auth().currentUser.uid
+            //alert("id is " + id+ "month is " + month);
+
+            let actualMonth = "" + (month + 1);
+            item_dict["keyedInMonth"] = actualMonth;
+            //alert("keyed in month is " + item_dict["keyedInMonth"])
+            this.all.push([id, item_dict]);
+            //alert("actual month i s" + actualMonth) 
+            //let field = "" + actualMonth + " - notConsumed"
+
+            db.collection("consumeItems").doc(userId).set({
+              [actualMonth]: {unConsumed: firebase.firestore.FieldValue.arrayUnion(id)}
+            }, {merge: true})
+
           });
         });
     },
   },
   created() {
     this.fetchItems();
+    //this.createConsume();
   },
+
 };
 </script>
 
