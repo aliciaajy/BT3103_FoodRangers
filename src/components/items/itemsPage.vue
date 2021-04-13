@@ -124,6 +124,7 @@ import db from "../../firebase.js";
 import addItem from "./addItem.vue";
 import firebase from "firebase";
 
+
 export default {
   data() {
     return {
@@ -146,22 +147,20 @@ export default {
         });
     },
 
-    createConsume: function() {
+    /*createConsume: function() {
       let userId = firebase.auth().currentUser.uid
       db.collection("consumeItems").doc(userId).set({
         consumed: [],
         notConsumed: []
       });
 
-      alert("these items are " + this.items);
-
-      db.collection("consumeItems").doc(userId).update({
-        notConsumed: this.items
-      });
+      //alert("these items are " + this.items);
 
 
 
-    },
+
+
+    },*/
 
     consumeItem: function() {
       //deleteItem(event);
@@ -169,6 +168,7 @@ export default {
       //db.collection("consumeItems").doc(userId).
     },
     fetchItems: function () {
+      alert("fetchItems")
       db.collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .get()
@@ -182,7 +182,7 @@ export default {
             let item_dict = doc.data();
 
             if (item_dict.img == "") {
-              alert("items' img are " + item_dict.img);
+              //alert("items' img are " + item_dict.img);
 
               db.collection("items").doc(id).update({
                 img:"https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png"
@@ -202,6 +202,22 @@ export default {
             } else if (days <= 5) {
               this.expiring.push([id, item_dict]);
             }
+            var date = doc.data()["keyin-date"];
+            var month = moment(date, 'DD-MM-YY').month();
+            let userId = firebase.auth().currentUser.uid
+            alert("id is " + id+ "month is " + month);
+
+            let actualMonth = "" + (month + 1);
+            alert("actual month i s" + actualMonth) 
+            //let field = "" + actualMonth + " - notConsumed"
+            
+
+            //all items not consumed yet
+            //db.collection("consumeItems").child(userId).child(actualMonth).update({
+              //unconsumed: firebase.firestore.FieldValue.arrayUnion(id)
+            //});
+
+
           });
         });
     },
@@ -211,9 +227,6 @@ export default {
     //this.createConsume();
   },
 
-  beforeMount() {
-    this.createConsume();
-  }
 };
 </script>
 
