@@ -35,25 +35,35 @@ export default {
   methods: {
     fetchItems: function() {
       let userId = firebase.auth().currentUser.uid;
+      //alert("fetch");
 
       db.collection("consumeItems").doc(userId).get().then((doc) => {
         let data = doc.data();
+        
 
         for (var i = 0; i< 12; i++) {
           let month = "" + (i+1);
+          //alert("inner loop");
+
 
           if ((month in data)) {
+            //alert("month is " + month);
+
             let consumed = this.datacollection.datasets[0].data;
             let unConsumed = this.datacollection.datasets[1].data;
             //alert("key exists")
+            //alert("consumed[i] before is " + unConsumed);
 
             let numConsumed = data[month].consumed.length;
-            let numUnconsumed = data[month].unConsumed.length;
-
+          //alert("numConsumed " + numConsumed);
+ 
+          let numUnconsumed = data[month].unConsumed.length;
+          //alert("numUnConsumed " + numUnconsumed);
+            unConsumed[i] += numUnconsumed;
             //alert("numConsumed is " + data[month].consumed.length + " and month is " + month)
             //alert("consumed[i] before is " + consumed)
-            consumed[i] += numConsumed;
-            unConsumed[i] += numUnconsumed;
+            consumed[i] += numConsumed - 1;
+            
 
             //alert("consumed[i] after is " + consumed[i])
           }

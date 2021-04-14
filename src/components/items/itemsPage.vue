@@ -174,10 +174,10 @@ export default {
               [actualMonth]: {consumed: firebase.firestore.FieldValue.arrayUnion(doc_id)}
             }, {merge: true})
 
-      //deleteItem(event);
+      this.deleteItem(event);
     },
     fetchItems: function () {
-      alert("fetchItems")
+      //alert("fetchItems")
       db.collection("items")
         .where("userid", "==", firebase.auth().currentUser.uid)
         .get()
@@ -225,6 +225,10 @@ export default {
 
             db.collection("consumeItems").doc(userId).set({
               [actualMonth]: {unConsumed: firebase.firestore.FieldValue.arrayUnion(id)}
+            }, {merge: true})
+
+            db.collection("consumeItems").doc(userId).set({
+              [actualMonth]: {consumed: firebase.firestore.FieldValue.arrayUnion("0")}
             }, {merge: true})
 
           });
