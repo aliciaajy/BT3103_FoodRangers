@@ -6,10 +6,41 @@
         <h1><img src="../../assets/foodranger.png" class="image2" /></h1>
 
         <div class="form-group">
+          <label> Name: </label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label> Gender: </label>
+          <select v-model="gender" class="form-control half">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <label> Date Of Birth: </label>
+          <input
+            type="date"
+            class="form-control half"
+            v-model="dob"
+          />
+        </div>
+
+        <div class="form-group">
+          <label> Phone Number: </label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="hp"
+          />
+        </div>
+        <div class="form-group">
           <label> Email Address: </label>
           <input
             type="email"
-            class="form-control form-control-lg"
+            class="form-control"
             v-model="email"
           />
         </div>
@@ -18,7 +49,7 @@
           <label> Password: </label>
           <input
             type="password"
-            class="form-control form-control-lg"
+            class="form-control"
             v-model="password"
           />
         </div>
@@ -27,12 +58,12 @@
           <label> Confirm Password: </label>
           <input
             type="password"
-            class="form-control form-control-lg"
+            class="form-control"
             v-model="confirm"
           />
         </div>
 
-        <button type="submit" class="btn btn-dark btn-lg btn-block">
+        <button type="submit" class="btn btn-dark btn-block">
           Sign Up
         </button>
 
@@ -55,6 +86,10 @@ export default {
   name: "Register",
   data() {
     return {
+      name: "",
+      gender: "",
+      hp: "",
+      dob: "",
       email: "",
       password: "",
       confirm: "",
@@ -73,6 +108,10 @@ export default {
             return database.collection("users").doc(cred.user.uid).set({
               Email: cred.user.email,
               userid: cred.user.uid,
+              name: this.name,
+              gender: this.gender,
+              hp: this.hp,
+              dob: this.dob,
             });
           })
           .catch((error) => {
@@ -96,6 +135,13 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
+label {
+  margin: 0px 3px;
+}
+.half {
+  width: 126px;
+  display: inline;
+}
 
 .image1 {
   width: 640px;
@@ -107,8 +153,8 @@ export default {
 }
 
 .image2 {
-  width: 200px;
-  height: 200px;
+  width: 150px;
   position: flexi;
+  padding-top: 20px;
 }
 </style>
