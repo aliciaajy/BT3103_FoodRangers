@@ -72,7 +72,6 @@ export default {
               this.dob = moment(info.dob).format("DD-MM-YYYY");
               this.email = info.Email;
               this.profile_pic = info.profile_pic;
-              this.events_raw = info.events;
             }
           });
         });
