@@ -5,17 +5,17 @@
       <div id="information">
         <div style="float: left">
           <h1><br><br>About Me</h1>
-          <br />
-          <p>Name: {{ info.name }}</p>
-          <br />
-          <p>Gender: {{ info.gender }}</p>
-          <br />
-          <p>Phone: {{ info.phone }}</p>
-          <br />
-          <p>Date of birth:{{ info.dob }}</p>
-          <br />
-          <p>Account:{{ info.acc }}</p>
-          <br />
+          <br>
+          <p>Name: {{ this.name }}</p>
+          <br>
+          <p>Gender: {{ this.gender }}</p>
+          <br>
+          <p>Phone: {{ this.hp }}</p>
+          <br>
+          <p>Date of birth:{{ this.dob }}</p>
+          <br>
+          <p>Email:{{ this.email }}</p>
+          <br>
           
         </div>
         <div
@@ -26,9 +26,9 @@
             flex-direction: column;
           "
         >
-          <img id="profile_pic" :src="info.profile_pic" />
-          <br />
-          <h2 style="margin-left: -130px">{{ info.name }}</h2>
+          <img id="profile_pic" :src="this.profile_pic" />
+          <br>
+          <h2 style="margin-left: -130px">{{ this.name }}</h2>
         </div>
 
   
@@ -39,40 +39,41 @@
 
 <script>
 import database from "../../firebase";
-// import firebase from "firebase"
+import firebase from "firebase"
 export default {
   data() {
     return {
-      info: {
-        name: "",
-        gender: "",
-        phone: "",
-        dob: "",
-        acc: "",
-        profile_pic: "",
-      },
+      name: "",
+      gender: "",
+      hp: "",
+      dob: "",
+      email: "",
+      profile_pic: "",
     };
   },
   methods: {
     getInfo() {
-      var username = localStorage.getItem("username");
+      //let doc_id = firebase.auth().currentUser.uid;
       database
-        .collection("accounts")
-        .doc(username)
+        .collection("users")
         .get()
-        .then((doc) => {
-          var info = doc.data();
-          this.info.name = info.name;
-          this.info.gender = info.gender;
-          this.info.phone = info.contact;
-          this.info.dob = info.dob;
-          this.info.acc = username;
-          this.events_raw = info.events;
-          this.info.profile_pic = info.profile_pic_url;
+        .then(snapshot => { 
+          snapshot.docs.forEach(doc => {
+            if (doc.id == firebase.auth().currentUser.uid) {
+              var info = doc.data();
+              console.log(info.name, info.gender, info.hp, info.dob, info.Email);
+              this.name = info.name;
+              this.gender = info.gender;
+              this.hp = info.hp;
+              this.dob = info.dob;
+              this.email = info.Email;
+              this.events_raw = info.events;
+            }
+          });
         });
     },
   },
-  mounted() {
+  created() {
     this.getInfo();
   },
 };
