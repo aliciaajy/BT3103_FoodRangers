@@ -2,44 +2,47 @@
   <div>
     <Bar></Bar>
     <div id="left">
-      <div id="information">
-        <div style="float: left">
-          <h1><br><br>About Me</h1>
-          <br>
-          <p>Name: {{ this.name }}</p>
-          <br>
-          <p>Gender: {{ this.gender }}</p>
-          <br>
-          <p>Phone: {{ this.hp }}</p>
-          <br>
-          <p>Date of birth:{{ this.dob }}</p>
-          <br>
-          <p>Email:{{ this.email }}</p>
-          <br>
-          
-        </div>
-        <div
-          style="
-            float: right;
-            margin-top: 50px;
-            display: flex;
-            flex-direction: column;
-          "
-        >
-          <img id="profile_pic" :src="this.profile_pic" />
-          <br>
-          <h2 style="margin-left: -130px">{{ this.name }}</h2>
-        </div>
-
-  
+      <h1><br><br>About Me</h1>
+      <br>
+      <p>
+        Name: 
+        <input class="form-control" type="text" v-bind:placeholder="this.name" disabled>
+      </p>
+      <p>
+        Gender: 
+        <input class="form-control" type="text" v-bind:placeholder="this.gender" disabled> 
+      </p>          
+      <p>
+        Phone: 
+        <input class="form-control" type="text" v-bind:placeholder="this.hp" disabled> 
+      </p> 
+      <p>
+        Date of Birth: 
+        <input class="form-control" type="text" v-bind:placeholder="this.dob" disabled> 
+      </p>
+      <p>
+        Email:
+        <input class="form-control" type="text" v-bind:placeholder="this.email" disabled>
+      </p>
+    </div>
+    <div id="right">
+      <div id="pp-name">
+        <img id="profile_pic" :src="this.profile_pic" />
+        <br>
+        <h3>{{ this.name }}</h3>
       </div>
+      <br>
+      <button class="btn btn-secondary" data-toggle="modal" data-target="#aboutMe">Edit Profile</button>
+      <editProfile></editProfile>
     </div>
   </div>
 </template>
 
 <script>
 import database from "../../firebase";
-import firebase from "firebase"
+import firebase from "firebase";
+import moment from "moment";
+import editProfile from "./editProfile.vue";
 export default {
   data() {
     return {
@@ -51,9 +54,11 @@ export default {
       profile_pic: "",
     };
   },
+  components: {
+    editProfile,
+  },
   methods: {
     getInfo() {
-      //let doc_id = firebase.auth().currentUser.uid;
       database
         .collection("users")
         .get()
@@ -61,12 +66,12 @@ export default {
           snapshot.docs.forEach(doc => {
             if (doc.id == firebase.auth().currentUser.uid) {
               var info = doc.data();
-              console.log(info.name, info.gender, info.hp, info.dob, info.Email);
               this.name = info.name;
               this.gender = info.gender;
               this.hp = info.hp;
-              this.dob = info.dob;
+              this.dob = moment(info.dob).format("DD-MM-YYYY");
               this.email = info.Email;
+              this.profile_pic = info.profile_pic;
               this.events_raw = info.events;
             }
           });
@@ -86,47 +91,26 @@ p {
 
 #left {
   float: left;
-  width: 60%;
-  text-align: justify;
+  width: 30%;
   height: 100%;
-  margin-left: 10%;
-  margin-right: 20%;
+  margin: 0px 10%;
 }
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-button {
-  background-color: #4caf50; /* Green */
-  border: double;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+#right {
+  float: right; 
+  width: 50%;
+  margin-top: 5%;
 }
 #profile_pic {
-  height: 200px;
   width: 200px;
+  height: 200px;
   overflow: hidden;
   border-radius: 500px;
-  justify-content: center;
   background-color: white;
-  color: cornflowerblue;
   box-shadow: 0 0 8px 3px #b8b8b8;
-  display: flex !important;
-  align-items: center;
-  margin: -10px 0px 0px -180px;
+  margin: 20px;
 }
-.cropped img {
-  margin: -10px 0px 0px -180px;
+#pp-name {
+  float: left;
 }
+
 </style>

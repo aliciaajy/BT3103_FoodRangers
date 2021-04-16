@@ -93,8 +93,7 @@ export default {
 }
 
 .image2 {
-  width: 250px;
-  height: 250px;
+  width: 300px;
   position: flexi;
   /* //right: 200px; */
   /* display: inline-block; */

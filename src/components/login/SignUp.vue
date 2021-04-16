@@ -17,8 +17,8 @@
         <div class="form-group">
           <label> Gender: </label>
           <select v-model="gender" class="form-control half">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
           </select>
           <label> Date Of Birth: </label>
           <input
@@ -112,6 +112,7 @@ export default {
               gender: this.gender,
               hp: this.hp,
               dob: this.dob,
+              profile_pic: "",
             });
           })
           .catch((error) => {
@@ -142,6 +143,9 @@ label {
   width: 126px;
   display: inline;
 }
+.vertical-center {
+  height: 95%;
+}
 
 .image1 {
   width: 640px;
@@ -153,8 +157,8 @@ label {
 }
 
 .image2 {
-  width: 150px;
+  width: 200px;
   position: flexi;
-  padding-top: 20px;
+  padding-top: 30px;
 }
 </style>
