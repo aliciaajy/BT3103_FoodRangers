@@ -15,7 +15,18 @@ export default {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        elements: {
+          line: {
+            backgroundColor: "#A6EDF0",
+            borderColor: "#75CCF1",
+            borderWidth: 4,
+          },
+          point: {
+            backgroundColor: "#5DB1D1",
+            radius: 5,
+          }
+        }
       }
     }
   },
