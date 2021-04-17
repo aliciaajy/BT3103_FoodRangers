@@ -50,12 +50,11 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});
 
 
-let app;
-firebase.auth().onAuthStateChanged(async user => {
-if (!app) {
+  let app;
+  firebase.auth().onAuthStateChanged(async user => {
+  if (!app) {
     //start app
     app = new Vue({
       router,
@@ -63,14 +62,42 @@ if (!app) {
         //redirect if user not logged in
         if (!user) {
           this.$router.push("/");
-        }
+        } else {
+         /* firebase.auth().currentUser.getIdTokenResult()
+        .then(function ({
+          claims
+        }) {
+
+          if (claims.user) {
+            if (to.path !== '/user')
+              return next({
+                path: '/user',
+              })
+          } else if (claims.supermarketAdmin) {
+            if (to.path !== '/supermarketAdmin')
+              return next({
+                path: '/supermarketAdmin',
+              })
+          } 
+
+        })*/
+    } 
       },
-      render: h => h(App)
-    }).$mount("#app");
-  }
+        render: h => h(App)
+      }).$mount("#app");
+    }
+  });
+
+
 });
+
+
+
 
 // new Vue({
 //   render: h => h(App),
 //   router: router
 // }).$mount('#app')
+
+
+
