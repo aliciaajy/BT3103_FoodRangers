@@ -5,7 +5,7 @@
     <p class="title">🍎 Personal Items 🍎</p>
     <div class="vertical-align">
       <div class="items scroll">
-        <h1>All Items</h1>
+        <h1>😄 All Items 😄</h1>
         <button
           class="button btn btn-info btn-sm"
           data-toggle="modal"
@@ -28,15 +28,15 @@
 
               <div id="itemDetails">
                 <p>
-                  <b>{{ item[1].name }} </b>
+                  <b>🍽 {{ item[1].name }} </b>
                 </p>
-                <p>Category: {{ item[1].category }}</p>
-                <p>State: {{ item[1].state }}</p>
-                <p>Amount Saved: ${{ item[1].saved }}</p>
-                <p>Expiry Date: {{ item[1].expiry }}</p>
+                <p>🔖 Category: {{ item[1].category }}</p>
+                <p>🍫 State: {{ item[1].state }}</p>
+                <p>💲 Amount Saved: ${{ item[1].saved }}</p>
+                <p>📆 Expiry Date: {{ item[1].expiry }}</p>
 
                 <h3>
-                  <b>{{ item[1].numDaysLeft }}</b> more days
+                  <b>⌛ {{ item[1].numDaysLeft }}</b> more days
                 </h3>
               </div>
             </div>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="expiring-soon scroll">
-        <h1>Expiring Soon</h1>
+        <h1>😨 Expiring Soon 😨</h1>
         <div class="vertical-align">
           <ul>
             <li v-for="item in this.expiring" :key="item.id">
@@ -62,14 +62,14 @@
 
                 <div id="itemDetails">
                   <p>
-                    <b>{{ item[1].name }} </b>
+                    <b>🍽 {{ item[1].name }} </b>
                   </p>
-                  <p>Category: {{ item[1].category }}</p>
-                  <p>State: {{ item[1].state }}</p>
-                  <p>Amount Saved: ${{ item[1].saved }}</p>
-                  <p>Expiry Date: {{ item[1].expiry }}</p>
+                  <p>🔖Category: {{ item[1].category }}</p>
+                  <p>🍫 State: {{ item[1].state }}</p>
+                  <p>💲 Amount Saved: ${{ item[1].saved }}</p>
+                  <p>📆 Expiry Date: {{ item[1].expiry }}</p>
                   <h3>
-                    <b>{{ item[1].numDaysLeft }}</b> more days
+                    <b>⌛ {{ item[1].numDaysLeft }}</b> more days
                   </h3>
                 </div>
               </div>
@@ -79,7 +79,7 @@
       </div>
 
       <div class="expired scroll">
-        <h1>Expired</h1>
+        <h1>😡 Expired 😡</h1>
         <div class="vertical-align">
           <ul>
             <li v-for="item in this.expired" :key="item.id">
@@ -96,14 +96,14 @@
 
                 <div id="itemDetails">
                   <p>
-                    <b>{{ item[1].name }} </b>
+                    <b>🍽 {{ item[1].name }} </b>
                   </p>
-                  <p>Category: {{ item[1].category }}</p>
-                  <p>State: {{ item[1].state }}</p>
-                  <p>Amount Saved: ${{ item[1].saved }}</p>
-                  <p>Expiry Date: {{ item[1].expiry }}</p>
+                  <p>🔖 Category: {{ item[1].category }}</p>
+                  <p>🍫 State: {{ item[1].state }}</p>
+                  <p>💲 Amount Saved: ${{ item[1].saved }}</p>
+                  <p>📆 Expiry Date: {{ item[1].expiry }}</p>
                   <h3>
-                    <b>Expired</b>
+                    <b>⌛ Expired</b>
                   </h3>
                 </div>
               </div>

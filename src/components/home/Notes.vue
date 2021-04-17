@@ -28,12 +28,12 @@
               </div>
             
               
-              <div>
-              <h4 > Add a Reminder</h4>
+              <div class="remind">
+              <h4>  🔔 Add a Reminder </h4>
               <h3>Total reminders: {{ this.reminders.length }}</h3>
               <div class="form">
                 <div class="form-group">
-                  <label>Title</label>
+                  <label>Title:</label>
                   <input
                     class="form-control"
                     type="text"
@@ -43,7 +43,7 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label>Reminder</label>
+                  <label>Reminder:</label>
                   <textarea
                     rows="3"
                     class="form-control"
@@ -131,8 +131,11 @@ export default {
 
 <style scoped>
 .remind {
-  float: left
+  float:center;
+  border-radius: 30px;
+  text-align: left;
 }
+
 #notes {
   float:left;
   width:800px;
@@ -180,6 +183,9 @@ h3 {
   font-size: 14px;
   margin: 30px 0px 30px 0px;
   color: #b5b5b5;
+}
+h4{
+  text-align: center;
 }
 h4.card-title {
   margin: 5px 0px 15px 0px;

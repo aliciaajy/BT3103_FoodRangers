@@ -2,7 +2,7 @@
   <div>
     <Bar></Bar>
     <div id="left">
-      <h1><br><br>About Me</h1>
+      <h1><br><br> About Me 👶</h1>
       <br>
       <p>
         Name: 

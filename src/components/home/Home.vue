@@ -4,8 +4,8 @@
     
     <h1>
       Welcome Back,
-      {{this.name}}
-      <h2 id ="annword">  Announcement </h2>
+      {{this.name}} 😁😍😋
+      <h2 id ="annword"> 📢 Announcement  </h2>
     </h1>
     <Notes></Notes>
     <Annoucement id="announcements"></Annoucement>
@@ -61,7 +61,7 @@ h1 {
 
 #annword {
     float:right;
-    width:36%;
+    width:27%;
     height: 40px;
     background: rgba(10, 11, 94, 0.603);
     color: white;
