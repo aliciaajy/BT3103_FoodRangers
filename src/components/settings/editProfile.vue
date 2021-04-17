@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form novalidate @submit.prevent="addItem">
+          <form novalidate @submit.prevent="update">
             
             <div class="form-group">
               <label for="name">Name: </label>
@@ -81,7 +81,7 @@ export default {
       hp: "",
       dob: "",
       imageData: null,
-      profile_pic: null,
+      profile_pic: "",
       imgurl: "",
       email: "",
     }
@@ -100,6 +100,7 @@ export default {
               this.hp = info.hp;
               this.dob = info.dob;
               this.email = info.Email;
+              this.profile_pic = info.profile_pic;
             }
           })
         })
