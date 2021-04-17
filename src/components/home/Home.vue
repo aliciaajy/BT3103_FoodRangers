@@ -4,7 +4,7 @@
     
     <h1>
       Welcome Back,
-      <small class="text-muted">Name</small>
+      {{this.name}}
       <h2 id ="annword">  Announcement </h2>
     </h1>
     <Notes></Notes>
@@ -18,11 +18,32 @@
 
 import Annoucement from './Announcement.vue';
 import Notes from './Notes.vue';
+import db from "../../firebase"
+import firebase from "firebase";
 
 export default {
   components: {
     Annoucement,
     Notes
+  },
+  data() {
+    return {
+      name: "",
+    }
+  },
+  methods: {
+    fetchName() {
+      db.collection("users").get().then(snapshot => { 
+          snapshot.docs.forEach(doc => {
+            if (doc.id == firebase.auth().currentUser.uid) {
+              this.name = doc.data()["name"];
+            }
+          })
+      })
+    }
+  },
+  created() {
+    this.fetchName();
   }
 };
 
