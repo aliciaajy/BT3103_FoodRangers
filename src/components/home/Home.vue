@@ -56,19 +56,16 @@ h1 {
 }
 
 #announcements {
-  padding: 20px;
+  margin-right: 20px;
 }
 
-h3 {
-  right: 20px;
-}
 #annword {
     float:right;
-    width:35%;
+    width:36%;
     height: 40px;
     background: rgba(10, 11, 94, 0.603);
     color: white;
-    border: 1.8px solid rgb(3, 3, 3);
     text-align: center;
+    border-radius: 10px;
 }
 </style>

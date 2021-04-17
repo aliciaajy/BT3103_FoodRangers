@@ -77,32 +77,28 @@ ul {
 li {
   flex-grow: 1;
   flex-basis: 300px;
-  text-align: center;
+  text-align: left;
   padding: 10px;
   margin: 10px;
 }
 
-#annword {
-  float: right;
-  width: 35%;
-  background: black;
-}
 #ann {
   float: right;
-  width: 35%;
-  height: 100vh;
-  padding: 10px;
+  width: 36%;
+  padding: 20px;
   background: rgb(151, 206, 228);
-  border: 1.8px solid rgb(3, 3, 3);
+  border-radius: 20px;
 }
 
 .scroll {
   margin: 4px, 4px;
   padding: 4px;
   width: 500px;
-  height: 110px;
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
+}
+b{
+  font-size: 20px;
 }
 </style>

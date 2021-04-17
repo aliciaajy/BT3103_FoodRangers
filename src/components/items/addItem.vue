@@ -231,11 +231,9 @@ select {
 }
 
 .formButton {
-  padding: 10px 20px;
+  padding: 5px 20px;
   background-color: lightblue;
   border-radius: 10px;
-  height: 40px;
-  padding: 3px;
 }
 
 button:disabled {
