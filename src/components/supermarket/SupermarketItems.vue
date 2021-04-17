@@ -156,7 +156,7 @@ export default {
   methods: {
     fetchItems: function () {
       db.collection("apiMart")
-        .get()
+        .get("B02008E000")
         .then((snapshot) => {
           snapshot.docs.forEach((doc) => {
             this.items.push([doc.id, doc.data()]);
