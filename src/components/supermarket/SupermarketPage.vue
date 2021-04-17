@@ -62,7 +62,7 @@ export default {
         .doc(this.id)
         .get()
         .then((snapshot) => {
-          this.mart = snapshot.data();
+          this.mart = snapshot.data().list;
         });
     },
   },

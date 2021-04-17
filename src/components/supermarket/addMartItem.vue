@@ -113,9 +113,11 @@ export default {
       return (
         this.foodname &&
         this.category &&
-        this.state &&
         this.expirydate &&
-        this.money
+        this.newprice &&
+        this.oldprice &&
+        this.qty 
+        
       );
     },
   },
@@ -125,34 +127,22 @@ export default {
       if (!this.isFormValid) return;
       this.dict["name"] = this.foodname;
       this.dict["category"] = this.category;
-      this.dict["state"] = this.state;
+      this.dict["qty"] = this.qty;
       this.dict["expiry"] = moment(this.expirydate).format("DD-MM-YYYY");
       this.dict["img"] = this.imgurl;
-      this.dict["saved"] = this.money;
-      this.dict["keyin-date"] = moment().format("DD-MM-YYYY");
-      this.dict["userid"] = firebase.auth().currentUser.uid;
-      db.collection("items")
-        .add(this.dict)
+      this.dict["newprice"] = this.newprice;
+      this.dict["oldprice"] = moment().format("DD-MM-YYYY");
+     
+      db.collection("apiMart")
+        .doc("B02008E000")
+        .update({items: this.dict}) //not sure if its update because we need add item to the list 
         .then(() => {
           location.reload();
         });
       console.log(this.dict);
     },
 
-    getPredDate() {
-      var chosenCat = this.category;
-      db.collection("perishable")
-        .get()
-        .then((querySnapShot) => {
-          querySnapShot.forEach((doc) => {
-            var food = doc.data();
-            this.numDay = food[chosenCat];
-          });
-        });
-
-      this.expirydate = moment().add(this.numDay, "days");
-      return this.expirydate;
-    },
+   
 
     click1() {
       this.$refs.input1.click();
