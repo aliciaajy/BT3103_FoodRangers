@@ -5,8 +5,8 @@
       <a href="/user/home"><i class="fa fa-bank fa-2x" aria-hidden="true"></i> Home </a>
       <a href="/user/items"><i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i> My Items</a>
       <a href="/user/dashboard"><i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i> Dashboard</a>
-      <a href="/map"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> Shops Near You</a>
-      <a href="/search"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Search</a>
+      <a href="/user/map"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> Shops Near You</a>
+      <a href="/user/search"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Search</a>
       <div class="ml-auto">
         <a href="/settings"><i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> Settings </a>
         <a href ='/' v-on:click="signOut"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Sign Out </a>
