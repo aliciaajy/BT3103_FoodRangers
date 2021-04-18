@@ -67,12 +67,12 @@ export default {
       db.collection("martAdmin").doc(uid).get().then( (snapshot) => {
 
         let apiId = snapshot.data().martId;
-        alert("from firebase snapshot id is " + apiId);
+        //alert("from firebase snapshot id is " + apiId);
       db.collection('apiMart').doc(apiId).get().then(snapshot => { 
-        alert("snapshot HERE " + JSON.stringify(snapshot.data()));
+       // alert("snapshot HERE " + JSON.stringify(snapshot.data()));
 
         this.mart = snapshot.data();
-        alert("this items are HERE " + JSON.stringify(this.mart));
+        //alert("this items are HERE " + JSON.stringify(this.mart));
         
       });
       });
