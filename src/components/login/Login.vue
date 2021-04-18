@@ -1,5 +1,8 @@
 <template>
+<div>
+  <!-- <Header></Header> -->
   <div class = "body1">
+    
     <img src="../../assets/earth.png" class="image1" />
 
     <form class="inner-block vertical-center" @submit.prevent="login">
@@ -53,6 +56,8 @@
         </ul>
       </div>
     </form>
+   
+  </div>
   </div>
 </template>
 
@@ -102,8 +107,8 @@ export default {
 
 <style scoped>
 .image1 {
-  width: 640px;
-  height: 630px;
+  width: 600px;
+  height: 600px;
   position:absolute;
   left: 100px;
   display: inline-block;
@@ -118,6 +123,7 @@ export default {
 }
 
 .div2 {
-  background-color: aqua;
+  /* background-color: aqua; */
+  background-color: white;
 }
 </style>

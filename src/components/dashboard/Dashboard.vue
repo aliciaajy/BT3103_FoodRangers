@@ -16,7 +16,7 @@
     <b-container>
       <b-row>
         <b-col><PieChart></PieChart> </b-col>
-        <b-col><TreeMap></TreeMap></b-col>
+        <b-col><TreeMap @input="window.dispatchEvent(new Event('resize'));"></TreeMap></b-col>
       </b-row>
       <b-row>
         <!-- <b-col> -->
@@ -44,5 +44,6 @@ export default {
     BarChart,
     TreeMap,
   },
-};
+}
+
 </script>

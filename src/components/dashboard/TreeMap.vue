@@ -20,6 +20,10 @@ import VueApexCharts from "vue-apexcharts";
 import database from "../../firebase.js";
 import firebase from "firebase";
 
+let resizeEvent = window.document.createEvent("UIEvents");
+resizeEvent.initUIEvent("resize", true, false, window, 0);
+window.dispatchEvent(resizeEvent);
+
 export default {
   name: "Chart",
   components: {
@@ -27,11 +31,10 @@ export default {
   },
   created() {
     this.fetchItems();
-      this.series = [
-        {
-          data: this.eventdata,
-        },
-      ];
+    this.ESresize();
+    let resizeEvent = window.document.createEvent("UIEvents");
+    resizeEvent.initUIEvent("resize", true, false, window, 0);
+    window.dispatchEvent(resizeEvent);
   },
   data() {
     return {
@@ -49,6 +52,7 @@ export default {
         chart: {
           height: 500,
           type: "treemap",
+          redrawOnParentResize: true,
         },
         colors: [
           "#3B93A5",
@@ -73,7 +77,7 @@ export default {
         },
         responsive: [
           {
-            breakpoint: 480,
+            breakpoint: undefined,
             options: {
               chart: {
                 width: 200,
@@ -213,11 +217,26 @@ export default {
           data: this.eventdata,
         },
       ];
-    
+
+      let resizeEvent = window.document.createEvent("UIEvents");
+      resizeEvent.initUIEvent("resize", true, false, window, 0);
+      window.dispatchEvent(resizeEvent);
     },
-    NAME_OF_MUTATION: (state, series) => {
-      state.nameOfDataInStore = series;
-      window.dispatchEvent(new Event("resize"));
+
+    ESresize() {
+      /*
+       * Trigger window resize function in javascript
+       * source path : http://codrate.com/questions/how-can-trigger-the-window-resize-event-manually-in-javascript
+       */
+      if (typeof Event === "function") {
+        // modern browsers
+        window.dispatchEvent(new Event("resize"));
+      } else {
+        //This will be executed on old browsers and especially IE
+        var resizeEvent = window.document.createEvent("UIEvents");
+        resizeEvent.initUIEvent("resize", true, false, window, 0);
+        window.dispatchEvent(resizeEvent);
+      }
     },
   },
 };
