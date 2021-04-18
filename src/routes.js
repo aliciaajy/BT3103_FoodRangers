@@ -1,4 +1,4 @@
-import Login from './components/login/Login.vue'
+import Login from './components/login/login2.vue'
 import SignUp from './components/login/SignUp.vue'
 import ForgotPassword from './components/login/ForgotPassword.vue'
 import searchPage from './components/search/searchPage.vue'
