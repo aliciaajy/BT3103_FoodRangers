@@ -3,14 +3,15 @@
     <div class="topnav">
       <!-- <img src="../assets/foodranger.png" /> -->
 
-      <a href="/customer"><i class="fa fa-bank fa-2x" aria-hidden="true"></i> Home </a>
-      <a href="/customer/items"><i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i> My Items</a>
-      <a href="/customer/dashboard"><i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i> Dashboard</a>
-      <a href="/customer/map"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> Shops Near You</a>
-      <a href="/customer/search"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Search</a>
+
+      <a v-on:click="home"><i class="fa fa-bank fa-2x" aria-hidden="true"></i> Home </a>
+      <a v-on:click="items"><i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i> My Items</a>
+      <a v-on:click="dashboard"><i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i> Dashboard</a>
+      <a v-on:click="map"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> Shops Near You</a>
+      <a v-on:click="search"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Search</a>
 
       <div class="ml-auto">
-        <a href="/customer/settings"><i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> Settings </a>
+        <a v-on:click="settings"><i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> Settings </a>
         <a href ='/' v-on:click="signOut"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Sign Out </a>
       </div>
     </div>
@@ -35,6 +36,33 @@ export default {
           this.$router.push("/");
         });
     },
+
+    home: function() {
+      //alert("home redirect");
+      this.$router.push("/customer/home");
+    },
+
+    items: function() {
+      alert("items redirect");
+      this.$router.push("/customer/items");
+    },
+
+    dashboard: function() {
+      this.$router.push("/customer/dashboard");
+    },
+
+    map: function() {
+      this.$router.push("/customer/map");
+    },
+
+    search: function() {
+      this.$router.push("/customer/search");
+    },
+
+    settings: function() {
+      this.$router.push("/customer/settings");
+    },
+    //methods end here
  }
 }
 
@@ -88,6 +116,13 @@ i {
 /* Add a color to the active/current link */
 .topnav a.active {
   background-color: #4caf50;
+  color: white;
+  height: 55px;
+}
+
+/* managed to turn the icon white */
+.topnav i {
+
   color: white;
   height: 55px;
 }
