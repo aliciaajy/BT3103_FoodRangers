@@ -5,9 +5,18 @@
     <form class="inner-block vertical-center" @submit.prevent="login">
       <h1><img src="../../assets/foodranger.png" class="image2" /></h1>
 
-      <div> 
-          <p id="search-tab">User Login </p>  
-          <router-link to="/supermarketAdmin/login" exact id="fav-tab"> Mart Admin Login </router-link>
+        <div> 
+          <router-link to="/" id="fav-tab">User Login </router-link> 
+          <p id="search-tab"> Admin Login </p>
+        </div>
+
+        <div class="form-group">
+          <label> Mart ID: </label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="martId"
+          />
         </div>
 
       <div class="form-group">
@@ -60,12 +69,14 @@
 import firebase from 'firebase'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './login.css'
+import db from "../../firebase.js";
 
 export default {
   data() {
     return {
       email: "",
       password: "",
+      martId: "",
     };
   },
 
@@ -90,7 +101,16 @@ export default {
         .then(() => {
           localStorage.setItem("login", true);
           alert("Successfully logged in");
-          this.$router.push("/customer/home");
+
+          let uid = firebase.auth().currentUser["uid"];
+          db.collection("martAdmin").doc(uid).get().then((snapshot) => {
+            if (snapshot.exists) {
+              alert("success 2x")
+              //admin is an admin
+              this.$router.push("/supermarketAdmin/supermarket");
+            }
+          })
+
         })
         .catch((error) => {
           alert(error.message);
