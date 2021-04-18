@@ -127,19 +127,33 @@ export default {
       if (!this.isFormValid) return;
       this.dict["name"] = this.foodname;
       this.dict["category"] = this.category;
-      this.dict["qty"] = this.qty;
-      this.dict["expiry"] = moment(this.expirydate).format("DD-MM-YYYY");
+      this.dict["quantity"] = this.qty;
+      this.dict["expiryDate"] = moment(this.expirydate).format("DD-MM-YYYY");
       this.dict["img"] = this.imgurl;
-      this.dict["newprice"] = this.newprice;
-      this.dict["oldprice"] = moment().format("DD-MM-YYYY");
-     
-      db.collection("apiMart")
-        .doc("B02008E000")
-        .update({items: this.dict}) //not sure if its update because we need add item to the list 
+      this.dict["promoPrice"] = this.newprice;
+      this.dict["keyed-in-date"] = moment().format("DD-MM-YYYY");
+      this.dict["usualPrice"] = this.oldprice;
+
+      let uid = firebase.auth().currentUser["uid"];
+      //let martId = ;
+      db.collection("martAdmin").doc(uid).get().then( (snapshot) => {
+
+        let apiId = snapshot.data().martId;
+        alert("from firebase snapshot id is " + apiId);
+        //martId += apiId;
+        //alert("martID " + martId);
+
+        db.collection("apiMart")
+        .doc(apiId)
+        .set({items: firebase.firestore.FieldValue.arrayUnion(this.dict)}, {merge: true}) //not sure if its update because we need add item to the list 
         .then(() => {
           location.reload();
         });
-      console.log(this.dict);
+
+      });
+     
+      
+     // console.log(this.dict);
     },
 
    

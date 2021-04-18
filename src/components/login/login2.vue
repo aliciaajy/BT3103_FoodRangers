@@ -85,7 +85,7 @@ export default {
                 db.collection("martAdmin").doc(uid).get().then((doc) => {
                     if (doc.exists) {
                         //is mart admin
-                        this.$router.push("/martAdmin");
+                        this.$router.push("/martAdmin/addItems");
                     }
                 })
             }

@@ -31,6 +31,7 @@ export default {
           localStorage.clear();
           localStorage.setItem("login", false);
           location.reload();
+          //alert("this router " + JSON.stringify(this.$router));
           this.$router.push("/");
         });
     },
