@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <h1>Consumed vs Unconsumed</h1>
+    <h4><br><br>Consumed vs Unconsumed</h4>
     <chart></chart>
   </div>
 </template>

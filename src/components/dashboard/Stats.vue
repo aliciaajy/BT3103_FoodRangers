@@ -1,8 +1,10 @@
 <template>
   <div>
-    <h1><span class=" w-100 align-baseline badge bg-info text-light">Dashboard</span></h1>
+    <!-- <h1><span class=" w-100 align-baseline badge bg-info text-light">Dashboard</span></h1> -->
+    <h1 class="title">📈📉📊 Dashboard 📈📉📊 </h1>
+    
     <div class="row">
-      <div class="card text-white bg-success mb-3 container" style="max-width: 25rem">
+      <div class="card text-white bg-success mb-2 container" style="max-width: 20rem">
         <div class="card-header">Items</div>
         <div class="card-body">
           <h1 class="card-title  fs-1 fw-bold">{{this.items.length}}</h1>
@@ -12,7 +14,7 @@
         </div>
       </div>
 
-      <div class="card text-white bg-warning mb-3 container" style="max-width: 25rem">
+      <div class="card text-white bg-warning mb-2 container" style="max-width: 20rem">
         <div class="card-header">Expiring Soon</div>
         <div class="card-body">
           <h1 class="card-title">{{this.expiring.length}}</h1>
@@ -21,7 +23,7 @@
           </p>
         </div>
       </div>
-      <div class="card text-white bg-danger mb-3 container" style="max-width: 25rem">
+      <div class="card text-white bg-danger mb-2 container" style="max-width: 20rem">
         <div class="card-header">Expired</div>
         <div class="card-body">
           <h1 class="card-title">{{this.expired.length}}</h1>
@@ -86,4 +88,8 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  background: rgb(208, 208, 223);
+  
+}
 </style>
