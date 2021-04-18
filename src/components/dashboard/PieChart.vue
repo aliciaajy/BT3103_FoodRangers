@@ -1,11 +1,13 @@
 <template>
   <div id="chart">
+    <h4 class = "title"> <br><br> Category Of Food </h4>
     <apexcharts
       type="pie"
-      width="50%"
+      width="100%"
       :options="chartOptions"
       :series="series"
-    ></apexcharts>
+    >
+    </apexcharts>
  
   </div>
 </template>
@@ -21,8 +23,9 @@ export default {
   components: {
     apexcharts: VueApexCharts,
   },
-  beforeMount() {
+  created() {
     this.fetchEventData();
+
   },
   data() {
     return {
@@ -31,14 +34,28 @@ export default {
             width:300,
           type: "pie",
         },
-        title: {
-          text: "Category of Food",
-          align: "left",
-          style: {
-            fontSize: "30px",
-            color: "Black",
-          },
-        },
+        colors: [
+              '#3B93A5',
+              '#F7B844',
+              '#ADD8C7',
+              '#EC3C65',
+              '#CDD7B6',
+              '#D43F97',
+              '#1E5D8C',
+              '#421243',
+              '#7F94B0',
+              '#EF6537',
+              '#C0ADDB'
+            ],
+        // title: {
+        //   text: "Category of Food",
+        //   align: "left",
+        //   style: {
+        //     fontSize: "30px",
+        //     color: "Grey",
+        //     fontFamily: 'Montserrat',
+        //   },
+        // },
         labels: ["Dairy", "Fish", "Fruit", "Meat", "Poultry", "Vegetable"],
         
         responsive: [
@@ -62,13 +79,13 @@ export default {
     };
   },
   methods: {
-    updateTheme(e) {
-      this.chartOptions = {
-        theme: {
-          palette: e.target.value,
-        },
-      };
-    },
+    // updateTheme(e) {
+    //   this.chartOptions = {
+    //     theme: {
+    //       palette: e.target.value,
+    //     },
+    //   };
+    // },
 
    fetchEventData() {
        database
@@ -78,7 +95,7 @@ export default {
         .get()
         .then((querySnapshot) => {
           this.eventdata.push(querySnapshot.size);
-          console.log("Event data" + this.eventdata);
+
         });
 
        database
@@ -88,7 +105,7 @@ export default {
         .get()
         .then((querySnapshot) => {
           this.eventdata.push(querySnapshot.size);
-          console.log("Event data" + this.eventdata);
+
         });
        database
         .collection("items")
@@ -97,7 +114,7 @@ export default {
         .get()
         .then((querySnapshot) => {
           this.eventdata.push(querySnapshot.size);
-          console.log("Event data" + this.eventdata);
+
         });
 
        database
@@ -107,7 +124,7 @@ export default {
         .get()
         .then((querySnapshot) => {
           this.eventdata.push(querySnapshot.size);
-          console.log("Event data" + this.eventdata);
+
         });
        database
         .collection("items")
@@ -116,7 +133,7 @@ export default {
         .get()
         .then((querySnapshot) => {
           this.eventdata.push(querySnapshot.size);
-          console.log("Event data" + this.eventdata);
+  
         });
        database
         .collection("items")
@@ -125,12 +142,19 @@ export default {
         .get()
         .then((querySnapshot) => {
           this.eventdata.push(querySnapshot.size);
-          console.log("Event data" + this.eventdata);
+    
         });
 
-      console.log("FinalArray" + this.eventdata);
+
       this.series = this.eventdata;
     },
   },
 };
 </script>
+
+<style scoped>
+
+.title{
+  float:center
+}
+</style>
