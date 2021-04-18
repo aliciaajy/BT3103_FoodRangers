@@ -41,8 +41,8 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
-                item[1]["usualPrice"].toFixed(2)
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
@@ -60,8 +60,8 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
-                item[1]["usualPrice"].toFixed(2)
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
@@ -77,8 +77,8 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
-                item[1]["usualPrice"].toFixed(2)
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
@@ -94,8 +94,8 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
-                item[1]["usualPrice"].toFixed(2)
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
@@ -111,8 +111,8 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
-                item[1]["usualPrice"].toFixed(2)
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
@@ -154,14 +154,14 @@ export default {
       db.collection("martAdmin").doc(uid).get().then( (snapshot) => {
 
         let apiId = snapshot.data().martId;
-        alert("from firebase snapshot id is " + apiId);
+        //alert("from firebase snapshot id is " + apiId);
       db.collection('apiMart').doc(apiId).get().then(snapshot => { 
         snapshot.data().items.forEach(doc => {
 
-        alert("doc is  " + doc.name);
+        //alert("doc is  " + doc.name);
           this.items.push([apiId, doc]);
-          alert("this items are " + JSON.stringify(this.items));
-          alert("this items are " + JSON.stringify(this.items[0][1].name));
+          //alert("this items are " + JSON.stringify(this.items));
+          //alert("this items are " + JSON.stringify(this.items[0][1].name));
           //alert("item pushed is " + JSON.stringify(doc));
           var cat = doc.category;
           //for (var cat of values) {
