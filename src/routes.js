@@ -43,7 +43,7 @@ let router = new Router({
 ]})
 
 router.beforeEach((to, from, next) => {
-    alert("router.beforeEach in routes.js");
+    //alert("router.beforeEach in routes.js");
 
     firebase.auth().onAuthStateChanged(userAuth => {
   
@@ -54,10 +54,12 @@ router.beforeEach((to, from, next) => {
           }) {
             if (claims.customer) {
                 //alert("customer");
-                alert("to path customer is " + to.path.toString() );
-                if (to.path.toString().contains("/customer")) {
+                //alert("to path customer is " + to.path.toString() );
+                //alert("do you contain customer or not " + to.path.toString().includes("/customer"))
+                if (to.path.toString().includes("/customer")) {
                     next();
                 } else {
+                    alert("access is non-authorised");
                     next("/customer/home");
                 }
               //let isCustomerRoute = to.fullPath.indexOf("/customer/") > -1;
@@ -67,17 +69,24 @@ router.beforeEach((to, from, next) => {
                   next();
                 }*/
             } else if (claims.admin) {
-                alert("to path admin is " + to.path.toString() )
-              if (to.path !== '/admin')
-                return next({
-                  path: '/admin',
-                })
+               // alert("to path admin is " + to.path.toString())
+
+                if (to.path.toString().includes("/admin")) {
+                    next();
+                } else {
+                    alert("access is non-authorised");
+                    next("/admin");
+                }
+
             } else if (claims.driver) {
-                alert("to path supermarket is " + to.path.toString() )
-              if (to.path !== '/supermarketAdmin')
-                return next({
-                  path: '/supermarketAdmin',
-                })
+                //alert("to path supermarket is " + to.path.toString() )
+
+                if (to.path.toString().includes("/supermarketAdmin")) {
+                    next();
+                } else {
+                    alert("access is non-authorised");
+                    next("supermarketAdmin");
+                }
             }
   
           })
