@@ -64,18 +64,19 @@ export default {
 
     fetchItems:function(){ 
       //alert("fetch");
-      //alert("id - " + firebase.auth().currentUser.uid)
-           db.collection('favMart').where("userid","array-contains",firebase.auth().currentUser.uid).
-           get().then((querySnapShot)=>{
-            //alert("working")
-               let mart={} 
-               querySnapShot.forEach(doc=>{
-                    mart=[doc.id,doc.data()]
+      let uid = firebase.auth().currentUser.uid;
+      db.collection('favMart').doc(uid).get().then((doc) => {
+              //alert(JSON.stringify(doc.data()))
+        doc.data().favMarts.forEach( (martId) => {
+               // alert("mart id in fav is " + martId);
+          db.collection('apiMart').doc(martId).get().then((marts) => {
+            let mart=[marts.id, marts.data()]
+                 // alert("mart pushed is " + mart);
+            this.marts.push(mart);
+          })
+        })
+      })
 
-                    //alert("mart is " + JSON.stringify(doc.data()))
-                    this.marts.push(mart)
-                }) 
-            }) 
     },
     route:function(event){
 

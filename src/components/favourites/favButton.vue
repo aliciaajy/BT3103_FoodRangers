@@ -13,6 +13,7 @@
 
 <script>
   import db from "../../firebase.js";
+  import firebase from "firebase";
   export default {
     data() {
       return {
@@ -35,12 +36,13 @@
         }
       },
       deleteMart: function() {
-        alert("before delte " + this.likeToggle);
-        this.setToggle();
-        let doc_id = this.mart[0];
-        //alert("doc id is " + doc_id);
-        db.collection('favMart').doc(doc_id).delete().then( () => {location.reload()});
-      },
+          let doc_id = this.mart[0];
+          let id = firebase.auth().currentUser.uid;
+          //alert("doc id is " + doc_id);
+          //alert("deleted");
+           db.collection('favMart').doc(id).set({favMarts: firebase.firestore.FieldValue.arrayRemove(doc_id)}, {merge: true}).then( () => {location.reload()});
+         // db.collection('favMart').doc(doc_id).delete();
+        },
       
 
       //methods end here

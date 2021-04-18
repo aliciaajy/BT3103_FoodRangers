@@ -43,48 +43,24 @@
 
           let added = this.mart;
           let id = firebase.auth().currentUser.uid;
-          let data = added[1];
+          //let data = added[1];
           alert(added[1].name);
-          let users = data.userid;
+
+
+          db.collection('favMart').doc(id).set({favMarts: firebase.firestore.FieldValue.arrayUnion(added[0])}, {merge: true});
           //alert("users is " + users);
 
 
-          if (!users.includes(id)) {
-            users.push(id);
-          }
-          
-          //alert("users after is " + users);
-            //var lst=[];
-           // alert("mart id " + this.mart[0]);
-            //alert("added")
-          db.collection('favMart').doc(added[0]).set(added[1]);
-          db.collection('favMart').doc(added[0]).update({
-            userid: users
-          });
-            //alert(this.itemsSelected + " saved to database");
             
-            /*for (let i = 0; i < this.marts.length; i++) {
-              const curr_item = this.marts[i];
-              const quantity = curr_item[1];
-                //const price = curr_item[2];
-              const name = curr_item[0];
-
-              lst.push({name, quantity});
-                
-              }
-
-              db.collection('favMart').add({
-                  lst
-                });*/
-
-            
-           },
+        },
 
         deleteMart: function() {
           let doc_id = this.mart[0];
+          let id = firebase.auth().currentUser.uid;
           //alert("doc id is " + doc_id);
           //alert("deleted");
-          db.collection('favMart').doc(doc_id).delete();
+           db.collection('favMart').doc(id).set({favMarts: firebase.firestore.FieldValue.arrayRemove(doc_id)}, {merge: true});
+         // db.collection('favMart').doc(doc_id).delete();
         },
 
         favMart: function() {
@@ -101,10 +77,12 @@
         displayFav: function() {
 
           let doc_id = this.mart[0];
-          var ref = db.collection("favMart").doc(doc_id);
+          let uid = firebase.auth().currentUser["uid"];
+          var ref = db.collection("favMart").doc(uid);
+
 
           ref.get().then((doc => {
-            if (doc.exists) {
+            if (doc["favMarts"].includes(doc_id)) {
               //if the doc exists = mart was previously favourited
               //set liketoggle to true
               this.setToggle();
