@@ -96,7 +96,7 @@ export default {
     };
   },
   methods: {
-    register() {
+    async register() {
       if (this.password != this.confirm) {
         alert("Password do not match. Please try again");
       } else {
@@ -118,7 +118,7 @@ export default {
           .catch((error) => {
             alert(error);
           });
-        this.$router.push("/login");
+        this.$router.push("/");
       }
     },
   },

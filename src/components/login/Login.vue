@@ -65,14 +65,27 @@ export default {
   },
 
   methods: {
-    login() {
+    created() {
+        firebase.auth().onAuthStateChanged(userAuth => {
+            if (userAuth) {
+                firebase
+                    .auth()
+                    .currentUser.getIdTokenResult()
+                    .then(tokenResult => {
+                        console.log(tokenResult.claims);
+                    });
+            }
+        });
+    },
+
+    async login() {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           localStorage.setItem("login", true);
           alert("Successfully logged in");
-          this.$router.push("/home");
+          this.$router.push("/customer/home");
         })
         .catch((error) => {
           alert(error.message);
