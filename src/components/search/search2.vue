@@ -296,7 +296,7 @@ export default {
 
         const doc_id = event.target.getAttribute("mod");
         //this.$router.push({name: 'modify', params: {doc_id}});
-        this.$router.push({path: `/mart/${doc_id}`});
+        this.$router.push({path: `/user/mart/${doc_id}`});
     },
 
     //methods end here

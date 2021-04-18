@@ -41,15 +41,15 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["price"].toFixed(2) }} (U.P. ${{
+              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
                 item[1]["usualPrice"].toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
             <br />
-            <p v-if="item[1].weight < 1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"] / 1000 }}kg</p>
-            <p v-show="item[1].halal">Halal</p>
+
+
+
             Expires: {{ item[1]["expiryDate"] }} <br />
             Qty left: {{ item[1]["quantity"] }}
           </div>
@@ -60,15 +60,13 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["price"].toFixed(2) }} (U.P. ${{
+              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
                 item[1]["usualPrice"].toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
             <br />
-            <p v-if="item[1].weight < 1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"] / 1000 }}kg</p>
-            <p v-show="item[1].halal">Halal</p>
+
             Expires: {{ item[1]["expiryDate"] }} <br />
             Qty left: {{ item[1]["quantity"] }}
           </div>
@@ -79,15 +77,13 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["price"].toFixed(2) }} (U.P. ${{
+              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
                 item[1]["usualPrice"].toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
             <br />
-            <p v-if="item[1].weight < 1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"] / 1000 }}kg</p>
-            <p v-show="item[1].halal">Halal</p>
+
             Expires: {{ item[1]["expiryDate"] }} <br />
             Qty left: {{ item[1]["quantity"] }}
           </div>
@@ -98,15 +94,13 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["price"].toFixed(2) }} (U.P. ${{
+              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
                 item[1]["usualPrice"].toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
             <br />
-            <p v-if="item[1].weight < 1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"] / 1000 }}kg</p>
-            <p v-show="item[1].halal">Halal</p>
+
             Expires: {{ item[1]["expiryDate"] }} <br />
             Qty left: {{ item[1]["quantity"] }}
           </div>
@@ -117,15 +111,13 @@
           <img v-bind:src="item[1].img" />
           <div id="info">
             <h5>
-              ${{ item[1]["price"].toFixed(2) }} (U.P. ${{
+              ${{ item[1]["promoPrice"].toFixed(2) }} (U.P. ${{
                 item[1]["usualPrice"].toFixed(2)
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
             <br />
-            <p v-if="item[1].weight < 1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"] / 1000 }}kg</p>
-            <p v-show="item[1].halal">Halal</p>
+
             Expires: {{ item[1]["expiryDate"] }} <br />
             Qty left: {{ item[1]["quantity"] }}
           </div>
@@ -138,6 +130,7 @@
 <script>
 import db from "../../firebase.js";
 import addMartItem from "./addMartItem"
+import firebase from "firebase";
 
 export default {
   data() {
@@ -154,26 +147,41 @@ export default {
       addMartItem
   },
   methods: {
-    fetchItems: function () {
-      db.collection("apiMart")
-        .get("B02008E000")
-        .then((snapshot) => {
-          snapshot.docs.forEach((doc) => {
-            this.items.push([doc.id, doc.data()]);
-            var values = Object.values(doc.data().category);
-            for (var cat of values) {
-              if (cat == "Housebrand") {
-                this.housebrand.push([doc.id, doc.data()]);
-              } else if (cat == "Snacks") {
-                this.snacks.push([doc.id, doc.data()]);
-              } else if (cat == "Frozen") {
-                this.frozen.push([doc.id, doc.data()]);
-              } else {
-                this.staples.push([doc.id, doc.data()]);
-              }
+    fetchItems: function() {
+
+      let uid = firebase.auth().currentUser["uid"];
+      //let martId = ;
+      db.collection("martAdmin").doc(uid).get().then( (snapshot) => {
+
+        let apiId = snapshot.data().martId;
+        alert("from firebase snapshot id is " + apiId);
+      db.collection('apiMart').doc(apiId).get().then(snapshot => { 
+        snapshot.data().items.forEach(doc => {
+
+        alert("doc is  " + doc.name);
+          this.items.push([apiId, doc]);
+          alert("this items are " + JSON.stringify(this.items));
+          alert("this items are " + JSON.stringify(this.items[0][1].name));
+          //alert("item pushed is " + JSON.stringify(doc));
+          var cat = doc.category;
+          //for (var cat of values) {
+            if (cat == "Housebrand") {
+              this.housebrand.push([apiId, doc]);
+            } else if (cat == "Snacks") {
+              this.snacks.push([apiId, doc]);
+            } else if (cat ==  "Frozen") {
+              this.frozen.push([apiId, doc]);
+            } else {
+              this.staples.push([apiId, doc])
             }
-          });
+          //}
         });
+      });
+      });
+
+      //alert("this items are " + JSON.stringify(this.items));
+
+        
     },
     filterCat: function (cat) {
       this.selectedCat = cat;

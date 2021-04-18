@@ -11,8 +11,10 @@ import addItems from "./components/items/addItem.vue"
 import Dashboard from "./components/dashboard/Dashboard.vue"
 import fav from "./components/favourites/favourites.vue"
 import Settings from "./components/settings/Settings.vue"
-import supermarketAdmin from './components/login/supermarketLogin.vue'
+import SuperMarket from "./components/supermarket/Supermarket.vue"
 import user from './components/login/userLogin.vue'
+
+
 
 
 export default [
@@ -31,6 +33,6 @@ export default [
     { path: '/user/mart/:id', component: martPage, props: true },
     { path: '/user/favourites', component: fav, meta: { requiresAuth: true } },
     { path: '/user', component: user, meta: { requiresAuth: true }},
-    { path: '/martAdmin', component: supermarketAdmin, meta: { requiresAuth: true }},
+    { path: '/martAdmin/addItems', component: SuperMarket, meta: { requiresAuth: true }},
 
 ]

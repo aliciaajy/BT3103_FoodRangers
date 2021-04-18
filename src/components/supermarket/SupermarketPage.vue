@@ -39,6 +39,7 @@ import db from "../../firebase.js";
 import SupermarketItems from "./SupermarketItems";
 import StarRating from "vue-star-rating";
 // import martReviews from "../mart/martReviews.vue";
+import firebase from 'firebase'
 
 export default {
   data() {
@@ -46,6 +47,8 @@ export default {
       mart: [],
     };
   },
+
+
   props: {
     id: {
       type: String,
@@ -57,13 +60,26 @@ export default {
    
   },
   methods: {
-    fetchItems: function () {
-      db.collection("apiMart")
-        .doc(this.id)
-        .get()
-        .then((snapshot) => {
-          this.mart = snapshot.data().list;
-        });
+    fetchItems: function() {
+
+      let uid = firebase.auth().currentUser["uid"];
+      //let martId = ;
+      db.collection("martAdmin").doc(uid).get().then( (snapshot) => {
+
+        let apiId = snapshot.data().martId;
+        alert("from firebase snapshot id is " + apiId);
+      db.collection('apiMart').doc(apiId).get().then(snapshot => { 
+        alert("snapshot HERE " + JSON.stringify(snapshot.data()));
+
+        this.mart = snapshot.data();
+        alert("this items are HERE " + JSON.stringify(this.mart));
+        
+      });
+      });
+
+      //alert("this items are " + JSON.stringify(this.items));
+
+        
     },
   },
   created() {
