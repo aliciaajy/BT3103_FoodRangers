@@ -65,6 +65,8 @@ import firebase from "firebase";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./login.css";
 import database from "../../firebase.js";
+var admin = require('firebase-admin');
+admin.initializeApp();
 
 export default {
   name: "Register",
@@ -84,10 +86,21 @@ export default {
       if (this.password != this.confirm) {
         alert("Password do not match. Please try again");
       } else {
+        
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
           .then((cred) => {
+
+            /*admin.auth().setCustomUserClaims(cred.user.uid, { supermarketAdmin: true }).then(() => {
+    // The new custom claims will propagate to the user's ID token the
+    // next time a new one is issued
+          });*/
+
+            database.collection("roles").doc(cred.user.id).set({
+              email: cred.user.email,
+              role: {supermarketAdmin: true},
+            })
             this.$router.push("/");
             return database.collection("martAdmin").doc(cred.user.uid).set({
               Email: cred.user.email,
@@ -98,7 +111,7 @@ export default {
           .catch((error) => {
             alert(error);
           });
-        this.$router.push("/login");
+        this.$router.push("/");
       }
     },
   },
