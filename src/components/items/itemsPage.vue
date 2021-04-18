@@ -5,14 +5,12 @@
     <p class="title">🍎 Personal Items 🍎</p>
     <div class="vertical-align">
       <div class="items scroll">
-        <h1>All Items</h1>
+        <h1>😄 All Items 😄</h1>
         <button
-          class="button btn btn-info btn-lg"
+          class="button btn btn-info btn-sm"
           data-toggle="modal"
           data-target="#myModal"
-        >
-          +
-        </button>
+        > + </button>
         <addItem></addItem>
 
         <ul>
@@ -30,15 +28,15 @@
 
               <div id="itemDetails">
                 <p>
-                  <b>{{ item[1].name }} </b>
+                  <b>🍽 {{ item[1].name }} </b>
                 </p>
-                <p>Category: {{ item[1].category }}</p>
-                <p>State: {{ item[1].state }}</p>
-                <p>Amount Saved: ${{ item[1].saved }}</p>
-                <p>Expiry Date: {{ item[1].expiry }}</p>
+                <p>🔖 Category: {{ item[1].category }}</p>
+                <p>🍫 State: {{ item[1].state }}</p>
+                <p>💲 Amount Saved: ${{ item[1].saved }}</p>
+                <p>📆 Expiry Date: {{ item[1].expiry }}</p>
 
                 <h3>
-                  <b>{{ item[1].numDaysLeft }}</b> more days
+                  <b>⌛ {{ item[1].numDaysLeft }}</b> more days
                 </h3>
               </div>
             </div>
@@ -47,7 +45,7 @@
       </div>
 
       <div class="expiring-soon scroll">
-        <h1>Expiring Soon</h1>
+        <h1>😨 Expiring Soon 😨</h1>
         <div class="vertical-align">
           <ul>
             <li v-for="item in this.expiring" :key="item.id">
@@ -64,14 +62,14 @@
 
                 <div id="itemDetails">
                   <p>
-                    <b>{{ item[1].name }} </b>
+                    <b>🍽 {{ item[1].name }} </b>
                   </p>
-                  <p>Category: {{ item[1].category }}</p>
-                  <p>State: {{ item[1].state }}</p>
-                  <p>Amount Saved: ${{ item[1].saved }}</p>
-                  <p>Expiry Date: {{ item[1].expiry }}</p>
+                  <p>🔖Category: {{ item[1].category }}</p>
+                  <p>🍫 State: {{ item[1].state }}</p>
+                  <p>💲 Amount Saved: ${{ item[1].saved }}</p>
+                  <p>📆 Expiry Date: {{ item[1].expiry }}</p>
                   <h3>
-                    <b>{{ item[1].numDaysLeft }}</b> more days
+                    <b>⌛ {{ item[1].numDaysLeft }}</b> more days
                   </h3>
                 </div>
               </div>
@@ -81,7 +79,7 @@
       </div>
 
       <div class="expired scroll">
-        <h1>Expired</h1>
+        <h1>😡 Expired 😡</h1>
         <div class="vertical-align">
           <ul>
             <li v-for="item in this.expired" :key="item.id">
@@ -98,14 +96,14 @@
 
                 <div id="itemDetails">
                   <p>
-                    <b>{{ item[1].name }} </b>
+                    <b>🍽 {{ item[1].name }} </b>
                   </p>
-                  <p>Category: {{ item[1].category }}</p>
-                  <p>State: {{ item[1].state }}</p>
-                  <p>Amount Saved: ${{ item[1].saved }}</p>
-                  <p>Expiry Date: {{ item[1].expiry }}</p>
+                  <p>🔖 Category: {{ item[1].category }}</p>
+                  <p>🍫 State: {{ item[1].state }}</p>
+                  <p>💲 Amount Saved: ${{ item[1].saved }}</p>
+                  <p>📆 Expiry Date: {{ item[1].expiry }}</p>
                   <h3>
-                    <b>Expired</b>
+                    <b>⌛ Expired</b>
                   </h3>
                 </div>
               </div>
@@ -250,21 +248,21 @@ h1 {
   padding-top: 10px;
 }
 .btn {
-  border-radius: 30px;
+  border-radius: 15px;
   right: 100px;
   float: right;
   border: none;
   color: rgb(248, 10, 10);
   background-color: #fcf7f7a9;
+  margin: 2px;
 }
 .btn:hover {
-  background-color: rgb(90, 83, 83);
+  background-color: rgb(146, 146, 146);
 }
 .scroll {
   margin: 4px, 4px;
   padding: 4px;
   width: 500px;
-  height: 110px;
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
@@ -277,8 +275,6 @@ ul {
   position: sticky;
 }
 li {
-  flex-grow: 1;
-  flex-basis: 300px;
   text-align: center;
   padding: 10px;
   margin: 10px;
@@ -301,23 +297,18 @@ h3 {
   font-size: 35px;
 }
 #itemImg {
-  width: 46%;
-  max-width: 200px;
-  height:auto;
-  max-height: 200px;
-  left: 20px;
-  border-width: 1px;
+  width: 35%;
+  height: 35%;
   overflow: hidden;
-  margin-top:20px;
-  margin-left: 20px;
+  margin: 20px 10px;
 }
 #itemDetails {
   align-items: center;
   text-align: center;
-  padding: 25px;
+  padding: 20px 0px;
   color: #192027;
   display:inline-block;
-  width: 46%;
+  width: 58%;
     @media (max-width: 620px) {
       width: 100%;
     }
@@ -354,24 +345,20 @@ h3 {
 }
 .button {
   position: absolute;
-  top: 10px;
   border-radius: 30px;
   right: 20px;
   z-index: 2;
-  border: none;
-  top: 2px;
-  height: 58px;
-  cursor: pointer;
-  width: 55px;
+  height: 60px;
+  width: 60px;
   color: white;
   font-size: 40px;
   text-align: center;
   color: black;
   background-color: #ebf0eba9;
-  transform: translateX(2px);
+
 }
 .items {
-  width: 42.5%;
+  width: 45%;
   height: 1570px;
   position: absolute;
   background: #2e976bcb;
@@ -385,7 +372,7 @@ h3 {
   flex-direction: column;
 }
 .expiring-soon {
-  width: 42.5%;
+  width: 45%;
   height: 750px;
   position: absolute;
   background: #f3ae53ab;
@@ -399,7 +386,7 @@ h3 {
   flex-direction: column;
 }
 .expired {
-  width: 42.5%;
+  width: 45%;
   height: 750px;
   position: absolute;
   background: #972e2eab;

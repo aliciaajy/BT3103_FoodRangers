@@ -7,8 +7,8 @@
             <div id="itemDetails">
               <p>
                 <i class="fa fa-map-exclamation fa-2x" aria-hidden="true"></i>
-                <b>{{ item[1].name }}</b> is expiring in
-                <b> {{ item[1].numDaysLeft }} </b> days
+                <b> ⏰ {{ item[1].name }}</b> is expiring in
+                <b> {{ item[1].numDaysLeft }} </b> days❗ 
               </p>
             </div>
           </li>
@@ -77,32 +77,43 @@ ul {
 li {
   flex-grow: 1;
   flex-basis: 300px;
-  text-align: center;
+  text-align: left;
   padding: 10px;
   margin: 10px;
 }
 
-#annword {
-  float: right;
-  width: 35%;
-  background: black;
-}
 #ann {
   float: right;
-  width: 35%;
-  height: 100vh;
-  padding: 10px;
-  background: rgb(151, 206, 228);
-  border: 1.8px solid rgb(3, 3, 3);
+  width: 27%;
+  padding: 20px;
+  background: rgb(57, 117, 141);
+  border-radius: 20px;
 }
 
 .scroll {
   margin: 4px, 4px;
   padding: 4px;
   width: 500px;
-  height: 110px;
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
+}
+
+b{
+  font-size: 20px;
+}
+
+#itemDetails {
+  align-items: center;
+  text-align: center;
+  padding: 20px 10px;
+  color: #192027;
+  background-color: rgb(136, 196, 196);
+  border-radius: 30px ;
+  /* display:inline-block; */
+  width: 100%;
+    /* @media (max-width: 620px) {
+      width: 100%;
+    } */
 }
 </style>
