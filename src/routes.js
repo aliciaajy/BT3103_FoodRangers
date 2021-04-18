@@ -1,4 +1,4 @@
-import Login from './components/login/login2.vue'
+import Login from './components/login/Login.vue'
 import SignUp from './components/login/SignUp.vue'
 import ForgotPassword from './components/login/ForgotPassword.vue'
 import searchPage from './components/search/searchPage.vue'
@@ -13,7 +13,6 @@ import Settings from "./components/settings/Settings.vue"
 import SuperMarket from "./components/supermarket/Supermarket.vue"
 import Admin from "./components/Admin.vue"
 import supermarketAdmin from './components/login/supermarketLogin.vue'
-import user from './components/login/userLogin.vue'
 
 
 import Vue from 'vue'
@@ -28,8 +27,8 @@ let router = new Router({
     { path: '/signup', component: SignUp, meta: {guest: true} },
     { path: '/', component: Login, meta: {guest: true} },
     { path: '/forgot-password', component: ForgotPassword, meta: {guest: true} },
-    { path: '/home', component: Home, meta: { requiresAuth: true } },
-    { path: '/search', component: searchPage, meta: { requiresAuth: true } },
+    { path: '/customer/home', component: Home, meta: { requiresAuth: true } },
+    { path: '/customer/search', component: searchPage, meta: { requiresAuth: true } },
     { path: '/map', component: map, meta: { requiresAuth: true } },
     { path: '/mart', component: martPage },
     { path: '/items', component: itemsPage, meta: { requiresAuth: true } },
@@ -40,7 +39,6 @@ let router = new Router({
     { path: '/favourites', component: fav, meta: { requiresAuth: true } },
     { path: '/supermarket', component:SuperMarket, meta: {requiresAuth: true}},
     {path: '/admin', component: Admin, meta: {reqiresAuth:true}},
-    { path: '/user', component: user, meta: { requiresAuth: true }},
     { path: '/supermarketAdmin', component: supermarketAdmin, meta: { requiresAuth: true }},
 ]})
 
@@ -53,12 +51,13 @@ router.beforeEach((to, from, next) => {
           .then(function ({
             claims
           }) {
-  
             if (claims.customer) {
-              if (to.path !== '/customer')
-                return next({
-                  path: '/customer',
-                })
+              let isCustomerRoute = to.fullPath.indexOf("/customer/") > -1;
+                if (isCustomerRoute) {
+                  next("/customer/home");
+                } else {
+                  next();
+                }
             } else if (claims.admin) {
               if (to.path !== '/admin')
                 return next({
