@@ -2,27 +2,47 @@
   <div>
     <Bar></Bar>
     <Stats></Stats>
+    <!-- <Bar></Bar>
+    <Stats></Stats>
     <div>
+  
     <PieChart></PieChart>
+    <TreeMap></TreeMap>
+    </div>
+    <div>
     <LineChart></LineChart>
     <BarChart></BarChart>
-    </div>
+    </div> -->
+    <b-container>
+      <b-row>
+        <b-col><PieChart></PieChart> </b-col>
+        <b-col><TreeMap></TreeMap></b-col>
+      </b-row>
+      <b-row>
+        <!-- <b-col> -->
+          <b-col> <LineChart></LineChart></b-col>
+          <b-col> <BarChart></BarChart></b-col>
+        <!-- </b-col> -->
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 
 <script>
-import Stats from './Stats.vue'
-import PieChart from './PieChart.vue'
-import LineChart from './LineChart.vue'
-import BarChart from './BarChart.vue'
+import Stats from "./Stats.vue";
+import PieChart from "./PieChart.vue";
+import LineChart from "./LineChart.vue";
+import BarChart from "./BarChart.vue";
+import TreeMap from "./TreeMap.vue";
 
 export default {
   components: {
     Stats,
     PieChart,
     LineChart,
-    BarChart
+    BarChart,
+    TreeMap,
   },
-}
+};
 </script>
