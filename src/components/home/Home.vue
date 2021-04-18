@@ -31,20 +31,28 @@ export default {
       name: "",
     }
   },
+
+  
   methods: {
     fetchName() {
+      //alert(JSON.stringify(this.$router.currentRoute))
+      //alert("url is " + JSON.stringify(this.$route))
       db.collection("users").get().then(snapshot => { 
           snapshot.docs.forEach(doc => {
             if (doc.id == firebase.auth().currentUser.uid) {
               this.name = doc.data()["name"];
             }
           })
-      })
-    }
+      });
+      //alert("url is " + JSON.stringify(this.$route))
+    },
+
+
   },
   created() {
     this.fetchName();
-  }
+  },
+
 };
 
 </script>
