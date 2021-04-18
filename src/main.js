@@ -16,6 +16,7 @@ import VueApexCharts from 'vue-apexcharts'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Header from "./components/Header.vue"
 
 Vue.use(VueApexCharts)
 // Make BootstrapVue available throughout your project
@@ -24,6 +25,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.component('apexchart', VueApexCharts)
+Vue.component("Header", Header)
 
 Vue.use(VueGoogleMaps, {
   load: {
