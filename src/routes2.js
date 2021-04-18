@@ -1,7 +1,7 @@
+
 import firebase from 'firebase'
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import Login from './components/login/Login.vue'
 import SignUp from './components/login/SignUp.vue'
 import ForgotPassword from './components/login/ForgotPassword.vue'

@@ -1,7 +1,7 @@
 <template>
 <div>
     <br>
-    <h2> Shops Near Me </h2>
+    <h2>🏠 Shops Near Me 🏠</h2>
 
     <!--
     {{this.markers}}

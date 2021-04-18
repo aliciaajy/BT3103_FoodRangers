@@ -1,78 +1,125 @@
 <template>
-    <div class="ui middle aligned center aligned grid">
-        <div class="column">
-            <form class="ui large form">
-                <div class="ui stacked secondary segment">
-                    <div class="field">
-                        <div class="ui left icon input large">
-                            <i class="user icon"></i>
-                            <input
-                                type="text"
-                                name="email"
-                                placeholder="E-mail address"
-                                v-model="email"
-                            />
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="ui left icon input large">
-                            <i class="lock icon"></i>
-                            <input
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                v-model="password"
-                            />
-                        </div>
-                    </div>
-                    <div class="ui fluid large teal submit button" @click="loginButtonPressed">Login</div>
-                </div>
+  <div class = "body1">
+    <img src="../../assets/earth.png" class="image1" />
 
-                <div class="ui error message"></div>
-            </form>
+    <form class="inner-block vertical-center" @submit.prevent="login">
+      <h1><img src="../../assets/foodranger.png" class="image2" /></h1>
 
-            <div class="ui message">
-                Don't have an account?
-                <router-link :to="{ name: 'register' }">Register</router-link>
-                <!-- <button @click="signOut">SignOut</button> -->
-            </div>
-        </div>
-    </div>
+      <div class="form-group">
+        <label> Email Address: </label>
+        <input
+          type="email"
+          class="form-control form-control-lg"
+          v-model="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label> Password: </label>
+        <input
+          type="password"
+          class="form-control form-control-lg"
+          v-model="password"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-dark btn-lg btn-block">
+        Sign In
+      </button>
+
+      <p class="forgot-password text-right mt-2 mb-4">
+       
+          Not registered?
+          <router-link to="/signup">Sign up</router-link> <br><br>
+            <router-link to="/forgot-password">Forgot password ?</router-link><br>
+      </p>
+
+      <div class="social-icons">
+        <ul>
+          <li>
+            <a href="#"><i class="fa fa-google"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from 'firebase'
+import db from "../../firebase.js";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './login.css'
+
 export default {
-    data() {
-        return {
-            email: "",
-            password: ""
-        };
-    },
-    created() {
-        firebase.auth().onAuthStateChanged(userAuth => {
-            if (userAuth) {
-                firebase
-                    .auth()
-                    .currentUser.getIdTokenResult()
-                    .then(tokenResult => {
-                        console.log(tokenResult.claims);
-                    });
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+
+  methods: {
+    login() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+            //alert("current user is " + JSON.stringify(firebase.auth().currentUser))
+
+          localStorage.setItem("login", true);
+          alert("Successfully logged in");
+
+          let uid = firebase.auth().currentUser["uid"];
+          db.collection("users").doc(uid).get().then((snapshot) => {
+            if (snapshot.exists) {
+                //is user
+                this.$router.push("/user/home");
+            } else {
+                db.collection("martAdmin").doc(uid).get().then((doc) => {
+                    if (doc.exists) {
+                        //is mart admin
+                        this.$router.push("/martAdmin");
+                    }
+                })
             }
+
+          })
+
+         // this.$router.push("/home");
+        })
+        .catch((error) => {
+          alert(error.message);
         });
     },
-    methods: {
-        async loginButtonPressed() {
-            try {
-                const {
-                    user
-                } = await firebase
-                    .auth()
-                    .signInWithEmailAndPassword(this.email, this.password);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
+  },
 };
 </script>
+
+<style scoped>
+.image1 {
+  width: 640px;
+  height: 630px;
+  position:absolute;
+  left: 100px;
+  display: inline-block;
+  padding-top: 40px;
+}
+
+.image2 {
+  width: 300px;
+  position: flexi;
+  /* //right: 200px; */
+  /* display: inline-block; */
+}
+
+.div2 {
+  background-color: aqua;
+}
+</style>

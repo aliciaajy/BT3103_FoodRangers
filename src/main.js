@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
+
 import router from './routes.js'
+
 import NavigationBar from './components/NavigationBar.vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'bootstrap';

@@ -6,7 +6,7 @@
 
       <div id="tab">
         <br>
-        <h1> Marts in Singapore </h1>
+        <h1>🏪 Marts in Singapore 🏪  </h1>
         <p id="search-tab">Search</p>  
         <router-link to="/favourites" exact id="fav-tab"> Favourites </router-link>
 

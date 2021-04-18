@@ -7,8 +7,8 @@
             <div id="itemDetails">
               <p>
                 <i class="fa fa-map-exclamation fa-2x" aria-hidden="true"></i>
-                <b>{{ item[1].name }}</b> is expiring in
-                <b> {{ item[1].numDaysLeft }} </b> days
+                <b> ⏰ {{ item[1].name }}</b> is expiring in
+                <b> {{ item[1].numDaysLeft }} </b> days❗ 
               </p>
             </div>
           </li>
@@ -84,9 +84,9 @@ li {
 
 #ann {
   float: right;
-  width: 36%;
+  width: 27%;
   padding: 20px;
-  background: rgb(151, 206, 228);
+  background: rgb(57, 117, 141);
   border-radius: 20px;
 }
 
@@ -98,7 +98,22 @@ li {
   overflow-y: auto;
   text-align: justify;
 }
+
 b{
   font-size: 20px;
+}
+
+#itemDetails {
+  align-items: center;
+  text-align: center;
+  padding: 20px 10px;
+  color: #192027;
+  background-color: rgb(136, 196, 196);
+  border-radius: 30px ;
+  /* display:inline-block; */
+  width: 100%;
+    /* @media (max-width: 620px) {
+      width: 100%;
+    } */
 }
 </style>
