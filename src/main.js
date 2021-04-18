@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
-import Routes from './routes2.js'
+
+import router from './routes.js'
+
 import NavigationBar from './components/NavigationBar.vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'bootstrap';
@@ -32,15 +33,7 @@ Vue.use(VueGoogleMaps, {
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
-Vue.use(VueRouter)
 Vue.component('Bar', NavigationBar)
-
-
-const router = new VueRouter({
-  routes: Routes,
-  mode: "history"
-})
-
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
