@@ -85,6 +85,7 @@ li {
 #ann {
   float: right;
   width: 27%;
+  height: 100vh;
   padding: 20px;
   background: rgb(57, 117, 141);
   border-radius: 20px;

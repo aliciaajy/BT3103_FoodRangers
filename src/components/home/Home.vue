@@ -1,7 +1,8 @@
 <template>
   <div>
+
     <Bar></Bar>
-    
+    <Header></Header>
     <h1>
       Welcome Back,
       {{this.name}} 😁😍😋
@@ -21,12 +22,14 @@ import Notes from './Notes.vue';
 import db from "../../firebase"
 import firebase from "firebase";
 
+
 export default {
   components: {
     Annoucement,
     Notes
   },
-  data() {
+  
+    Headerata() {
     return {
       name: "",
     }
