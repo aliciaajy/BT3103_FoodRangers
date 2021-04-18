@@ -29,20 +29,21 @@ let router = new Router({
     { path: '/forgot-password', component: ForgotPassword, meta: {guest: true} },
     { path: '/customer/home', component: Home, meta: { requiresAuth: true } },
     { path: '/customer/search', component: searchPage, meta: { requiresAuth: true } },
-    { path: '/map', component: map, meta: { requiresAuth: true } },
-    { path: '/mart', component: martPage },
-    { path: '/items', component: itemsPage, meta: { requiresAuth: true } },
-    { path: '/addItems', component: addItems },
-    { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } },
-    { path: '/settings', component: Settings, meta: { requiresAuth: true } },
-    { path: '/mart/:id', component: martPage, props: true },
-    { path: '/favourites', component: fav, meta: { requiresAuth: true } },
+    { path: '/customer/map', component: map, meta: { requiresAuth: true } },
+    { path: '/customer/mart', component: martPage },
+    { path: '/customer/items', component: itemsPage, meta: { requiresAuth: true } },
+    { path: '/customer/addItems', component: addItems },
+    { path: '/customer/dashboard', component: Dashboard, meta: { requiresAuth: true } },
+    { path: '/customer/settings', component: Settings, meta: { requiresAuth: true } },
+    { path: '/customer/mart/:id', component: martPage, props: true },
+    { path: '/customer/favourites', component: fav, meta: { requiresAuth: true } },
     { path: '/supermarket', component:SuperMarket, meta: {requiresAuth: true}},
     {path: '/admin', component: Admin, meta: {reqiresAuth:true}},
     { path: '/supermarketAdmin', component: supermarketAdmin, meta: { requiresAuth: true }},
 ]})
 
 router.beforeEach((to, from, next) => {
+    alert("router.beforeEach in routes.js");
 
     firebase.auth().onAuthStateChanged(userAuth => {
   
@@ -52,18 +53,27 @@ router.beforeEach((to, from, next) => {
             claims
           }) {
             if (claims.customer) {
-              let isCustomerRoute = to.fullPath.indexOf("/customer/") > -1;
-                if (isCustomerRoute) {
+                //alert("customer");
+                alert("to path customer is " + to.path.toString() );
+                if (to.path.toString().contains("/customer")) {
+                    next();
+                } else {
+                    next("/customer/home");
+                }
+              //let isCustomerRoute = to.fullPath.indexOf("/customer/") > -1;
+               /* if (isCustomerRoute) {
                   next("/customer/home");
                 } else {
                   next();
-                }
+                }*/
             } else if (claims.admin) {
+                alert("to path admin is " + to.path.toString() )
               if (to.path !== '/admin')
                 return next({
                   path: '/admin',
                 })
             } else if (claims.driver) {
+                alert("to path supermarket is " + to.path.toString() )
               if (to.path !== '/supermarketAdmin')
                 return next({
                   path: '/supermarketAdmin',

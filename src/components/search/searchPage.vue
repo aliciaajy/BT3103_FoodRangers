@@ -8,7 +8,7 @@
         <br>
         <h1>🔍 Marts in Singapore 🔍 </h1>
         <p id="search-tab">Search</p>  
-        <router-link to="/favourites" exact id="fav-tab"> Favourites </router-link>
+        <router-link to="/customer/favourites" exact id="fav-tab"> Favourites </router-link>
 
       </div>
 
@@ -40,7 +40,7 @@ export default {
   },
 
   /*beforeRouteEnter(to, from, next) {
-    //alert(this.$router)
+    alert(this.$router)
     //alert(JSON.stringify(to))
     //alert("url is " + JSON.stringify(to.params))
     let uid = firebase.auth().currentUser["uid"];
