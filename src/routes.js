@@ -1,5 +1,5 @@
 import Login from './components/login/Login.vue'
-import SignUp from './components/login/SignUp2.vue'
+import SignUp from './components/login/SignUp.vue'
 import ForgotPassword from './components/login/ForgotPassword.vue'
 import searchPage from './components/search/searchPage.vue'
 import Home from './components/home/Home.vue'
