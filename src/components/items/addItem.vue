@@ -153,7 +153,7 @@ export default {
 
     getPredDate() {
       var chosenCat = this.category;
-      db.collection("perishable")
+      db.collection("openedFood")
         .get()
         .then((querySnapShot) => {
           querySnapShot.forEach((doc) => {
