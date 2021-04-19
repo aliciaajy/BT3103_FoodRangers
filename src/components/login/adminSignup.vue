@@ -96,7 +96,7 @@ export default {
     // The new custom claims will propagate to the user's ID token the
     // next time a new one is issued
           });*/
-
+            alert("adminSignup");
             database.collection("roles").doc(cred.user.id).set({
               email: cred.user.email,
               role: {supermarketAdmin: true},
