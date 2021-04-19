@@ -84,11 +84,8 @@ router.beforeEach((to, from, next) => {
             } else if (claims.supermarketAdmin) {
                 alert("to path supermarket is " + to.path.toString() )
 
-                if (to.path.toString().includes("/supermarketAdmin")) {
-                    next();
-                } else {
-                    alert("access is non-authorised");
-                    next("/supermarketAdmin/supermarket");
+                if (to.path !== '/supermarketAdmin') {
+                    return next( {path: '/supermarketAdmin'});
                 }
             }
   

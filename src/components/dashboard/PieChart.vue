@@ -147,6 +147,7 @@ export default {
 
 
       this.series = this.eventdata;
+      window.dispatchEvent(new Event('resize'));
     },
   },
 };
