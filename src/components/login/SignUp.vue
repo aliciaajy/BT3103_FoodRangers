@@ -5,6 +5,11 @@
       <form class="vertical-center inner-block" @submit.prevent="register">
         <h1><img src="../../assets/foodranger.png" class="image2" /></h1>
 
+
+        <div> 
+          <p id="search-tab">User Signup </p>  
+          <router-link to="/adminSignup" exact id="fav-tab"> Mart Admin Signup </router-link>
+        </div>
         <div class="form-group">
           <label> Name: </label>
           <input
@@ -20,6 +25,7 @@
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
+          <br><br>
           <label> Date Of Birth: </label>
           <input
             type="date"
@@ -104,6 +110,9 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
           .then((cred) => {
+
+            alert("signup2")
+
             this.$router.push("/");
             return database.collection("users").doc(cred.user.uid).set({
               Email: cred.user.email,

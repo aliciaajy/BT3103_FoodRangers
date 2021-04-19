@@ -3,8 +3,12 @@
     <section>
         <div class="ui middle aligned center aligned grid">
             <div class="column">
+                <br>
                 <h1>Admin</h1>
+                <p style="text-align:center"> Kindly change the roles of the customer or supermarket admin by clicking on the drop-down list. </p>
                 <button class="ui pink submit button" @click="signout">Signout</button>
+                <br>
+                <br>
                 <table class="ui celled table">
                     <thead>
                         <tr>
@@ -80,3 +84,7 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+
+</style>
