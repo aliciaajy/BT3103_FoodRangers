@@ -4,15 +4,15 @@
       <!-- <img src="../assets/foodranger.png" /> -->
 
 
-      <a v-on:click="home"><i class="fa fa-bank fa-2x" aria-hidden="true"></i> Home </a>
-      <a v-on:click="items"><i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i> My Items</a>
-      <a v-on:click="dashboard"><i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i> Dashboard</a>
-      <a v-on:click="map"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> Shops Near You</a>
-      <a v-on:click="search"><i class="fa fa-search fa-2x" aria-hidden="true"></i> Search</a>
+      <a id="navbuttons" v-on:click="home"><i class="fa fa-bank fa-2x" aria-hidden="true"></i> 🏡 Home </a>
+      <a id="navbuttons" v-on:click="items"><i class="fa fa-shopping-basket fa-2x" aria-hidden="true"></i> 🛍 My Items</a>
+      <a id="navbuttons" v-on:click="dashboard"><i class="fa fa-bar-chart fa-2x" aria-hidden="true"></i> 📈 Dashboard</a>
+      <a id="navbuttons" v-on:click="map"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> 🗺 Shops Near You</a>
+      <a id="navbuttons" v-on:click="search"><i class="fa fa-search fa-2x" aria-hidden="true"></i> 🔎 Search</a>
 
       <div class="ml-auto">
-        <a v-on:click="settings"><i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> Settings </a>
-        <a href ='/' v-on:click="signOut"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>Sign Out </a>
+        <a id="navbuttons" v-on:click="settings"><i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> ⚙️ Settings </a>
+        <a href ='/' v-on:click="signOut"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i> 🚪 Sign Out </a>
       </div>
     </div>
   </div>
@@ -69,6 +69,16 @@ export default {
 </script>
 
 <style scoped>
+#navbuttons {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+  float: left;
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
   width: 100%;

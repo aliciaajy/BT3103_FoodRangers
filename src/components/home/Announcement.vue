@@ -5,11 +5,17 @@
         <ul>
           <li v-for="item in this.expiring" :key="item.id">
             <div id="itemDetails">
-              <p>
                 <i class="fa fa-map-exclamation fa-2x" aria-hidden="true"></i>
                 <b> ⏰ {{ item[1].name }}</b> is expiring in
-                <b> {{ item[1].numDaysLeft }} </b> days❗ 
-              </p>
+
+                <div v-if="item[1].numDaysLeft > 0">  
+                      <h3> <b>⌛ {{ item[1].numDaysLeft }}</b> days❗  </h3>
+                    </div> 
+
+                  <div v-else>
+                      <h3> <b>⌛ &#60; 1 </b>  day❗  </h3>
+                  </div>
+              
             </div>
           </li>
         </ul>
@@ -66,6 +72,11 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  font-size:20px;
+}
+
+
 ul {
   display: flex;
   flex-wrap: wrap;

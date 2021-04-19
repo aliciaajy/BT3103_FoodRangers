@@ -28,7 +28,7 @@
 
               <div id="itemDetails">
                 <p>
-                  <b>🍽 {{ item[1].name }} </b>
+                  <b> {{ item[1].name }} </b>
                 </p>
                 <p>🔖 Category: {{ item[1].category }}</p>
                 <p>🍫 State: {{ item[1].state }}</p>
@@ -62,14 +62,23 @@
 
                 <div id="itemDetails">
                   <p>
-                    <b>🍽 {{ item[1].name }} </b>
+                    <b> {{ item[1].name }} </b>
                   </p>
                   <p>🔖Category: {{ item[1].category }}</p>
                   <p>🍫 State: {{ item[1].state }}</p>
                   <p>💲 Amount Saved: ${{ item[1].saved }}</p>
                   <p>📆 Expiry Date: {{ item[1].expiry }}</p>
                   <h3>
-                    <b>⌛ {{ item[1].numDaysLeft }}</b> more days
+
+                    <div v-if="item[1].numDaysLeft > 0">  
+                      <h3> <b>⌛ {{ item[1].numDaysLeft }}</b> more days </h3>
+                    </div> 
+
+                    <div v-else>
+                      <h3> <b>⌛ &#60; 1 more days </b> </h3>
+                      
+                      </div>
+                  
                   </h3>
                 </div>
               </div>
@@ -96,7 +105,7 @@
 
                 <div id="itemDetails">
                   <p>
-                    <b>🍽 {{ item[1].name }} </b>
+                    <b> {{ item[1].name }} </b>
                   </p>
                   <p>🔖 Category: {{ item[1].category }}</p>
                   <p>🍫 State: {{ item[1].state }}</p>
