@@ -84,8 +84,9 @@ nav {
   float: left;
   width: 25%;
   background: #ffff;
-  height: 100vh;
   padding: 10px;
+  height: 1200px;
+  border-right: 1px solid black;
 }
 
 img {

@@ -228,7 +228,10 @@ export default {
 #products {
   width: 75%;
   float: right;
-  margin-top: 50px;
+  margin-top: 20px;
+  padding: 30px 20px;
+  background-color:antiquewhite;
+  border-radius: 20px;
 }
 .listOfProducts {
   width: 100%;
@@ -252,12 +255,16 @@ li {
   width: 30%;
   text-align: center;
   padding: 15px 20px;
-  border: 1px solid #222;
+
+  background-color: white;
+  border-radius: 15px;
   margin: 10px;
-  height: 430px;
+  height: 350px;
 }
 h2 {
   float: left;
+  margin-top: 20px;
+  padding: 0px 20px;
 }
 h5 {
   font-weight: bold;
@@ -268,6 +275,7 @@ p {
 img {
   width: 135px;
   height: 135px;
+  margin-bottom: 10px;
 }
 
 #info {
@@ -304,6 +312,8 @@ div.scrollmenu a:hover {
 #cats {
   width: 75%;
   float: right;
+  background-color:#f5dfee;
+  border-radius: 15px;
 }
 
 </style>
