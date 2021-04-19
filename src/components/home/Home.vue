@@ -29,7 +29,7 @@ export default {
     Notes
   },
   
-    Headerata() {
+    data() {
     return {
       name: "",
     }
