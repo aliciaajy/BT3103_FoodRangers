@@ -91,7 +91,7 @@ export default {
           let uid = firebase.auth().currentUser["uid"];
           db.collection("martAdmin").doc(uid).get().then((snapshot) => {
             if (snapshot.exists) {
-              alert("success 2x")
+              //alert("success 2x")
               //admin is an admin
               this.$router.push("/supermarketAdmin/supermarket");
             }
