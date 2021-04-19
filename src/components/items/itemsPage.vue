@@ -5,7 +5,7 @@
     <p class="title">🍎 Personal Items 🍎</p>
     <div class="vertical-align">
       <div class="items scroll">
-        <h1>😄 All Items 😄</h1>
+        <h1>😄 Items 😄</h1>
         <button
           class="button btn btn-info btn-sm"
           data-toggle="modal"
