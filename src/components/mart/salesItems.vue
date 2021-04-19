@@ -39,7 +39,7 @@
       </div>
     </div>
     <div id="products">
-      <h2>Products</h2>
+      <h2>Items on Sale ❗</h2>
 
       <ul v-if="this.selectedCat == ''||this.selectedCat == 'All'" class="listOfProducts">
         <li v-for="item in this.items" :key="item.index">
@@ -263,7 +263,7 @@ li {
 }
 h2 {
   float: left;
-  margin-top: 20px;
+  margin: 20px 10px;
   padding: 0px 20px;
 }
 h5 {
