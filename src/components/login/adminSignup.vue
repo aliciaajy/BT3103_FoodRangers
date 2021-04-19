@@ -26,6 +26,7 @@
             type="text"
             class="form-control"
             v-model="martId"
+            v-bind:disabled="adminId != '0TivkfmutxgMDBYDTe81g23O2zy1'"
           />
         </div>
 
@@ -36,6 +37,7 @@
             type="email"
             class="form-control"
             v-model="email"
+            v-bind:disabled="adminId != '0TivkfmutxgMDBYDTe81g23O2zy1'"
           />
         </div>
 
@@ -45,6 +47,7 @@
             type="password"
             class="form-control"
             v-model="password"
+            v-bind:disabled="adminId != '0TivkfmutxgMDBYDTe81g23O2zy1'"
           />
         </div>
 
@@ -54,10 +57,12 @@
             type="password"
             class="form-control"
             v-model="confirm"
+            v-bind:disabled="adminId != '0TivkfmutxgMDBYDTe81g23O2zy1'"
           />
         </div>
 
-        <button type="submit" class="btn btn-dark btn-block">
+        <button type="submit" class="btn btn-dark btn-block"
+        v-bind:disabled="adminId != '0TivkfmutxgMDBYDTe81g23O2zy1'">
           Sign Up
         </button>
 
@@ -92,8 +97,6 @@ export default {
       confirm: "",
     };
   },
-
-
   methods: {
     register() {
       if (this.password != this.confirm) {

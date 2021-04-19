@@ -32,7 +32,10 @@
         :opened="infoWinOpen"
         @closeclick="infoWinOpen=false"
       >
-    <div v-html="infoContent"></div>
+    <div class="info_window container">
+            <router-link :to="`/customer/mart/${infoContent[0]}`"> {{infoContent[1]}} </router-link>
+            <p> {{infoContent[3]}} </p>
+        </div>
     </gmap-info-window>
 
     </gmap-map>
@@ -104,7 +107,7 @@ export default {
 
     toggleInfoWindow: function (marker, idx) {
         this.infoWindowPos = marker[2];
-        this.infoContent = this.getInfoWindowContent(marker);
+        this.infoContent = marker;
 
         if (this.currentMidx == idx) {
           this.infoWinOpen = !this.infoWinOpen;
