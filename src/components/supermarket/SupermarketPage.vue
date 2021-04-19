@@ -145,6 +145,7 @@ li {
 }
 span {
   font-size: 30pt;
+  margin-right: 20px;
   color: red;
 }
 #rating {

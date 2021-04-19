@@ -42,9 +42,12 @@
               <label for="text"><b> Category*: </b></label>
 
               <select v-model="category">
-                <option value="Frozen">Frozen</option>
-                <option value="Snacks">Snacks</option>
                 <option value="Staples">Staples</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Drinks">Drinks</option>
+                <option value="Frozen">Frozen</option>
+                <option value="FruitsVege">Fruits and Vegetables</option>
+                <option value="Others">Others</option>
               </select>
             </div>
 
@@ -64,7 +67,7 @@
             </div>
 
             <div>
-              <label for="text"> <b>New Price*:</b></label>
+              <label for="text"> <b>Discounted Price*:</b></label>
               <input type="text" value="$" v-model="newprice" placeholder="$" />
             </div>
 

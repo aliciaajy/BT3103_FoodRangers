@@ -19,7 +19,7 @@
     <div>
     <ul>
         <li v-for="(key, value) in this.mart.reviews" :key="key">
-            {{value}}
+            <u><b>{{value}}</b></u>
             <br>
             {{key}}
         </li>
@@ -75,5 +75,9 @@ button {
 
 li {
     margin: 20px; 
+}
+
+b {
+  font-size: 18px;
 }
 </style>

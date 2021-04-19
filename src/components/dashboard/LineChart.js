@@ -10,7 +10,7 @@ export default {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
           label: "Amount saved ($)",
-          data: [0,0,0,0,0,0]
+          data: []
         }]
       },
       options: {
