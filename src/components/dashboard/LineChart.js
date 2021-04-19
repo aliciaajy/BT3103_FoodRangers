@@ -10,7 +10,7 @@ export default {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
           label: "Amount saved ($)",
-          data: []
+          data: [0,0,0,0,0,0]
         }]
       },
       options: {
@@ -42,7 +42,7 @@ export default {
         for (var i = 0; i<d.length; i++) {
           this.datacollection.datasets[0].data.push(d[i].toFixed(2));
         }
-        console.log(this.datacollection.datasets[0].data);
+ 
         this.renderChart(this.datacollection, this.options);
       });
     }
