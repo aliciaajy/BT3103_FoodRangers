@@ -39,7 +39,7 @@ let router = new Router({
     { path: '/customer/mart/:id', component: martPage, props: true },
     { path: '/customer/favourites', component: fav, meta: { requiresAuth: true } },
     { path: '/supermarketAdmin/supermarket', component:SuperMarket, meta: {requiresAuth: true}},
-    {path: '/admin', component: Admin, meta: {reqiresAuth:true}},
+    {path: '/admin', component: Admin, meta: {requiresAuth:true}},
     { path: '/supermarketAdmin/login', component: supermarketAdmin, meta: {guest: true} },
     { path: '/adminSignup', component: adminSignup, meta: {guest: true}},
 
