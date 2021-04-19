@@ -7,7 +7,7 @@
 
         <div> 
           <router-link to="/" id="fav-tab">User Login </router-link> 
-          <p id="search-tab"> Admin Login </p>
+          <p id="search-tab"> Mart Admin Login </p>
         </div>
 
         <div class="form-group">

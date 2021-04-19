@@ -7,7 +7,8 @@
 
         <div> 
           <router-link to="/signup" id="fav-tab">User Signup</router-link> 
-          <p id="search-tab"> Admin Signup </p>
+          <p id="search-tab"> Mart Admin Signup </p>
+          <p style="text-align:center"> Please contact our FoodRanger admin at mart@foodranger.com for business enquiries. </p>
         </div>
 
         <div class="form-group">
