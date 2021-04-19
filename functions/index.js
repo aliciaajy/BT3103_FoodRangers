@@ -10,7 +10,7 @@ exports.AddUserRole = functions.auth.user().onCreate(async (authUser) => {
 
   if (authUser.email) {
     const customClaims = {
-      admin: true,
+      customer: true,
     };
     try {
       var _ = await admin.auth().setCustomUserClaims(authUser.uid, customClaims)
