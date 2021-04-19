@@ -4,6 +4,7 @@
     <br />
     <p class="title">🍎 Personal Items 🍎</p>
     <div class="vertical-align">
+      
       <div class="items scroll">
         <h1>😄 All Items 😄</h1>
         <button
@@ -15,15 +16,8 @@
 
         <ul>
           <li v-for="item in this.items" :key="item.id">
-            <button
-              class="btn"
-              v-bind:id="item[0]"
-              v-on:click="deleteItem($event)"
-            >
-              Delete
-            </button>
-            <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
-            <div id="list-items" class="container">
+
+            <div id="list-items" class="container">  
               <img v-bind:src="item[1].img" id="itemImg" />
 
               <div id="itemDetails">
@@ -39,7 +33,18 @@
                   <b>⌛ {{ item[1].numDaysLeft }}</b> more days
                 </h3>
               </div>
-            </div>
+
+              <b-col>
+                <br>
+              <button
+              class="btn"
+              v-bind:id="item[0]"
+              v-on:click="deleteItem($event)"
+            >
+              Delete
+            </button> 
+            <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
+              </b-col></div>
           </li>
         </ul>
       </div>
@@ -49,14 +54,7 @@
         <div class="vertical-align">
           <ul>
             <li v-for="item in this.expiring" :key="item.id">
-              <button
-                class="btn"
-                v-bind:id="item[0]"
-                v-on:click="deleteItem($event)"
-              >
-                Delete
-              </button>
-              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
+              
               <div id="list-expiring">
                 <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -80,7 +78,19 @@
                       </div>
                   
                   </h3>
+                  
                 </div>
+                <b-col>
+                  <br>
+                <button
+                class="btn"
+                v-bind:id="item[0]"
+                v-on:click="deleteItem($event)"
+              >
+                Delete
+              </button>
+              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
+              </b-col>
               </div>
             </li>
           </ul>
@@ -92,14 +102,6 @@
         <div class="vertical-align">
           <ul>
             <li v-for="item in this.expired" :key="item.id">
-              <button
-                class="btn"
-                v-bind:id="item[0]"
-                v-on:click="deleteItem($event)"
-              >
-                Delete
-              </button>
-              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
               <div id="list-expired">
                 <img v-bind:src="item[1].img" id="itemImg" />
 
@@ -115,6 +117,17 @@
                     <b>⌛ Expired</b>
                   </h3>
                 </div>
+                <b-col>
+                  <br>
+                <button
+                class="btn"
+                v-bind:id="item[0]"
+                v-on:click="deleteItem($event)"
+              >
+                Delete
+              </button>
+              <button class="btn" v-bind:id="item[0]" v-on:click="consumeItem($event)"> Consume </button>
+              </b-col>
               </div>
             </li>
           </ul>
@@ -261,9 +274,10 @@ h1 {
   right: 100px;
   float: right;
   border: none;
-  color: rgb(248, 10, 10);
+  color: rgb(0, 0, 0);
   background-color: #fcf7f7a9;
   margin: 2px;
+  height: 30px;
 }
 .btn:hover {
   background-color: rgb(146, 146, 146);
