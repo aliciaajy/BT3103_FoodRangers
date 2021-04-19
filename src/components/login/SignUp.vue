@@ -25,10 +25,7 @@
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
-
-          <br><br>
-
-          <label> Date Of Birth: </label>
+          <label> D.O.B: </label>
           <input
             type="date"
             class="form-control half"
@@ -139,7 +136,7 @@ export default {
 
 <style scoped>
 #dob {
-  width: 200px;
+  width: 172px;
 }
 
 
