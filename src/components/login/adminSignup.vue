@@ -12,6 +12,15 @@
         </div>
 
         <div class="form-group">
+          <label> Admin ID: </label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="adminId"
+          />
+        </div>
+
+        <div class="form-group">
           <label> Mart ID: </label>
           <input
             type="text"
@@ -73,6 +82,7 @@ export default {
   name: "Register",
   data() {
     return {
+      adminId: "",
       martId: "",
       gender: "",
       hp: "",
@@ -82,6 +92,8 @@ export default {
       confirm: "",
     };
   },
+
+
   methods: {
     register() {
       if (this.password != this.confirm) {
