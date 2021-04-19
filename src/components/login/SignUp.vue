@@ -162,8 +162,8 @@ label {
 }
 
 .image1 {
-  width: 640px;
-  height: 630px;
+  width: 600px;
+  height: 600px;
   position: absolute;
   left: 100px;
   display: inline-block;
