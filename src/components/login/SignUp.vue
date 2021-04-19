@@ -25,12 +25,15 @@
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
+
           <br><br>
+
           <label> Date Of Birth: </label>
           <input
             type="date"
             class="form-control half"
             v-model="dob"
+            id="dob"
           />
         </div>
 
@@ -135,6 +138,11 @@ export default {
 </script>
 
 <style scoped>
+#dob {
+  width: 200px;
+}
+
+
 .header {
   background: var(--dark-color-a);
   color: #fff;

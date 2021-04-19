@@ -43,7 +43,6 @@ export default {
     },
 
     items: function() {
-      alert("items redirect");
       this.$router.push("/customer/items");
     },
 
