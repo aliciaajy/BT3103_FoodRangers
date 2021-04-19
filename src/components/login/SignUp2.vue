@@ -112,11 +112,6 @@ export default {
 
             alert("signup2")
 
-
-            database.collection("roles").doc(cred.user.id).set({
-              email: cred.user.email,
-              role: {admin: true},
-            })
             this.$router.push("/");
             return database.collection("users").doc(cred.user.uid).set({
               Email: cred.user.email,
