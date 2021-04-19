@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Bar></Bar>
+    <NavBar></NavBar>
     <nav>
       <img v-bind:src="this.mart.image" />
       <div class="mart">
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import NavBar from "../MartAdminNavBar.vue";
 import db from "../../firebase.js";
 import SupermarketItems from "./SupermarketItems";
 import StarRating from "vue-star-rating";
@@ -57,6 +58,7 @@ export default {
   components: {
     SupermarketItems,
     StarRating,
+    NavBar
    
   },
   methods: {
