@@ -2,35 +2,46 @@
   <div>
     <div>
       <h2>Categories</h2>
-      <div id="cats" class="scrollmenu">
-        <button id="all" v-on:click="filterCat('All')">All</button>
-        <button v-on:click="filterCat('Housebrand')">
+      <div id="cats" class="scrollmenu tab">
+        <button class="noCat tablinks All" v-on:click="filterCat(event,'All')">All</button>
+  
+        <button class="tablinks Staples" v-on:click="filterCat(event,'Staples')">
           <img
-            src="https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1436334225/p4ucgwxnao0czp2ce1ap.png"
-          /><br />Housebrand
+            src="https://media.nedigital.sg/fairprice/images/1a4a66a1-df6e-4d53-a90f-a371568c6913/Rice-Noodles-Zop_L1.png"
+          /><br>Staples
         </button>
-        <button v-on:click="filterCat('Snacks')">
+
+        <button class="tablinks Dairy" v-on:click="filterCat(event,'Dairy')">
           <img
-            src="https://images-na.ssl-images-amazon.com/images/I/81FfpLMWNfL._SL1500_.jpg"
-          /><br />Snacks
+            src="https://media.nedigital.sg/fairprice/images/72869ded-797c-4444-8833-fd3342f9bc95/Dairy-Chilled-Eggs-Zop_L1.png"
+          /><br>Dairy
         </button>
-        <button v-on:click="filterCat('Frozen')">
+
+        <button class="tablinks Drinks" v-on:click="filterCat(event,'Drinks')">
           <img
-            src="https://www.tnp.sg/sites/default/files/styles/rl680/public/articles/2020/07/16/np20200716-nps-014-00.jpg?itok=SWmYphQe"
-          /><br />Frozen
+            src="https://media.nedigital.sg/fairprice/images/f147455f-0e7d-4ede-ad81-f2098f1a297f/Drinks-Zop_L1.png"
+          /><br>Drinks
         </button>
-        <button v-on:click="filterCat('Staples')">
+
+        <button class="tablinks Frozen" v-on:click="filterCat(event,'Frozen')">
           <img
-            src="https://thumbs.dreamstime.com/b/carbohydrate-products-potato-15101117.jpg"
-          /><br />Staples
+            src="https://media.nedigital.sg/fairprice/images/7ccc6cb4-64ac-43e5-9736-afd2dbe2aaee/Frozen-Zop_L1.png"
+          /><br>Frozen
         </button>
+
+        <button class="tablinks FruitsVege" v-on:click="filterCat(event,'FruitsVege')">
+          <img
+            src="https://media.nedigital.sg/fairprice/images/654aa62a-b6ad-42dc-9feb-a8b93407656d/Fruits-Vegetables-Zop_L1.png"
+          /><br>Fruits and Vege
+        </button>
+
+        <button class="noCat tablinks Others" v-on:click="filterCat(event,'Others')">Others</button>
       </div>
     </div>
     <div id="products">
       <h2>Products</h2>
 
-      <addMartItem></addMartItem>
-      <ul v-if="this.selectedCat == 'All'" class="listOfProducts">
+      <ul v-if="this.selectedCat == ''||this.selectedCat == 'All'" class="listOfProducts">
         <li v-for="item in this.items" :key="item.index">
           <img v-bind:src="item[1].img" />
           <div id="info">
@@ -40,61 +51,7 @@
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
-            <br />
-
-
-
-            Expires: {{ item[1]["expiryDate"] }} <br />
-            Qty left: {{ item[1]["quantity"] }}
-          </div>
-        </li>
-      </ul>
-      <ul v-if="this.selectedCat == 'Housebrand'" class="listOfProducts">
-        <li v-for="item in this.housebrand" :key="item.index">
-          <img v-bind:src="item[1].img" />
-          <div id="info">
-            <h5>
-              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
-                parseFloat(item[1]["usualPrice"]).toFixed(2)
-              }})
-            </h5>
-            <p>{{ item[1]["name"] }}</p>
-            <br />
-
-            Expires: {{ item[1]["expiryDate"] }} <br />
-            Qty left: {{ item[1]["quantity"] }}
-          </div>
-        </li>
-      </ul>
-      <ul v-if="this.selectedCat == 'Snacks'" class="listOfProducts">
-        <li v-for="item in this.snacks" :key="item.index">
-          <img v-bind:src="item[1].img" />
-          <div id="info">
-            <h5>
-              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
-                parseFloat(item[1]["usualPrice"]).toFixed(2)
-              }})
-            </h5>
-            <p>{{ item[1]["name"] }}</p>
-            <br />
-
-            Expires: {{ item[1]["expiryDate"] }} <br />
-            Qty left: {{ item[1]["quantity"] }}
-          </div>
-        </li>
-      </ul>
-      <ul v-if="this.selectedCat == 'Frozen'" class="listOfProducts">
-        <li v-for="item in this.frozen" :key="item.index">
-          <img v-bind:src="item[1].img" />
-          <div id="info">
-            <h5>
-              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
-                parseFloat(item[1]["usualPrice"]).toFixed(2)
-              }})
-            </h5>
-            <p>{{ item[1]["name"] }}</p>
-            <br />
-
+            <br>
             Expires: {{ item[1]["expiryDate"] }} <br />
             Qty left: {{ item[1]["quantity"] }}
           </div>
@@ -110,8 +67,87 @@
               }})
             </h5>
             <p>{{ item[1]["name"] }}</p>
-            <br />
-
+            <br>
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
+          </div>
+        </li>
+      </ul>
+      <ul v-if="this.selectedCat == 'Dairy'" class="listOfProducts">
+        <li v-for="item in this.dairy" :key="item.index">
+          <img v-bind:src="item[1].img" />
+          <div id="info">
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br>
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
+          </div>
+        </li>
+      </ul>
+      <ul v-if="this.selectedCat == 'Drinks'" class="listOfProducts">
+        <li v-for="item in this.drinks" :key="item.index">
+          <img v-bind:src="item[1].img" />
+          <div id="info">
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br>
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
+          </div>
+        </li>
+      </ul>
+      <ul v-if="this.selectedCat == 'Frozen'" class="listOfProducts">
+        <li v-for="item in this.frozen" :key="item.index">
+          <img v-bind:src="item[1].img" />
+          <div id="info">
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br>
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
+          </div>
+        </li>
+      </ul>
+      <ul v-if="this.selectedCat == 'FruitsVege'" class="listOfProducts">
+        <li v-for="item in this.fruitsNvege" :key="item.index">
+          <img v-bind:src="item[1].img" />
+          <div id="info">
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br>
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
+          </div>
+        </li>
+      </ul>
+      <ul v-else class="listOfProducts">
+        <li v-for="item in this.others" :key="item.index">
+          <img v-bind:src="item[1].img" />
+          <div id="info">
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br>
             Expires: {{ item[1]["expiryDate"] }} <br />
             Qty left: {{ item[1]["quantity"] }}
           </div>
@@ -127,10 +163,12 @@ export default {
   data() {
     return {
       items: [],
-      housebrand: [],
-      snacks: [],
-      frozen: [],
       staples: [],
+      dairy: [],
+      drinks: [],
+      frozen: [],
+      fruitsNvege: [],
+      others: [],
       selectedCat: "",
     }
   },
@@ -153,23 +191,31 @@ export default {
           this.items.push([this.id, doc]);
 
           var cat = doc.category;
-          //for (var cat of values) {
-            if (cat == "Housebrand") {
-              this.housebrand.push([this.id, doc]);
-            } else if (cat == "Snacks") {
-              this.snacks.push([this.id, doc]);
-            } else if (cat ==  "Frozen") {
-              this.frozen.push([this.id, doc]);
-            } else {
-              this.staples.push([this.id, doc])
-            }
-          //}
+          if (cat == "Staples") {
+            this.staples.push([this.id, doc]);
+          } else if (cat=="Dairy") {
+            this.dairy.push([this.id, doc]);
+          } else if (cat=="Drinks") {
+            this.drinks.push([this.id, doc]);
+          } else if (cat=="Frozen") {
+            this.frozen.push([this.id, doc]);
+          } else if (cat=="FruitsVege") {
+            this.fruitsNvege.push([this.id, doc]);
+          } else if (cat=="Others") {
+            this.others.push([this.id, doc])
+          }
         });
       });
     },
-    filterCat: function(cat) {
-      this.selectedCat=cat;
+    filterCat: function (evt, cat) {
+      this.selectedCat = cat;
       console.log(this.selectedCat);
+      var tablinks = document.getElementsByClassName("tablinks");
+      for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementByClassName(cat).style.display = "block";
+      evt.currentTarget.className += " active";
     },
   },
   created() {
@@ -189,7 +235,7 @@ export default {
   padding-left: 15px;
   box-sizing: border-box;
 }
-#all {
+.noCat {
   width: 180px;
   height: 50px;
   border-radius: 10px;
@@ -229,14 +275,23 @@ img {
   padding-left: 45px;
   text-align: left;
 }
-button {
+.tab button {
   background-color: #ffff;
   margin: 10px;
   padding: 5px;
-  font-size: 12pt;
+  font-size: 13pt;
   font-weight: bold;
   width: 180px;
   border-radius: 10px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
 }
 div.scrollmenu {
   background-color: #ffff;
