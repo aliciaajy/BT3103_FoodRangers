@@ -29,7 +29,7 @@
           id="ratingsStar"
         ></starRating>
       </p>
-      <salesItems></salesItems>
+      <salesItems v-bind:id="this.id"></salesItems>
     </div>
   </div>
 </template>

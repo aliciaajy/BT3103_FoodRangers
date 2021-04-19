@@ -4,81 +4,116 @@
       <h2>Categories</h2>
       <div id="cats" class="scrollmenu">
         <button id="all" v-on:click="filterCat('All')">All</button>
-        <button v-on:click="filterCat('Housebrand')"><img src="https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1436334225/p4ucgwxnao0czp2ce1ap.png"><br>Housebrand</button>
-        <button v-on:click="filterCat('Snacks')"><img src="https://images-na.ssl-images-amazon.com/images/I/81FfpLMWNfL._SL1500_.jpg"><br>Snacks</button>
-        <button v-on:click="filterCat('Frozen')"><img src="https://www.tnp.sg/sites/default/files/styles/rl680/public/articles/2020/07/16/np20200716-nps-014-00.jpg?itok=SWmYphQe"><br>Frozen</button>
-        <button v-on:click="filterCat('Staples')"><img src="https://thumbs.dreamstime.com/b/carbohydrate-products-potato-15101117.jpg"><br>Staples</button>
+        <button v-on:click="filterCat('Housebrand')">
+          <img
+            src="https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/v1436334225/p4ucgwxnao0czp2ce1ap.png"
+          /><br />Housebrand
+        </button>
+        <button v-on:click="filterCat('Snacks')">
+          <img
+            src="https://images-na.ssl-images-amazon.com/images/I/81FfpLMWNfL._SL1500_.jpg"
+          /><br />Snacks
+        </button>
+        <button v-on:click="filterCat('Frozen')">
+          <img
+            src="https://www.tnp.sg/sites/default/files/styles/rl680/public/articles/2020/07/16/np20200716-nps-014-00.jpg?itok=SWmYphQe"
+          /><br />Frozen
+        </button>
+        <button v-on:click="filterCat('Staples')">
+          <img
+            src="https://thumbs.dreamstime.com/b/carbohydrate-products-potato-15101117.jpg"
+          /><br />Staples
+        </button>
       </div>
     </div>
     <div id="products">
       <h2>Products</h2>
-      <ul v-if = "this.selectedCat=='All'" class="listOfProducts" >
+
+      <addMartItem></addMartItem>
+      <ul v-if="this.selectedCat == 'All'" class="listOfProducts">
         <li v-for="item in this.items" :key="item.index">
-          <img v-bind:src="item[1].img">
+          <img v-bind:src="item[1].img" />
           <div id="info">
-            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
-            <p>{{ item[1]["name"] }}</p><br>
-            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
-            <p v-show = "item[1].halal">Halal</p>
-            Expires: {{item[1]["expiryDate"]}} <br>
-            Qty left: {{item[1]["quantity"]}}
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br />
+
+
+
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
           </div>
         </li>
       </ul>
-      <ul v-if = "this.selectedCat=='Housebrand'" class="listOfProducts" >
+      <ul v-if="this.selectedCat == 'Housebrand'" class="listOfProducts">
         <li v-for="item in this.housebrand" :key="item.index">
-          <img v-bind:src="item[1].img">
+          <img v-bind:src="item[1].img" />
           <div id="info">
-            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
-            <p>{{ item[1]["name"] }}</p><br>
-            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
-            <p v-show = "item[1].halal">Halal</p>
-            Expires: {{item[1]["expiryDate"]}} <br>
-            Qty left: {{item[1]["quantity"]}}
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br />
+
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
           </div>
         </li>
       </ul>
-      <ul v-if = "this.selectedCat=='Snacks'" class="listOfProducts" >
+      <ul v-if="this.selectedCat == 'Snacks'" class="listOfProducts">
         <li v-for="item in this.snacks" :key="item.index">
-          <img v-bind:src="item[1].img">
+          <img v-bind:src="item[1].img" />
           <div id="info">
-            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
-            <p>{{ item[1]["name"] }}</p><br>
-            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
-            <p v-show = "item[1].halal">Halal</p>
-            Expires: {{item[1]["expiryDate"]}} <br>
-            Qty left: {{item[1]["quantity"]}}
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br />
+
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
           </div>
         </li>
       </ul>
-      <ul v-if = "this.selectedCat=='Frozen'" class="listOfProducts" >
+      <ul v-if="this.selectedCat == 'Frozen'" class="listOfProducts">
         <li v-for="item in this.frozen" :key="item.index">
-          <img v-bind:src="item[1].img">
+          <img v-bind:src="item[1].img" />
           <div id="info">
-            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
-            <p>{{ item[1]["name"] }}</p><br>
-            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
-            <p v-show = "item[1].halal">Halal</p>
-            Expires: {{item[1]["expiryDate"]}} <br>
-            Qty left: {{item[1]["quantity"]}}
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br />
+
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
           </div>
         </li>
       </ul>
-      <ul v-if = "this.selectedCat=='Staples'" class="listOfProducts" >
+      <ul v-if="this.selectedCat == 'Staples'" class="listOfProducts">
         <li v-for="item in this.staples" :key="item.index">
-          <img v-bind:src="item[1].img">
+          <img v-bind:src="item[1].img" />
           <div id="info">
-            <h5>${{item[1]["price"].toFixed(2)}} (U.P. ${{ item[1]["usualPrice"].toFixed(2)}})</h5>
-            <p>{{ item[1]["name"] }}</p><br>
-            <p v-if = "item[1].weight<1000">{{ item[1]["weight"] }}g</p>
-            <p v-else>{{ item[1]["weight"]/1000 }}kg</p>
-            <p v-show = "item[1].halal">Halal</p>
-            Expires: {{item[1]["expiryDate"]}} <br>
-            Qty left: {{item[1]["quantity"]}}
+            <h5>
+              ${{ parseFloat(item[1]["promoPrice"]).toFixed(2) }} (U.P. ${{
+                parseFloat(item[1]["usualPrice"]).toFixed(2)
+              }})
+            </h5>
+            <p>{{ item[1]["name"] }}</p>
+            <br />
+
+            Expires: {{ item[1]["expiryDate"] }} <br />
+            Qty left: {{ item[1]["quantity"] }}
           </div>
         </li>
       </ul>
@@ -99,23 +134,36 @@ export default {
       selectedCat: "",
     }
   },
+
+  props: {
+        id: {
+            type: String
+        }
+  },
   methods: {
     fetchItems: function() {
-      db.collection('salesItems').get().then(snapshot => { 
-        snapshot.docs.forEach(doc => { 
-          this.items.push([doc.id, doc.data()]);
-          var values = Object.values(doc.data().category);
-          for (var cat of values) {
+      //alert("fetch items");
+
+      //alert("id " + this.id)
+      db.collection('apiMart').doc(this.id).get().then(snapshot => { 
+        //alert("snapshot " + JSON.stringify(snapshot.data()));
+        snapshot.data().items.forEach(doc => {
+
+        //alert("doc is  " + doc.name);
+          this.items.push([this.id, doc]);
+
+          var cat = doc.category;
+          //for (var cat of values) {
             if (cat == "Housebrand") {
-              this.housebrand.push([doc.id, doc.data()]);
+              this.housebrand.push([this.id, doc]);
             } else if (cat == "Snacks") {
-              this.snacks.push([doc.id, doc.data()]);
+              this.snacks.push([this.id, doc]);
             } else if (cat ==  "Frozen") {
-              this.frozen.push([doc.id, doc.data()]);
+              this.frozen.push([this.id, doc]);
             } else {
-              this.staples.push([doc.id, doc.data()])
+              this.staples.push([this.id, doc])
             }
-          }
+          //}
         });
       });
     },
