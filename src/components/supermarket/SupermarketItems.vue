@@ -3,39 +3,39 @@
     <div>
       <h2>Categories</h2>
       <div id="cats" class="scrollmenu tab">
-        <button class="noCat tablinks All" v-on:click="filterCat(event,'All')">All</button>
+        <button class="noCat tablinks All" v-on:click="filterCat($event,'All')">All</button>
   
-        <button class="tablinks Staples" v-on:click="filterCat(event,'Staples')">
+        <button class="tablinks Staples" v-on:click="filterCat($event,'Staples')">
           <img
             src="https://media.nedigital.sg/fairprice/images/1a4a66a1-df6e-4d53-a90f-a371568c6913/Rice-Noodles-Zop_L1.png"
           /><br>Staples
         </button>
 
-        <button class="tablinks Dairy" v-on:click="filterCat(event,'Dairy')">
+        <button class="tablinks Dairy" v-on:click="filterCat($event,'Dairy')">
           <img
             src="https://media.nedigital.sg/fairprice/images/72869ded-797c-4444-8833-fd3342f9bc95/Dairy-Chilled-Eggs-Zop_L1.png"
           /><br>Dairy
         </button>
 
-        <button class="tablinks Drinks" v-on:click="filterCat(event,'Drinks')">
+        <button class="tablinks Drinks" v-on:click="filterCat($event,'Drinks')">
           <img
             src="https://media.nedigital.sg/fairprice/images/f147455f-0e7d-4ede-ad81-f2098f1a297f/Drinks-Zop_L1.png"
           /><br>Drinks
         </button>
 
-        <button class="tablinks Frozen" v-on:click="filterCat(event,'Frozen')">
+        <button class="tablinks Frozen" v-on:click="filterCat($event,'Frozen')">
           <img
             src="https://media.nedigital.sg/fairprice/images/7ccc6cb4-64ac-43e5-9736-afd2dbe2aaee/Frozen-Zop_L1.png"
           /><br>Frozen
         </button>
 
-        <button class="tablinks FruitsVege" v-on:click="filterCat(event,'FruitsVege')">
+        <button class="tablinks FruitsVege" v-on:click="filterCat($event,'FruitsVege')">
           <img
             src="https://media.nedigital.sg/fairprice/images/654aa62a-b6ad-42dc-9feb-a8b93407656d/Fruits-Vegetables-Zop_L1.png"
           /><br>Fruits and Vege
         </button>
 
-        <button class="noCat tablinks Others" v-on:click="filterCat(event,'Others')">Others</button>
+        <button class="noCat tablinks Others" v-on:click="filterCat($event,'Others')">Others</button>
       </div>
     </div>
     <div id="products">
@@ -232,7 +232,7 @@ export default {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
       }
       document.getElementByClassName(cat).style.display = "block";
-      evt.currentTarget.className += " active";
+      evt.target.className += " active";
     },
   },
   created() {
