@@ -16,10 +16,13 @@
 <script>
 import VueApexCharts from "vue-apexcharts";
 import database from "../../firebase.js";
-import firebase from 'firebase'
+import firebase from 'firebase';
 
 export default {
   name: "Chart",
+    mounted: function(){
+         window.dispatchEvent(new Event('resize'));
+    },
   components: {
     apexcharts: VueApexCharts,
   },

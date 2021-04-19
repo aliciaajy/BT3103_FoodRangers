@@ -16,13 +16,12 @@
     <b-container>
       <b-row>
         <b-col><PieChart></PieChart> </b-col>
-        <b-col><TreeMap @input="window.dispatchEvent(new Event('resize'));"></TreeMap></b-col>
+       
+        <b-col><TreeMap></TreeMap></b-col>
       </b-row>
       <b-row>
-        <!-- <b-col> -->
-          <b-col> <LineChart></LineChart></b-col>
-          <b-col> <BarChart></BarChart></b-col>
-        <!-- </b-col> -->
+        <b-col> <LineChart></LineChart></b-col>
+        <b-col> <BarChart></BarChart></b-col>
       </b-row>
     </b-container>
   </div>
@@ -44,6 +43,5 @@ export default {
     BarChart,
     TreeMap,
   },
-}
-
+};
 </script>
