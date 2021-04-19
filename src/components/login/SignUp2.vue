@@ -5,11 +5,11 @@
       <form class="vertical-center inner-block" @submit.prevent="register">
         <h1><img src="../../assets/foodranger.png" class="image2" /></h1>
 
-        <div> 
-          <p id="search-tab">User Signup</p>  
-          <router-link to="/adminSignup" exact id="fav-tab"> Admin Signup </router-link>
-        </div>
 
+        <div> 
+          <p id="search-tab">User Signup </p>  
+          <router-link to="/adminSignup" exact id="fav-tab"> Mart Admin Signup </router-link>
+        </div>
         <div class="form-group">
           <label> Name: </label>
           <input
@@ -101,7 +101,7 @@ export default {
     };
   },
   methods: {
-    register() {
+    async register() {
       if (this.password != this.confirm) {
         alert("Password do not match. Please try again");
       } else {
@@ -109,6 +109,9 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
           .then((cred) => {
+
+            alert("signup2")
+
             this.$router.push("/");
             return database.collection("users").doc(cred.user.uid).set({
               Email: cred.user.email,
@@ -123,7 +126,7 @@ export default {
           .catch((error) => {
             alert(error);
           });
-        this.$router.push("/login");
+        this.$router.push("/");
       }
     },
   },

@@ -1,5 +1,5 @@
 import Login from './components/login/Login.vue'
-import SignUp from './components/login/SignUp.vue'
+import SignUp from './components/login/SignUp2.vue'
 import ForgotPassword from './components/login/ForgotPassword.vue'
 import searchPage from './components/search/searchPage.vue'
 import Home from './components/home/Home.vue'
@@ -12,8 +12,9 @@ import fav from "./components/favourites/favourites.vue"
 import Settings from "./components/settings/Settings.vue"
 import SuperMarket from "./components/supermarket/Supermarket.vue"
 import Admin from "./components/Admin.vue"
-import supermarketAdmin from './components/login/supermarketLogin.vue'
-
+import supermarketAdmin from './components/login/martAdminLogin.vue'
+import adminSignup from './components/login/adminSignup.vue'
+//import supermarketAdd from './components/supermarket/Supermarket.vue'
 
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -37,13 +38,15 @@ let router = new Router({
     { path: '/customer/settings', component: Settings, meta: { requiresAuth: true } },
     { path: '/customer/mart/:id', component: martPage, props: true },
     { path: '/customer/favourites', component: fav, meta: { requiresAuth: true } },
-    { path: '/supermarket', component:SuperMarket, meta: {requiresAuth: true}},
+    { path: '/supermarketAdmin/supermarket', component:SuperMarket, meta: {requiresAuth: true}},
     {path: '/admin', component: Admin, meta: {reqiresAuth:true}},
-    { path: '/supermarketAdmin', component: supermarketAdmin, meta: { requiresAuth: true }},
+    { path: '/supermarketAdmin/login', component: supermarketAdmin, meta: {guest: true} },
+    { path: '/adminSignup', component: adminSignup, meta: {guest: true}},
+
 ]})
 
 router.beforeEach((to, from, next) => {
-    alert("router.beforeEach in routes.js");
+    //alert("router.beforeEach in routes.js");
 
     firebase.auth().onAuthStateChanged(userAuth => {
   
@@ -53,9 +56,9 @@ router.beforeEach((to, from, next) => {
             claims
           }) {
             if (claims.customer) {
-                //alert("customer");
-                alert("to path customer is " + to.path.toString() );
-                if (to.path.toString().contains("/customer")) {
+                //alert("to path customer is " + to.path.toString() );
+                //alert("do you contain customer or not " + to.path.toString().includes("/customer"))
+                if (to.path.toString().includes("/customer")) {
                     next();
                 } else {
                     next("/customer/home");
@@ -67,17 +70,19 @@ router.beforeEach((to, from, next) => {
                   next();
                 }*/
             } else if (claims.admin) {
-                alert("to path admin is " + to.path.toString() )
-              if (to.path !== '/admin')
-                return next({
-                  path: '/admin',
-                })
-            } else if (claims.driver) {
-                alert("to path supermarket is " + to.path.toString() )
-              if (to.path !== '/supermarketAdmin')
-                return next({
-                  path: '/supermarketAdmin',
-                })
+
+                if (to.path.toString().includes("/admin")) {
+                    next();
+                } else {
+                    next("/admin");
+                }
+
+            } else if (claims.supermarketAdmin) {
+
+
+                if (to.path !== '/supermarketAdmin/supermarket') {
+                    return next( {path: '/supermarketAdmin/supermarket'});
+                }
             }
   
           })
