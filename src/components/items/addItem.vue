@@ -163,7 +163,7 @@ export default {
         });
    
 
-      this.expirydate = moment().add(this.numDay, "days");
+      this.expirydate = moment().utc().add(this.numDay, "days");
       return this.expirydate;
     },
 
