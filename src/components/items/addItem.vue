@@ -137,7 +137,7 @@ export default {
       this.dict["name"] = this.foodname;
       this.dict["category"] = this.category;
       this.dict["state"] = this.state;
-      this.dict["expiry"] = this.expirydate;
+      this.dict["expiry"] = moment(this.expirydate).format("DD-MM-YYYY");
       this.dict["img"] = this.imgurl;
       this.dict["saved"] = this.money;
       this.dict["keyin-date"] = moment().format("DD-MM-YYYY");
