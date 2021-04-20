@@ -1,6 +1,6 @@
 <template>
   <div id="chart">
-    <h4><br> <br>Monthly Savings</h4>
+    <h4><br> <br><br>Monthly Savings</h4>
     <chart></chart>
   </div>
 </template>

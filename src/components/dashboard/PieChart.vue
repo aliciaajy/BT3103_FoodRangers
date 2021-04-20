@@ -3,7 +3,7 @@
     <h4 class = "title"> <br><br> Category Of Food </h4>
     <apexcharts
       type="pie"
-      width="100%"
+      width="50%"
       :options="chartOptions"
       :series="series"
     >
@@ -159,6 +159,6 @@ export default {
 <style scoped>
 
 .title{
-  float:center
+  float:left
 }
 </style>
