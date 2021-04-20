@@ -27,8 +27,8 @@
 
 //import db from "../../firebase.js";
 //import firebase from 'firebase'
-//import filters from "./filtersAndMarts.vue";
-import filters from "./search2.vue";
+import filters from "./filtersAndMarts.vue";
+//import filters from "./search2.vue";
 //import starRatings from "./starRatings.vue";
 //import store from '@/store';
 
@@ -39,28 +39,7 @@ export default {
    // starRatings
   },
 
-  /*beforeRouteEnter(to, from, next) {
-    alert(this.$router)
-    //alert(JSON.stringify(to))
-    //alert("url is " + JSON.stringify(to.params))
-    let uid = firebase.auth().currentUser["uid"];
-    alert("user is " + uid);
-    //alert("router is "+ this.$router.history);
-    //console.log("id is " + this.$router.path);
-    db.collection("users").doc(uid).get().then((snapshot) => {
-      if (snapshot.exists) {
-                //is user
-          next();
-      } else {
-      alert("no access");
-      next('/martAdmin')
-
-    }
-      //next(false);
-    })
-  },*/
-
-  //export ends
+  
 };
 </script>
 

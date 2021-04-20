@@ -1,5 +1,7 @@
 <template>
-	<div id="all">
+  <div id="all">
+    <api></api>
+    <martDetails></martDetails>
       <div id="filters">
         <div id="search-div" class="searchLoc">
         <input id="search" class="form-control" type="text" v-model="searchQuery"
@@ -58,13 +60,12 @@
               <div id="mart">
                 <img v-bind:src="mart[1].image" id="martImg" />
                 <div id="martDetails">
-                  <h1 id="martLink" v-bind:mod ="mart[0]" v-on:click="route($event)">
-                    {{mart[1].name }}</h1>
+                  <h1 id="martLink" v-bind:mod ="mart[0]" v-on:click="route($event)">🛒 {{mart[1].name }}</h1>
                   
-                  <h4> {{ mart[1].address }}</h4>
+                  <h4> 🚘 {{ mart[1].address }}</h4>
                 </div>
                 <div id="starRatings">
-                  <starRatings  v-bind:rating = "mart[1].ratings"></starRatings>
+                  <starRatings v-bind:rating = "mart[1].ratings"></starRatings>
                 </div>
 
                 <div id="likeButton">
@@ -83,6 +84,9 @@
 import db from "../../firebase.js";
 import starRatings from "./starRatings.vue";
 import like from "./favButton.vue";
+import api from "./apiMart.js";
+//import martDetails from "./martDetails.js";
+//import axios from 'axios';
 export default {
   data() {
     return {
@@ -95,19 +99,23 @@ export default {
       selectedRatings: "0", //means didnt select the dropdown for ratings
       selectedType: "0",
       center: {lat:0, lng:0},
+      marts2: [],
     };
   },
 
   methods: {
 
     fetchItems:function(){ 
-           db.collection('marts').orderBy('name').get().then((querySnapShot)=>{
+           db.collection('apiMart').orderBy('name').get().then((querySnapShot)=>{
                let mart={} 
                querySnapShot.forEach(doc=>{
                     mart=[doc.id,doc.data()]
+                    //alert("mart name pushed " + doc.data().name)
                     this.marts.push(mart)
                 }) 
-            }) 
+            })
+
+            //alert("this.marts " + this.marts[0]); 
     },
 
     compareRatings: function(res) {
@@ -288,7 +296,7 @@ export default {
 
         const doc_id = event.target.getAttribute("mod");
         //this.$router.push({name: 'modify', params: {doc_id}});
-        this.$router.push({path: `/mart/${doc_id}`});
+        this.$router.push({path: `/customer/mart/${doc_id}`});
     },
 
     //methods end here
@@ -321,27 +329,31 @@ export default {
   },
 
 
-  mounted() {
-
-
+  beforeCreate() {
+    //this.addAPI();
     
     },
 
   created() {
     this.fetchItems();
     this.geolocation();
+    //this.addAPI();
+    
   },
 
   components: {
     starRatings,
-    like
+    like,
+    api,
+    //martDetails
   }
 
 };
 </script>
 
 <style scoped>
-  
+
+
   #starRatings {
     text-align: center;
     float:left;
@@ -368,5 +380,9 @@ export default {
 
   }
 
-</style>
+  #filters {
+    padding-left:3%;
+    padding-right:3%;
+  }
 
+</style>
