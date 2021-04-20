@@ -82,10 +82,12 @@
 
 
           ref.get().then((doc => {
-            if (doc["favMarts"].includes(doc_id)) {
+            //alert("doc " + JSON.stringify(doc));
+            if (doc.data()["favMarts"].includes(doc_id)) {
+              //alert("here fav")
               //if the doc exists = mart was previously favourited
               //set liketoggle to true
-              this.setToggle();
+              this.likeToggle = true;
               //alert("after adding to fav is " + this.likeToggle)
             }
           }))

@@ -8,7 +8,7 @@
       <div id="main">
         <div id="tab">
           <br>
-          <h1> Favourite marts </h1>
+          <h1> ❤️ Favourite marts ❤️ </h1>
           <router-link to="/customer/search" exact id="search-tab"> Search </router-link>
           <p id="fav-tab"> Favourites </p>
         </div>
