@@ -44,7 +44,7 @@
           let added = this.mart;
           let id = firebase.auth().currentUser.uid;
           //let data = added[1];
-          alert(added[1].name);
+          //alert(added[1].name);
 
 
           db.collection('favMart').doc(id).set({favMarts: firebase.firestore.FieldValue.arrayUnion(added[0])}, {merge: true});
