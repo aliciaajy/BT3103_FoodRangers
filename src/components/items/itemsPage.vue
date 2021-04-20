@@ -160,7 +160,7 @@ export default {
     addItem,
   },
   methods: {
-    deleteItem: function (event) {
+    deleteConsume: function (event) {
       let doc_id = event.target.getAttribute("id");
       db.collection("items")
         .doc(doc_id)
@@ -169,6 +169,42 @@ export default {
           location.reload();
         });
     },
+
+    deleteItem: function (event) {
+      let doc_id = event.target.getAttribute("id");
+      //let item = event.value;
+      let userId = firebase.auth().currentUser.uid;
+      alert("doc id " + doc_id)
+
+      //alert("uid " + userId)
+      //alert("item " + JSON.stringify(item))
+
+      db.collection("items").doc(doc_id).get().then((snapshot) => {
+        let doc = snapshot.data();
+        let date = doc["keyin-date"];
+        let actualMonth = moment(date, 'DD-MM-YY').month() + 1;
+        //alert("actual month  "+ actualMonth);
+
+        db.collection("consumeItems").doc(userId).set({
+            [actualMonth]: {unConsumed: firebase.firestore.FieldValue.arrayRemove(doc_id)}
+            }, {merge: true});
+        //alert("working 1")
+      /*db.collection("consumeItems").doc(userId).set({
+              [actualMonth]: {consumed: firebase.firestore.FieldValue.arrayRemove(doc_id)}
+            }, {merge: true});
+      alert("working 2")*/
+
+        //location.reload();
+
+      }) 
+      db.collection("items")
+        .doc(doc_id)
+        .delete()
+        .then(() => {
+          location.reload();
+        });
+    },
+
 
     consumeItem: function(event) {
 
@@ -194,7 +230,7 @@ export default {
               [actualMonth]: {consumed: firebase.firestore.FieldValue.arrayUnion(doc_id)}
             }, {merge: true})
 
-      this.deleteItem(event);
+      this.deleteConsume(event);
     },
     fetchItems: function () {
       //alert("fetchItems")
