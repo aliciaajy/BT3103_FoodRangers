@@ -10,96 +10,89 @@
         </div>
         <div class="modal-body">
           <form novalidate @submit.prevent="addItem">
-            
             <div>
-            <label for="name"><b>Food Item*: </b></label>
-            <input
-              type="text"
-              placeholder="Enter food"
-              name="food"
-              v-model="foodname"
-              required="true"
-            />
-            <br />
-            </div>
-
-            <div>
-            <input
-              @click="click1"
-              type="file"
-              accept="image/*"
-              @change="previewImage"
-              id="file-input"
-            />
-            <br />
-
-            <div v-if="img != null">
-              <img class="preview" height="200" width="200" :src="img" />
+              <label for="name"><b>Food Item*: </b></label>
+              <input
+                type="text"
+                placeholder="Enter food"
+                name="food"
+                v-model="foodname"
+                required="true"
+              />
               <br />
             </div>
+
+            <div>
+              <input
+                @click="click1"
+                type="file"
+                accept="image/*"
+                @change="previewImage"
+                id="file-input"
+              />
+              <br />
+
+              <div v-if="img != null">
+                <img class="preview" height="200" width="200" :src="img" />
+                <br />
+              </div>
             </div>
 
             <div>
-            <label for="text"><b> Category*: </b></label>
+              <label for="text"><b> Category*: </b></label>
 
-            <select v-model="category">
-              <option value="meat">Meat</option>
-              <option value="dairy">Dairy</option>
-              <option value="fish">Fish</option>
-              <option value="poultry">Poultry</option>
-              <option value="vegetable">Vegetable</option>
-              <option value="fruit">Fruit</option>
-            </select>
+              <select v-model="category">
+                <option value="meat">Meat</option>
+                <option value="dairy">Dairy</option>
+                <option value="fish">Fish</option>
+                <option value="poultry">Poultry</option>
+                <option value="vegetable">Vegetable</option>
+                <option value="fruit">Fruit</option>
+              </select>
             </div>
 
             <div>
-            <label for="text"> <b>Item Details*:</b></label>
-            <h1>
-              Select <b>Opened / No Expiry Date</b> to get the estimated expiry
-              date <br />Select <b>Unopened / Have Expiry Date</b> to key in
-              your expiry date!
-            </h1>
-            <select v-model="state" required="true">
-              <option value="Opened">Opened / No Expiry Date</option>
-              <option value="Unopened">Unopened / Have Expiry Date</option>
-            </select>
+              <label for="text"> <b>Item Details*:</b></label>
+              <h1>
+                Select <b>Opened / No Expiry Date</b> to get the estimated
+                expiry date <br />Select <b>Unopened / Have Expiry Date</b> to
+                key in your expiry date!
+              </h1>
+              <select v-model="state" required="true">
+                <option value="Opened">Opened / No Expiry Date</option>
+                <option value="Unopened">Unopened / Have Expiry Date</option>
+              </select>
 
-            <p v-if="state == 'Opened'">
-              <label for="text">
-                <b>Predicted Expiry Date: </b>
-                {{ this.getPredDate().format("DD-MM-YYYY") }}
-              </label>
-            </p>
-            <p v-if="state == 'Unopened'">
-              <label><b>Expiry Date*: </b></label>
-              <input type="date" v-model="expirydate" required="true" />
-            </p>
+              <p v-if="state == 'Opened'">
+                <label for="text">
+                  <b>Predicted Expiry Date: </b>
+                  {{ this.getPredDate() }}
+                </label>
+              </p>
+              <p v-if="state == 'Unopened'">
+                <label><b>Expiry Date*: </b></label>
+                <input type="date" v-model="expirydate" required="true" />
+              </p>
             </div>
 
             <div>
-            <label for="text"> <b>Amount saved ($)*:</b></label>
-            <input
-              type="text"
-              value="$"
-              v-model="money"
-              placeholder="$"
-            />
+              <label for="text"> <b>Amount saved ($)*:</b></label>
+              <input type="text" value="$" v-model="money" placeholder="$" />
             </div>
 
-          <div>
-          <button
-            class="formButton"
-            :disabled="!isFormValid"
-            type="submit"
-            data-dismiss="modal"
-             v-on:click="addItem"
-          >
-            Add
-          </button>
-          </div>
+            <div>
+              <button
+                class="formButton"
+                :disabled="!isFormValid"
+                type="submit"
+                data-dismiss="modal"
+                v-on:click="addItem"
+              >
+                Add
+              </button>
+            </div>
           </form>
         </div>
-        
       </div>
     </div>
   </div>
@@ -128,8 +121,14 @@ export default {
 
   computed: {
     isFormValid() {
-      return this.foodname && this.category && this.state && this.expirydate && this.money;
-    }
+      return (
+        this.foodname &&
+        this.category &&
+        this.state &&
+        this.expirydate &&
+        this.money
+      );
+    },
   },
 
   methods: {
@@ -142,7 +141,7 @@ export default {
       this.dict["img"] = this.imgurl;
       this.dict["saved"] = this.money;
       this.dict["keyin-date"] = moment().format("DD-MM-YYYY");
-      this.dict['userid'] = firebase.auth().currentUser.uid
+      this.dict["userid"] = firebase.auth().currentUser.uid;
       db.collection("items")
         .add(this.dict)
         .then(() => {
@@ -161,9 +160,21 @@ export default {
             this.numDay = food[chosenCat];
           });
         });
-   
 
-      this.expirydate = moment().utc().add(this.numDay, "days");
+      var someDate = new Date();
+
+      someDate.setDate(someDate.getDate() + parseInt(this.numDay));
+
+      var dd = someDate.getDate();
+      
+      var mm = someDate.getMonth() + 1;
+    
+      var y = someDate.getFullYear();
+
+      var someFormattedDate = dd + "-" + mm + "-" + y;
+      this.expirydate = someFormattedDate
+      // alert(this.expirydate);
+      // this.expirydate = new Date().add(this.numDay, "days");
       return this.expirydate;
     },
 
